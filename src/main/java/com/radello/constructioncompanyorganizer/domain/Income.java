@@ -12,13 +12,12 @@ import java.sql.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "Income")
-public class Income extends MoneyTransfer
-{
+public class Income extends MoneyTransfer {
 
 
     private String forWhat;
     private Date scheduledTimeToGet;
-    @OneToOne
-    private ConstructionOrder constructionOrder;
+    //@OneToOne
+    //private ConstructionOrder constructionOrder;
 
 }

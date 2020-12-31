@@ -34,7 +34,7 @@ class IncomeTest {
         assertEquals(scheduledTimeToGetTest, income.getScheduledTimeToGet());
     }
 
-    @Test
+    /*@Test
     void getConstructionOrder() {
 
         int idTest = 1;
@@ -45,5 +45,5 @@ class IncomeTest {
         assertEquals(idTest, income.getConstructionOrder().getID());
 
 
-    }
+    } */
 }

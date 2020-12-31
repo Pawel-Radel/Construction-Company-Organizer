@@ -21,8 +21,8 @@ public class IndicativeCost{
     //Indicate for what will be this Indicate Cost ( Not for accounting for cash resources)
     private String ForWhat;
 
-  //  @ManyToOne
-    //private ConstructionOrder constructionOrder;
+  //@ManyToOne
+ //  private ConstructionOrder constructionOrder;
 
 
 }

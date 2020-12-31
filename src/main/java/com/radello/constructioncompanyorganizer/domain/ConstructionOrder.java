@@ -1,6 +1,5 @@
 package com.radello.constructioncompanyorganizer.domain;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,7 +26,7 @@ public class ConstructionOrder {
     private Income income;
 
     @OneToMany
-    @JoinColumn (name = "IndicateCost_ID")
+    @JoinColumn (name = "ConstructionOrder_ID")
     private Set<IndicativeCost> indicateCosts = new HashSet<>();
 
 }
