@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +29,7 @@ class IncomeTest {
     @Test
     void getScheduledTimeToGet() {
 
-        Date scheduledTimeToGetTest = new Date(2020-11-11);
+        LocalDate scheduledTimeToGetTest = LocalDate.of(2020,11,11);
 
         income.setScheduledTimeToGet(scheduledTimeToGetTest);
         assertEquals(scheduledTimeToGetTest, income.getScheduledTimeToGet());

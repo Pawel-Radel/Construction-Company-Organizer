@@ -6,18 +6,19 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "Income")
 public class Income extends MoneyTransfer {
 
 
     private String forWhat;
-    private Date scheduledTimeToGet;
-    //@OneToOne
-    //private ConstructionOrder constructionOrder;
+    private LocalDate scheduledTimeToGet;
+
+    @OneToOne
+    private ConstructionOrder constructionOrder;
 
 }

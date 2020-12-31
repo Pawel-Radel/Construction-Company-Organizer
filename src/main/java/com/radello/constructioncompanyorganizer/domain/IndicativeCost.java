@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-// class representing costs that will only be used to estimate profits from the construction order (will not be accounted)
+// class representing costs that will only be used to estimate profits from the construction order (will not be accounted in budget)
 
 @Getter
 @Setter
@@ -21,8 +21,8 @@ public class IndicativeCost{
     //Indicate for what will be this Indicate Cost ( Not for accounting for cash resources)
     private String ForWhat;
 
-  //@ManyToOne
- //  private ConstructionOrder constructionOrder;
+    @ManyToOne
+    private ConstructionOrder constructionOrder;
 
 
 }

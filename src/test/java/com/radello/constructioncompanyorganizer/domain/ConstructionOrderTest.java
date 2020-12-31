@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ class ConstructionOrderTest {
     @Test
     void getStartDate() {
 
-        Date dateTest = new Date(2020 - 11 - 11);
+        LocalDate dateTest = LocalDate.of(2020, 11, 11);
         consOrd.setStartDate(dateTest);
 
         assertEquals(dateTest, consOrd.getStartDate());
@@ -62,7 +63,7 @@ class ConstructionOrderTest {
 
     @Test
     void getScheduledEndDate() {
-        Date dateTest = new Date(2020 - 11 - 11);
+        LocalDate dateTest = LocalDate.of(2020,11,11);
         consOrd.setScheduledEndDate(dateTest);
         assertEquals(dateTest, consOrd.getScheduledEndDate());
 

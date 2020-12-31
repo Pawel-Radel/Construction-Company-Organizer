@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.*;
 
 @NoArgsConstructor
@@ -19,15 +19,28 @@ public class ConstructionOrder {
     private int ID;
     private String title;
     private String addres;
-    private Date startDate;
-    private Date scheduledEndDate;
+    private LocalDate startDate;
+    private LocalDate scheduledEndDate;
 
-    @OneToOne (cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     private Income income;
 
     @OneToMany
-    @JoinColumn (name = "ConstructionOrder_ID")
+    @JoinColumn(name = "Construction_Order_ID")
     private Set<IndicativeCost> indicateCosts = new HashSet<>();
+
+    public void setIncome(Income income) {
+        if (income != null) {
+            this.income = income;
+            income.setConstructionOrder(this);
+        }
+    }
+
+    public ConstructionOrder addIndicativeCost(IndicativeCost indcCost) {
+        indcCost.setConstructionOrder(this);
+        this.indicateCosts.add(indcCost);
+        return this;
+    }
 
 }
 
