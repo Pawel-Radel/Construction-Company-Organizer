@@ -18,7 +18,7 @@ public class IndicativeCostCommand{
     private int ID;
     //Indicate for what will be this Indicate Cost ( Not for accounting for cash resources)
     private String ForWhat;
-    private ConstructionOrderCommand constructionOrderCommand;
+    //private ConstructionOrderCommand constructionOrderCommand;
     //@ManyToOne
     //  private ConstructionOrder constructionOrder;
 

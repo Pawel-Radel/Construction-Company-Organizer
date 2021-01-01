@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ConstructionOrdertoConstructionOrderCommand implements Converter<ConstructionOrder, ConstructionOrderCommand> {
-/*
+
     private final IncomeToIncomeCommand incomeToIncomeCommand;
     private final IndicativeCostToIndicativeCostCommand indicativeCostToIndicativeCostCommand;
 
@@ -17,7 +17,7 @@ public class ConstructionOrdertoConstructionOrderCommand implements Converter<Co
             (IncomeToIncomeCommand incomeToIncomeCommand, IndicativeCostToIndicativeCostCommand indicativeCostToIndicativeCostCommand) {
         this.incomeToIncomeCommand = incomeToIncomeCommand;
         this.indicativeCostToIndicativeCostCommand = indicativeCostToIndicativeCostCommand;
-    }*/
+    }
 
     @Synchronized
     @Nullable
@@ -33,13 +33,13 @@ public class ConstructionOrdertoConstructionOrderCommand implements Converter<Co
             constructionOrderCommand.setScheduledEndDate(constructionOrder.getScheduledEndDate());
             constructionOrderCommand.setStartDate(constructionOrder.getStartDate());
             constructionOrderCommand.setTitle(constructionOrder.getTitle());
-            //constructionOrderCommand.setIncomeCommand(incomeToIncomeCommand.convert(constructionOrder.getIncome()));
+            constructionOrderCommand.setIncomeCommand(incomeToIncomeCommand.convert(constructionOrder.getIncome()));
 
-          // if (constructionOrder.getIndicateCosts() != null && constructionOrder.getIndicateCosts().size() > 0) {
-            //    constructionOrder.getIndicateCosts()
-              //          .forEach(indicativeCost -> constructionOrderCommand.getIndicateCosts()
-                //                .add(indicativeCostToIndicativeCostCommand.convert(indicativeCost)));
-        //    }
+           if (constructionOrder.getIndicateCosts() != null && constructionOrder.getIndicateCosts().size() > 0) {
+                constructionOrder.getIndicateCosts()
+                        .forEach(indicativeCost -> constructionOrderCommand.getIndicateCosts()
+                                .add(indicativeCostToIndicativeCostCommand.convert(indicativeCost)));
+            }
             return constructionOrderCommand;
         }
         return null;

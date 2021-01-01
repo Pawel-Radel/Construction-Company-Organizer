@@ -17,6 +17,6 @@ public class IncomeCommand {
     private int amount;
     private String forWhat;
     private LocalDate scheduledTimeToGet;
-    private ConstructionOrderCommand constructionOrderCommand;
+
 
 }
