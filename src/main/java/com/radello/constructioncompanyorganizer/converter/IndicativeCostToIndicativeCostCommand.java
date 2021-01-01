@@ -10,12 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class IndicativeCostToIndicativeCostCommand implements Converter<IndicativeCost, IndicativeCostCommand> {
 
-    private ConstructionOrdertoConstructionOrderCommand constructionOrdertoConstructionOrderCommand;
-
-    public IndicativeCostToIndicativeCostCommand(ConstructionOrdertoConstructionOrderCommand consOrdToConsOrdComm) {
-        this.constructionOrdertoConstructionOrderCommand = consOrdToConsOrdComm;
-    }
-
 
     @Synchronized
     @Nullable
@@ -26,8 +20,7 @@ public class IndicativeCostToIndicativeCostCommand implements Converter<Indicati
 
             indicativeCostCommand.setForWhat(indicativeCost.getForWhat());
             indicativeCostCommand.setID(indicativeCost.getID());
-            indicativeCostCommand.setConstructionOrderCommand(constructionOrdertoConstructionOrderCommand
-                    .convert(indicativeCost.getConstructionOrder()));
+
             return indicativeCostCommand;
         }
         return null;
