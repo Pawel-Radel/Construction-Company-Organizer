@@ -1,5 +1,6 @@
 package com.radello.constructioncompanyorganizer.commands;
 
+import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,6 @@ public class IncomeCommand {
     private int amount;
     private String forWhat;
     private LocalDate scheduledTimeToGet;
-    //@OneToOne
-    //private ConstructionOrder constructionOrder;
+    private ConstructionOrderCommand constructionOrderCommand;
 
 }

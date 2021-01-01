@@ -35,7 +35,7 @@ public class ConstructionOrderCommand {
     @Max(value = 2100 - 1 - 1)
     private LocalDate scheduledEndDate;
 
-    private Income income;
-    private Set<IndicativeCost> indicateCosts = new HashSet<>();
+    private IncomeCommand incomeCommand;
+    private Set<IndicativeCostCommand> indicateCosts = new HashSet<>();
 
 }
