@@ -20,7 +20,6 @@ public class IncomeCommandToIncome implements Converter<IncomeCommand, Income> {
 
         final Income income = new Income();
 
-
         income.setID(incomeCommand.getID());
         income.setForWhat(incomeCommand.getForWhat());
         income.setScheduledTimeToGet(incomeCommand.getScheduledTimeToGet());

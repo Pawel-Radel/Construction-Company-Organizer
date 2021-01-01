@@ -20,7 +20,7 @@ public class BudgetCommandToBudget implements Converter<BudgetCommand, Budget> {
 
         final Budget budget = new Budget();
         budget.setID(source.getID());
-        budget.setAmount(source.getID());
+        budget.setAmount(source.getAmount());
         return budget;
     }
 }
