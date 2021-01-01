@@ -13,7 +13,7 @@ public class CostCommandToCost implements Converter<CostCommand, Cost> {
     @Synchronized
     @Nullable
     @Override
-    public Cost conver(CostCommand costCommand) {
+    public Cost convert(CostCommand costCommand) {
 
         if (costCommand == null) return null;
 
@@ -21,7 +21,7 @@ public class CostCommandToCost implements Converter<CostCommand, Cost> {
         cost.setID(costCommand.getID());
         cost.setForWhat(costCommand.getForWhat());
         cost.setScheduledtime(costCommand.getScheduledtime());
-        cost.setAmount(costCommand.getScheduledtime());
+        cost.setAmount(costCommand.getAmount());
         return cost;
 
     }

@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 public class ConstructionOrderCommandtoConstructionOrder implements Converter<ConstructionOrderCommand, ConstructionOrder> {
 
 
-    public ConstructionOrderCommandtoConstructionOrder(IncomeCommandToIncome incomeCommandToIncome,
+  /*  public ConstructionOrderCommandtoConstructionOrder(IncomeCommandToIncome incomeCommandToIncome,
                                                        IndicativeCostCommandToIndicativeCost indicativeCostCommandToIndicativeCost) {
         this.incomeCommandToIncome = incomeCommandToIncome;
         this.indicativeCostCommandToIndicativeCost = indicativeCostCommandToIndicativeCost;
     }
 
     private final IncomeCommandToIncome incomeCommandToIncome;
-    private final IndicativeCostCommandToIndicativeCost indicativeCostCommandToIndicativeCost;
+    private final IndicativeCostCommandToIndicativeCost indicativeCostCommandToIndicativeCost;*/
 
     @Synchronized
     @Nullable
@@ -34,13 +34,13 @@ public class ConstructionOrderCommandtoConstructionOrder implements Converter<Co
         constructionOrder.setStartDate(constructionOrderCommand.getStartDate());
         constructionOrder.setScheduledEndDate(constructionOrderCommand.getScheduledEndDate());
         constructionOrder.setAddres(constructionOrderCommand.getAddres());
-        constructionOrder.setIncome(incomeCommandToIncome.convert(constructionOrderCommand.getIncomeCommand()));
+     //   constructionOrder.setIncome(incomeCommandToIncome.convert(constructionOrderCommand.getIncomeCommand()));
 
-        if (constructionOrderCommand.getIndicateCosts() != null && constructionOrderCommand.getIndicateCosts().size() > 0) {
-            constructionOrderCommand.getIndicateCosts()
-                    .forEach(indicativeCostCommand -> constructionOrder.getIndicateCosts()
-                            .add(indicativeCostCommandToIndicativeCost.convert(indicativeCostCommand)));
-        }
+       // if (constructionOrderCommand.getIndicateCosts() != null && constructionOrderCommand.getIndicateCosts().size() > 0) {
+         //   constructionOrderCommand.getIndicateCosts()
+           //         .forEach(indicativeCostCommand -> constructionOrder.getIndicateCosts()
+             //               .add(indicativeCostCommandToIndicativeCost.convert(indicativeCostCommand)));
+        //}
 
         return constructionOrder;
     }

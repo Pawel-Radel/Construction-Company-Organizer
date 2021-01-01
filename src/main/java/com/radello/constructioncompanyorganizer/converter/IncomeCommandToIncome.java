@@ -25,8 +25,8 @@ public class IncomeCommandToIncome implements Converter<IncomeCommand, Income> {
 
         final Income income = new Income();
 
-        income.setConstructionOrder(constructionOrderCommandtoConstructionOrder
-                .conver(incomeCommand.getConstructionOrderCommand()));
+       // income.setConstructionOrder(constructionOrderCommandtoConstructionOrder
+         //       .convert(incomeCommand.getConstructionOrderCommand()));
         income.setID(incomeCommand.getID());
         income.setForWhat(incomeCommand.getForWhat());
         income.setScheduledTimeToGet(incomeCommand.getScheduledTimeToGet());

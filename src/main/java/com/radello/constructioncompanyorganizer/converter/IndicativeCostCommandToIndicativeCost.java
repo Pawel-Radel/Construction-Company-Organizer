@@ -27,7 +27,7 @@ public class IndicativeCostCommandToIndicativeCost implements Converter<Indicati
         final IndicativeCost indicativeCost = new IndicativeCost();
 
         indicativeCost.setConstructionOrder(constructionOrderCommandtoConstructionOrder
-                .conver(indicativeCostCommand.getConstructionOrderCommand()));
+                .convert(indicativeCostCommand.getConstructionOrderCommand()));
         indicativeCost.setID(indicativeCostCommand.getID());
         indicativeCost.setForWhat(indicativeCostCommand.getForWhat());
 
