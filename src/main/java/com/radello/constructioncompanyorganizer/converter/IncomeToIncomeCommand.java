@@ -12,12 +12,6 @@ import javax.validation.constraints.Null;
 @Component
 public class IncomeToIncomeCommand implements Converter<Income, IncomeCommand> {
 
-    public IncomeToIncomeCommand(ConstructionOrdertoConstructionOrderCommand constructionOrdertoConstructionOrderCommand) {
-        this.constructionOrdertoConstructionOrderCommand = constructionOrdertoConstructionOrderCommand;
-    }
-
-    private ConstructionOrdertoConstructionOrderCommand constructionOrdertoConstructionOrderCommand;
-
 
     @Synchronized
     @Nullable

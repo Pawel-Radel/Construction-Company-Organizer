@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class IncomeCommandToIncome implements Converter<IncomeCommand, Income> {
 
-    private ConstructionOrderCommandtoConstructionOrder constructionOrderCommandtoConstructionOrder;
-
-    public IncomeCommandToIncome(ConstructionOrderCommandtoConstructionOrder constructionOrderCommandtoConstructionOrder) {
-        this.constructionOrderCommandtoConstructionOrder = constructionOrderCommandtoConstructionOrder;
-    }
 
     @Synchronized
     @Nullable
@@ -25,8 +20,7 @@ public class IncomeCommandToIncome implements Converter<IncomeCommand, Income> {
 
         final Income income = new Income();
 
-       // income.setConstructionOrder(constructionOrderCommandtoConstructionOrder
-         //       .convert(incomeCommand.getConstructionOrderCommand()));
+
         income.setID(incomeCommand.getID());
         income.setForWhat(incomeCommand.getForWhat());
         income.setScheduledTimeToGet(incomeCommand.getScheduledTimeToGet());
