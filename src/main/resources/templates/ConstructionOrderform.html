@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/ConstructionOrderForm.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="main-block">
+    <form action="/">
+        <h1>Dodaj zlecenie budowlane</h1>
+        <div class="info">
+            <input class="fname" type="hidden" name="name" placeholder="Full name">
+
+            <label>Tytuł</label>
+            <input type="text" name="name" placeholder="e.g. 1000">
+
+            <label>Adres</label>
+            <input type="text" name="name" placeholder="e. g. Rozliczenie z urzędem skarbowym">
+
+            <div>
+                <div class="element1">
+                    <label>Termin rozpoczęcia</label>
+                    <input type="date" name="name" placeholder="">
+                </div>
+                <div class="element2">
+                    <label>Termin zakończenia</label>
+                    <input type="date" name="name" placeholder="">
+                </div>
+            </div>
+            <div class="elementClear"></div>
+
+            <label>Lista kosztów </label>
+            <div class="elementClear"></div>
+            <div class="IncomeBody">
+                <ul>
+                    <li>1000 zł, Andrzej Brzozowski, 2021-11-11</li>
+                    <li>2000 zł, Jan Nowak. 2021-10-10</li>
+                    <li>3000, Artur Morawiec, 2021-09-09</li>
+
+                </ul>
+            </div>
+            <div class="IncomeHead">
+                <button type="submit" href="/">Konfiguruj</button>
+            </div>
+            <label>Przychód</label>
+            <div class="IncomeBody">
+                <ul>
+                    <li>20 000 zł, Kamil Albertski, rozliczenie faktury za naprawę, 2021-09-09</li>
+                </ul>
+            </div>
+            <div class="IncomeHead">
+                <button type="submit" href="/">Konfiguruj</button>
+            </div>
+        </div>
+
+        <button type="submit" href="/">Dodaj Rozchód</button>
+    </form>
+</div>
+</body>
+
+</html>

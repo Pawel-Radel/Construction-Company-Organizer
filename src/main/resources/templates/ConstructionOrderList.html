@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/ConstructionOrderList.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="responstable">
+    <table>
+        <tr>
+            <th>Tytuł</th>
+            <th>Adres</th>
+            <th>Data rozpoczęcia</th>
+            <th>Data zakończenia</th>
+            <th>Szacowany zysk</th>
+            <th class="links">Szczegóły</th>
+            <th class="links">Rozliczenia</th>
+            <th class="links">Usuń</th>
+        </tr>
+        <tr>
+            <td>Renowacja Elewacji Mokotów</td>
+            <td>Mokotów, ul. Czerniakowska 33/55</td>
+            <td>01-01-2020</td>
+            <td>03-03-2020r</td>
+            <td>15 000 zł</td>
+            <td class="links"><a href "#"> Szczegóły</a></td>
+            <td><a href "#"> Rozlicz </a></td>
+            <td><a href "#"> Usuń</a></td>
+        </tr>
+        <tr>
+            <td>Remont Mieszkania Białołęka</td>
+            <td>Białołęka Bajeczna 1/10</td>
+            <td>02-04-2020</td>
+            <td>05-05-2020</td>
+            <td>25 000 zł</td>
+            <td><a href "#"> Szczegóły</a></td>
+            <td><a href "#"> Rozlicz </a></td>
+            <td><a href "#"> Usuń</a></td>
+        </tr>
+        <tr>
+            <td>Budowa domu jednorodzinnego Izabelin</td>
+            <td>Poniatowskiego 1</td>
+            <td>06-06-2020</td>
+            <td>07-07-2020</td>
+            <td>40 000 zł</td>
+            <td><a href "#"> Szczegóły</a></td>
+            <td><a href "#"> Rozlicz </a></td>
+            <td><a href "#"> Usuń</a></td>
+        </tr>
+    </table>
+    <button> Dodaj nowe zlecenie budowlane</button>
+</div>
+</body>
+</html>

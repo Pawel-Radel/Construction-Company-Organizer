@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link th:href="@{/css/newIncome.css}" rel="stylesheet"/>
+</head>
+
+<body>
+
+<div class="main-block">
+    <form action="/">
+        <h1>Dodaj nowy Przychód</h1>
+        <div class="info">
+            <input class="fname" type="hidden" name="name" placeholder="Full name">
+            <label>Kwota</label>
+            <input type="text" name="name" placeholder="e.g. 1000">
+            <label>Za co</label>
+            <input type="text" name="name" placeholder="e. g. Wynagordzenie za zrealizowaną usługę">
+            <label>termin zapłaty</label>
+            <input type="date" name="name" placeholder="">
+        </div>
+        <button type="submit" href="/">Dodaj Przychód</button>
+    </form>
+</div>
+
+</body>
+
+</html>
