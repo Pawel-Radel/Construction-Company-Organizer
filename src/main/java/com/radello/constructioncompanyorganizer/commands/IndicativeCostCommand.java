@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class IndicativeCostCommand{
 
-    private int ID;
+    private Long ID;
     //Indicate for what will be this Indicate Cost ( Not for accounting for cash resources)
     private String ForWhat;
     //private ConstructionOrderCommand constructionOrderCommand;

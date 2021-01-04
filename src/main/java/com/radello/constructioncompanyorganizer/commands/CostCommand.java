@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class CostCommand {
 
-    private int ID;
+    private Long ID;
     private int amount;
     private String forWhat;
     private LocalDate scheduledtime;

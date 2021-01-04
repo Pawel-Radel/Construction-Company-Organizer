@@ -17,7 +17,7 @@ class IndicativeCostTest {
     @Test
     void getID() {
 
-        int testId = 1;
+        Long testId = 1L;
 
         indicativeCost.setID(testId);
 

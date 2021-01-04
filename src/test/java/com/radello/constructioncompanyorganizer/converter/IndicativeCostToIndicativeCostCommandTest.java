@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IndicativeCostToIndicativeCostCommandTest {
 
     private final String FOR_WHAT_VALUE = "Flat";
-    private final int ID_VALUE = 1;
+    private final Long ID_VALUE = 1L;
 
     IndicativeCostToIndicativeCostCommand indicativeCostToIndicativeCostCommand;
 

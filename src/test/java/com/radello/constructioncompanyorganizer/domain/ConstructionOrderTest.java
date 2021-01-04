@@ -22,7 +22,7 @@ class ConstructionOrderTest {
 
     @Test
     void getID() {
-        int idTest = 1;
+        Long idTest = 1L;
 
         consOrd.setID(idTest);
 
@@ -73,7 +73,7 @@ class ConstructionOrderTest {
     void getIncome() {
         int testint = 1;
         Income income = new Income();
-        income.setID(1);
+        income.setID(1L);
 
         consOrd.setIncome(income);
         assertEquals(testint, consOrd.getIncome().getID());
@@ -84,9 +84,9 @@ class ConstructionOrderTest {
 
 
         IndicativeCost indc1 = new IndicativeCost();
-        indc1.setID(1);
+        indc1.setID(1L);
         IndicativeCost indc2 = new IndicativeCost();
-        indc2.setID(2);
+        indc2.setID(2L);
         Set<IndicativeCost> costsTest = new HashSet<>();
         costsTest.add(indc1);
         costsTest.add(indc2);

@@ -18,7 +18,7 @@ public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
     // Represent amount of money in budget
     private int amount;
 }

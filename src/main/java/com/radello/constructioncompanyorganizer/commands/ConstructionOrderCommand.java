@@ -17,7 +17,7 @@ import java.util.Set;
 public class ConstructionOrderCommand {
 
 
-    private int ID;
+    private Long ID;
 
     @NotBlank(message = "Title is mandatory")
     @Size(min = 3, max = 255)

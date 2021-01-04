@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ConstructionOrderCommandtoConstructionOrderTest {
 
-    private final int ID_VALUE_1 = 1;
-    private final int ID_VALUE_2 = 2;
+    private final Long ID_VALUE_1 = 1L;
+    private final Long ID_VALUE_2 = 2L;
     private final String FOR_WHAT_VALUE_1 = "flat";
     private final String FOR_WHAT_VALUE_3 = "flat2";
     private final String FOR_WHAT_VALUE_2 = "flat1";

@@ -13,6 +13,6 @@ public abstract class MoneyTransfer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
     private int amount;
 }

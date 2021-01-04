@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IncomeCommandToIncomeTest {
 
-    private final int ID_VALUE = 1;
+    private final Long ID_VALUE = 1L;
     private final int AMOUNT_VALUE = 123;
     private final String FOR_WHAT_VALUE = "Flat";
     private final LocalDate LOCALE_DATE_VALUE = LocalDate.of(2020, 11, 11);

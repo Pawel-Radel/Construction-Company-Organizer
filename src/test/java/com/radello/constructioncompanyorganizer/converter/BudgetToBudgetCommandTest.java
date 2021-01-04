@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BudgetToBudgetCommandTest {
 
-    private static final int ID_VALUE = 1;
+    private static final Long ID_VALUE = 1L;
     private static final int AMOUNT_VALUE = 12;
 
     BudgetToBudgetCommand budgetToBudgetCommand;

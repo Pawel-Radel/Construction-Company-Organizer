@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class IncomeCommand {
 
-    private int ID;
+    private Long ID;
     private int amount;
     private String forWhat;
     private LocalDate scheduledTimeToGet;

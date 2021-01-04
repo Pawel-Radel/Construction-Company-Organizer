@@ -16,7 +16,7 @@ public class ConstructionOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
     private String title;
     private String addres;
     private LocalDate startDate;

@@ -17,7 +17,7 @@ public class IndicativeCost{
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
     //Indicate for what will be this Indicate Cost ( Not for accounting for cash resources)
     private String ForWhat;
 

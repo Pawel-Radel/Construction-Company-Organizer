@@ -12,7 +12,7 @@ import lombok.Setter;
 public class BudgetCommand {
 
 
-    private int ID;
+    private Long ID;
     // Represent amount of money in budget
     private int amount;
 }

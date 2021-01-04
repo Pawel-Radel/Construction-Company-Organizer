@@ -16,7 +16,7 @@ class BudgetTest {
 
     @Test
     void getID() {
-        int testID = 1;
+        Long testID = 1L;
 
         budget.setID(testID);
 
