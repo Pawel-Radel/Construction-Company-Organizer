@@ -27,6 +27,12 @@ public class controller {
         return "newIncome";
     }
 
+    @GetMapping("/ConstructionOrderView")
+    public String showConstructionOrder(){
+
+        return "ConstructionOrderFormView";
+    }
+
     @GetMapping("/financialForecast")
     public String showFinancialForecast(){
         return "FinancialForecast";
