@@ -1,25 +1,53 @@
 
-.html, body {
-    background: #39CCCC;
+.html, body{
+    background:#d9d9de;
     box-sizing: border-box;
 }
-
-.responstable {
+.responstable{
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
+
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 0;
     right: 0;
+
+
 }
 
+
 th {
-    background-color: #1c87c9;
-    border: 2px solid rgba(29, 150, 178, 1);
+
+    border: 2px solid rgba(29,150,178,1);
     font-weight: normal;
     text-align: center;
+    background-color: #1c87c9;
     height: 4vh;
+}
+
+h1 {
+    opacity: 60%;
+}
+
+
+
+.head {
+    width: 60%;
+    opacity: 50%;
+
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10%;
+    opacity: 80%;
+    font-size: 20px;
+
 }
 
 button {
@@ -29,11 +57,10 @@ button {
     line-height: 20px;
     padding: 4px;
     border-radius: 3px;
-    background: #1c87c9;
+    background-color: #1c87c9;
     margin-top: 3vh;
     border: 1px solid #006400;
 }
-
 button:hover {
     background: #2371a0;
 }
@@ -44,11 +71,11 @@ table {
     border: 2px solid #008B8B;
 }
 
-.links {
+.links{
     width: 6%;
 }
 
-td {
+td{
     height: 4vh;
     background: #f5f5f5;
     text-align: center;

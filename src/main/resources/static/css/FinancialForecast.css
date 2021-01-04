@@ -1,0 +1,126 @@
+
+.html, body {
+    background: #d9d9de;
+
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.half {
+    box-sizing: border-box;
+    width: 50%;
+    float: left;
+    font-size: 16px;
+
+}
+
+.head {
+    width: 60%;
+    opacity: 50%;
+
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10%;
+    opacity: 80%;
+    font-size: 20px;
+
+}
+
+p{
+    margin: 0;
+    opacity: 80%;
+}
+input {
+    width: 20px;
+}
+
+.forecast {
+    width: 40vw;
+    height: 13vh;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    border-radius: 20%;
+}
+h1 {
+    text-align: center;
+    opacity: 55%;
+
+}
+.clear{
+    clear: both;
+}
+
+input {
+    margin-right: 10px;
+}
+table {
+    border: 2px solid #008B8B;
+    box-sizing: border-box;
+
+}
+
+.formInfo {
+    margin-top: 10%;
+    box-sizing: border-box;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto  ;
+}
+h3{
+    opacity: 75%;
+
+}
+
+th {
+    padding: 3px;
+    font-weight: normal;
+    text-align: center;
+    background-color: #1c87c9;
+    height: 4vh;
+    text-align: center;
+
+}
+td {
+    padding: 5px;
+}
+
+tr{
+    padding: 3px;
+    text-align: center;
+    background-color:     #f5f5f5;
+}
+
+button {
+    width: 20%;
+    float: right;
+    height: 30px;
+    line-height: 20px;
+    padding: 4px;
+    border-radius: 3px;
+    background-color: #1c87c9;
+    margin-top: 3vh;
+    border: 1px solid #006400;
+}
+button:hover {
+    background: #2371a0;
+}
+
+
+td{
+    height: 4vh;
+    background: #f5f5f5;
+    text-align: center;
+}
+
+a {
+    text-align: center;
+}

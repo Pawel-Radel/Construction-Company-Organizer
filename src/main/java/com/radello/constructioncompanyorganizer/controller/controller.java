@@ -27,6 +27,11 @@ public class controller {
         return "newIncome";
     }
 
+    @GetMapping("/financialForecast")
+    public String showFinancialForecast(){
+        return "FinancialForecast";
+    }
+
     @GetMapping("/newCost")
     public String shownewCostTemplate(){
 
