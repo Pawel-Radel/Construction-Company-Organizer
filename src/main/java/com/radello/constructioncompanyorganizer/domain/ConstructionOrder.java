@@ -25,7 +25,7 @@ public class ConstructionOrder {
     @OneToOne(cascade = CascadeType.ALL)
     private Income income;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "Construction_Order_ID")
     private Set<IndicativeCost> indicateCosts = new HashSet<>();
 
