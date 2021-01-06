@@ -20,6 +20,7 @@ public class IndicativeCostToIndicativeCostCommand implements Converter<Indicati
 
             indicativeCostCommand.setForWhat(indicativeCost.getForWhat());
             indicativeCostCommand.setID(indicativeCost.getID());
+            indicativeCostCommand.setAmount(indicativeCost.getAmount());
 
             return indicativeCostCommand;
         }

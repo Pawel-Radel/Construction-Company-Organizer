@@ -12,6 +12,8 @@ class IndicativeCostCommandToIndicativeCostTest {
 
     private final String FOR_WHAT_VALUE = "Flat";
     private final Long ID_VALUE = 1L;
+    private final int AMOUNT_VALUE = 123;
+
 
     IndicativeCostCommandToIndicativeCost indicativeCostCommandToIndicativeCost;
 
@@ -39,12 +41,14 @@ class IndicativeCostCommandToIndicativeCostTest {
 
         indicativeCostCommand.setForWhat(FOR_WHAT_VALUE);
         indicativeCostCommand.setID(ID_VALUE);
+        indicativeCostCommand.setAmount(AMOUNT_VALUE);
 
         IndicativeCost indicativeCost = indicativeCostCommandToIndicativeCost.convert(indicativeCostCommand);
 
         assertNotNull(indicativeCost);
         assertEquals(ID_VALUE,indicativeCost.getID());
         assertEquals(FOR_WHAT_VALUE, indicativeCost.getForWhat());
+        assertEquals(AMOUNT_VALUE, indicativeCost.getAmount());
 
     }
 }
