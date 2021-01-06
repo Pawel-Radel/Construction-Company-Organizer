@@ -8,12 +8,12 @@
 <body>
 
 <div class="container">
-    <div><a href="#" class="button"><span>✓</span>Dodaj zlecenie budowlane</a></div>
+    <div><a th:href="@{'/newConstructionOrder'}" class="button"><span>✓</span>Dodaj zlecenie budowlane</a></div>
 
-        <div><a href="#" class="button purple"><span>✓</span>Dodaj zobowiązanie</a></div>
-            <div><a href="#" class="button green"><span>✓</span>Dodaj należność</a></div>
-                <div><a href="#" class="button turquoise"><span>✓</span>Przejrzyj listę budów</a></div>
-                    <div><a href="#" class="button red"><span>✓</span>Prognoza finansowa</a></div>
+        <div><a th:href="@{'/newCost'}" class="button purple"><span>✓</span>Dodaj zobowiązanie</a></div>
+            <div><a th:href="@{/newIncome}" class="button green"><span>✓</span>Dodaj należność</a></div>
+                <div><a th:href="@{/listConstructionOrder}" class="button turquoise"><span>✓</span>Przejrzyj listę budów</a></div>
+                    <div><a th:href="@{/financialForecast}" class="button red"><span>✓</span>Prognoza finansowa</a></div>
 </div>
 
 </body>
