@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,11 +30,11 @@ public class ConstructionOrderCommand {
 
     @Min(value = 2021 - 1 - 1)
     @Max(value = 2100 - 1 - 1)
-    private LocalDate startDate;
+    private Date startDate;
 
     @Min(value = 2021 - 1 - 1)
     @Max(value = 2100 - 1 - 1)
-    private LocalDate scheduledEndDate;
+    private Date scheduledEndDate;
 
     private IncomeCommand incomeCommand;
     private Set<IndicativeCostCommand> indicateCosts = new HashSet<>();

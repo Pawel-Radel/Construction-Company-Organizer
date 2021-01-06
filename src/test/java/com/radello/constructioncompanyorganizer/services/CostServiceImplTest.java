@@ -12,7 +12,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import java.util.Optional;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
@@ -23,8 +27,13 @@ class CostServiceImplTest {
 
     private static final int AMOUNT_VALUE = 1000;
     private final Long ID_VALUE = 1L;
-
-    Cost cost;
+    private final LocalDate TODAY_DATE = LocalDate.now();
+    private final Date DAY_AFTER = Date.valueOf(LocalDate.now().plusDays(1));
+    private final Date DAY_BEFORE = Date.valueOf(LocalDate.now().minusDays(1));
+    private List<Cost> costs;
+    private Cost cost;
+    private Cost cost1;
+    private Cost cost2;
 
     Optional<Cost> costFromOptional;
 
@@ -36,25 +45,41 @@ class CostServiceImplTest {
     CostToCostCommand costToCostCommand;
     @Mock
     CostCommandToCost costCommandToCost;
+    @Mock
+    CostsDependsOnTimeServiceImpl costsDependsonTimeService;
 
     @BeforeEach
     void setUp() {
 
-        costService = new CostServiceImpl(costRepository, costToCostCommand, costCommandToCost);
+        costService = new CostServiceImpl(costRepository,
+                costToCostCommand, costCommandToCost, costsDependsonTimeService);
 
         cost = new Cost();
         cost.setID(ID_VALUE);
         cost.setAmount(AMOUNT_VALUE);
 
         costFromOptional = Optional.of(cost);
+
+        costs = new ArrayList<>();
+        cost1 = new Cost();
+        cost2 = new Cost();
+        cost1.setScheduledtime(DAY_AFTER);
+        cost2.setScheduledtime(DAY_BEFORE);
+        costs.add(cost1);
+        costs.add(cost2);
     }
 
     @Test
     void getCosts() {
 
-        costService.getCosts();
+        when(costRepository.findAll()).thenReturn(costs);
 
-        verify(costRepository, times(1)).findAll();
+        Set <Cost> costs1 = costService.getCosts();
+
+        assertNotNull(costs1);
+        assertEquals(2, costService.getCosts().size());
+
+        verify(costRepository, times(2)).findAll();
         verify(costRepository, never()).save(any());
     }
 
@@ -108,7 +133,7 @@ class CostServiceImplTest {
         costCommand.setID(ID_VALUE);
         costCommand.setAmount(AMOUNT_VALUE);
 
-        costService.saveCostCommand(costCommand);
+        CostCommand costCommand1 = costService.saveCostCommand(costCommand);
 
         verify(costRepository, times(1)).save(any());
         verify(costRepository, never()).findAll();
@@ -123,4 +148,5 @@ class CostServiceImplTest {
         verify(costRepository,never()).save(any());
 
     }
+
 }

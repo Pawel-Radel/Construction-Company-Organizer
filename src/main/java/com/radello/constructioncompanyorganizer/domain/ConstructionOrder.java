@@ -19,8 +19,8 @@ public class ConstructionOrder {
     private Long ID;
     private String title;
     private String addres;
-    private LocalDate startDate;
-    private LocalDate scheduledEndDate;
+    private Date startDate;
+    private Date scheduledEndDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Income income;

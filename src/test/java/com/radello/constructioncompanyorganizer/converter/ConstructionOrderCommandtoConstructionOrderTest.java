@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,9 +20,9 @@ class ConstructionOrderCommandtoConstructionOrderTest {
     private final String FOR_WHAT_VALUE_1 = "flat";
     private final String FOR_WHAT_VALUE_3 = "flat2";
     private final String FOR_WHAT_VALUE_2 = "flat1";
-    private final LocalDate LOCAL_DATE_VALUE = LocalDate.of(2020, 11, 11);
-    private final LocalDate LOCAL_DATE_VALUE2 = LocalDate.of(2020, 12, 11);
-    private final LocalDate LOCAL_DATE_VALUE3 = LocalDate.of(2020, 10, 11);
+    private final Date LOCAL_DATE_VALUE = new Date(2020-11-11);
+    private final Date LOCAL_DATE_VALUE2 = new Date(2020-12-11);
+    private final Date LOCAL_DATE_VALUE3 = new Date(2020-10-11);
     private final int AMOUNT_VALUE = 123;
     private final String TITLE_VALUE = "Title";
     private final String ADDRES_VALUE = "Addres Value";

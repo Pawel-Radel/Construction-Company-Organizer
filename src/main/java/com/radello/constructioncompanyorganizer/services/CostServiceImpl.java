@@ -7,22 +7,19 @@ import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 
 @Service
 public class CostServiceImpl implements CostService {
+
 
 
     private final CostRepository costRepository;
     private final CostToCostCommand costToCostCommand;
     private final CostCommandToCost costCommandToCost;
 
-    public CostServiceImpl(CostRepository costRepository,
-                                     CostToCostCommand costToCostCommand,
-                                     CostCommandToCost costCommandToCost) {
-
+    public CostServiceImpl(CostRepository costRepository, CostToCostCommand costToCostCommand, CostCommandToCost costCommandToCost, CostsDependsOnTimeServiceImpl costsDependsonTimeService) {
         this.costRepository = costRepository;
         this.costToCostCommand = costToCostCommand;
         this.costCommandToCost = costCommandToCost;
@@ -66,4 +63,9 @@ public class CostServiceImpl implements CostService {
 
         costRepository.deleteById(l);
     }
-}
+
+
+    }
+
+
+

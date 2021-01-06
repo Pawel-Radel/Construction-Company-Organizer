@@ -23,11 +23,7 @@ public class controller {
         return "ConstructionOrderform";
     }
 
-    @GetMapping("/newIncome")
-    public String shownewIncomeTemplate(){
 
-        return "newIncome";
-    }
 
     @GetMapping("/ConstructionOrderView")
     public String showConstructionOrder(){
@@ -35,12 +31,4 @@ public class controller {
         return "ConstructionOrderFormView";
     }
 
-
-    @GetMapping("/newCost")
-    public String shownewCostTemplate(Model model){
-
-        model.addAttribute("cost", new CostCommand());
-
-        return "newCost";
-    }
 }

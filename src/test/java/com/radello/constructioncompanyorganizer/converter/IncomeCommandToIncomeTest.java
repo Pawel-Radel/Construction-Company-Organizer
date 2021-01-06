@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +16,7 @@ class IncomeCommandToIncomeTest {
     private final Long ID_VALUE = 1L;
     private final int AMOUNT_VALUE = 123;
     private final String FOR_WHAT_VALUE = "Flat";
-    private final LocalDate LOCALE_DATE_VALUE = LocalDate.of(2020, 11, 11);
+    private final Date LOCALE_DATE_VALUE = new Date(2020- 11- 11);
 
     IncomeCommandToIncome incomeCommandToIncome;
 

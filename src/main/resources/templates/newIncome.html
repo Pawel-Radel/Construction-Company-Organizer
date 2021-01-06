@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link th:href="@{/css/newIncome.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
 </head>
 
 <body>
 
 <div class="main-block">
-    <form action="/">
+    <form th:object="${income}" action="income" method="post">
         <h1>Dodaj nowy Przychód</h1>
         <div class="info">
-            <input class="fname" type="hidden" name="name" placeholder="Full name">
+            <input class="fname" type="hidden"  th:field="*{ID}">
             <label>Kwota</label>
-            <input type="text" name="name" placeholder="e.g. 1000">
+            <input type="text" name="name" placeholder="e.g. 1000" th:field="*{amount}">
             <label>Za co</label>
-            <input type="text" name="name" placeholder="e. g. Wynagordzenie za zrealizowaną usługę">
+            <input type="text" th:field="*{forWhat}" placeholder="e.g. Wynagordzenie za zrealizowaną usługę">
             <label>termin zapłaty</label>
-            <input type="date" name="name" placeholder="">
-        </div>
+            <input type="text" id="datepicker" th:field="*{scheduledTimeToGet}"></div>
         <button type="submit" href="/">Dodaj Przychód</button>
     </form>
 </div>
