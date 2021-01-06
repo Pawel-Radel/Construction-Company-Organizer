@@ -3,10 +3,11 @@ package com.radello.constructioncompanyorganizer.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 // class representing cost to accounting
 @Entity
@@ -17,7 +18,10 @@ public class Cost extends MoneyTransfer{
 
 
     private String forWhat;
-    private LocalDate scheduledtime;
+
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private Date scheduledtime;
 
 
 }

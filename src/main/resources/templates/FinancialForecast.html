@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/FinancialForecast.css}" rel="stylesheet"/>
@@ -19,7 +19,15 @@
                     <th> Zrealizuj</th>
                     <th> Zrealizuj i odnów za</th>
                 </tr>
-                <tr>
+                <tr th:remove="all" >
+                    <td>Renowacja Elewacji Mokotów</td>
+                    <td>Mokotów, ul. Czerniakowska 33/55</td>
+                    <td>01-01-2020</td>
+                    <td><a href = "#"> Usuń </a></td>
+                    <td><a href = "#"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href "#">dni</a></td>
+                </tr>
+                <tr th:remove="all" >
                     <td>Renowacja Elewacji Mokotów</td>
                     <td>Mokotów, ul. Czerniakowska 33/55</td>
                     <td>01-01-2020</td>
@@ -27,7 +35,7 @@
                     <td><a href "#"> Zrealizuj</a></td>
                     <td class="links"><input type="text"><a href "#">dni</a></td>
                 </tr>
-                <tr>
+                <tr th:remove="all">
                     <td>Renowacja Elewacji Mokotów</td>
                     <td>Mokotów, ul. Czerniakowska 33/55</td>
                     <td>01-01-2020</td>
@@ -35,18 +43,10 @@
                     <td><a href "#"> Zrealizuj</a></td>
                     <td class="links"><input type="text"><a href "#">dni</a></td>
                 </tr>
-                <tr>
-                    <td>Renowacja Elewacji Mokotów</td>
-                    <td>Mokotów, ul. Czerniakowska 33/55</td>
-                    <td>01-01-2020</td>
-                    <td><a href "#"> Usuń </a></td>
-                    <td><a href "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href "#">dni</a></td>
-                </tr>
-                <tr>
-                    <td>Renowacja Elewacji Mokotów</td>
-                    <td>Mokotów, ul. Czerniakowska 33/55</td>
-                    <td>01-01-2020</td>
+                <tr th:each="cost : ${costs}">
+                    <td th:text="${cost.amount}">1000</td>
+                    <td th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td th:text="${cost.scheduledtime}">01-01-2020</td>
                     <td><a href "#"> Usuń </a></td>
                     <td><a href "#"> Zrealizuj</a></td>
                     <td class="links"><input type="text"><a href "#">dni</a></td>
