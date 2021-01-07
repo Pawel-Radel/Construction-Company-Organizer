@@ -4,18 +4,19 @@ import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
 
+import java.util.List;
 import java.util.Set;
 
 public interface IncomesDependsOnTime {
 
-    Set<IncomeCommand> getIncomes();
+    List<IncomeCommand> getIncomes();
 
-    Set<IncomeCommand> getOutstandingIncomes();
+    List<IncomeCommand> getOutstandingIncomes();
 
-    Set <IncomeCommand> getIncomesNextMonth();
+    List <IncomeCommand> getIncomesNextMonth();
 
-    Set <IncomeCommand> getIncomesAnotherMonth();
+    List <IncomeCommand> getIncomesAnotherMonth();
 
-    Set <IncomeCommand> getFurtherIncomes();
+    List <IncomeCommand> getFurtherIncomes();
 
 }

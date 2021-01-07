@@ -7,6 +7,7 @@ import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostService;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeServiceImpl;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +31,9 @@ public class CostServiceImpl implements CostService {
     @Override
     public Set<Cost> getCosts() {
         Set<Cost> costSet = new HashSet<>();
-        costRepository.findAll().iterator().forEachRemaining(costSet::add);
+        costRepository.findAll(Sort.by(Sort.Direction.ASC, "ID")).iterator().forEachRemaining(costSet::add);
+
+
         return costSet;
     }
 

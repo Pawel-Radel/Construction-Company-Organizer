@@ -1,21 +1,21 @@
 package com.radello.constructioncompanyorganizer.services.costsServices;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
-import com.radello.constructioncompanyorganizer.domain.Cost;
 
+import java.util.List;
 import java.util.Set;
 
 public interface CostsDependsOnTimeService {
 
-    Set<CostCommand> getCosts();
+    List<CostCommand> getCosts();
 
-    Set<CostCommand> getOutstandingCosts();
+    List<CostCommand> getOutstandingCosts();
 
-    Set <CostCommand> getCostsNextMonth();
+    List <CostCommand> getCostsNextMonth();
 
-    Set <CostCommand> getCostsAnotherMonth();
+    List <CostCommand> getCostsAnotherMonth();
 
-    Set <CostCommand> furtherCosts();
+    List <CostCommand> getFurtherCosts();
 
 
 }

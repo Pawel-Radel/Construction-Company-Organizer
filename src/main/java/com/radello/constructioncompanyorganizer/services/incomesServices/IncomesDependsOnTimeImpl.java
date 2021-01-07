@@ -3,11 +3,15 @@ package com.radello.constructioncompanyorganizer.services.incomesServices;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.converter.IncomeToIncomeCommand;
 import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -26,10 +30,10 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
     }
 
     @Override
-    public Set<IncomeCommand> getIncomes() {
+    public List<IncomeCommand> getIncomes() {
 
-        Set<IncomeCommand> incomeSet = new HashSet<>();
-        incomeRepository.findAll()
+        List<IncomeCommand> incomeSet = new ArrayList<>();
+        incomeRepository.findAll(Sort.by(Sort.Direction.ASC, "ID"))
                 .stream()
                 .map(cost -> incomeToIncomeCommand.convert(cost))
                 .iterator().forEachRemaining(incomeSet::add);
@@ -37,9 +41,9 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
     }
 
     @Override
-    public Set<IncomeCommand> getOutstandingIncomes() {
+    public List<IncomeCommand> getOutstandingIncomes() {
 
-        Set<IncomeCommand> listOfDates = new HashSet<>();
+        List<IncomeCommand> listOfDates = new ArrayList<>();
 
         getIncomes()
                 .stream()
@@ -52,9 +56,9 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
     }
 
     @Override
-    public Set<IncomeCommand> getIncomesNextMonth() {
+    public List<IncomeCommand> getIncomesNextMonth() {
 
-        Set<IncomeCommand> listOfDates = new HashSet<>();
+        List<IncomeCommand> listOfDates = new ArrayList<>();
 
         getIncomes()
                 .stream()
@@ -68,9 +72,9 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
     }
 
     @Override
-    public Set<IncomeCommand> getIncomesAnotherMonth() {
+    public List<IncomeCommand> getIncomesAnotherMonth() {
 
-        Set<IncomeCommand> listOfDates = new HashSet<>();
+        List<IncomeCommand> listOfDates = new ArrayList<>();
 
         getIncomes()
                 .stream()
@@ -84,9 +88,9 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
     }
 
     @Override
-    public Set<IncomeCommand> getFurtherIncomes() {
+    public List<IncomeCommand> getFurtherIncomes() {
 
-        Set<IncomeCommand> listOfDates = new HashSet<>();
+        List<IncomeCommand> listOfDates = new ArrayList<>();
 
         getIncomes()
                 .stream()

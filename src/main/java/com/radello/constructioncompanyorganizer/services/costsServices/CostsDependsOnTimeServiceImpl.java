@@ -5,13 +5,13 @@ import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
 import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeService;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.OneToMany;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -31,10 +31,10 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
     }
 
     @Override
-    public Set<CostCommand> getCosts() {
+    public List<CostCommand> getCosts() {
 
-        Set<CostCommand> costSet = new HashSet<>();
-        costRepository.findAll()
+        List<CostCommand> costSet = new ArrayList<>();
+        costRepository.findAll(Sort.by(Sort.Direction.ASC, "ID"))
                 .stream()
                 .map(cost -> costToCostCommand.convert(cost))
                 .iterator().forEachRemaining(costSet::add);
@@ -42,24 +42,23 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
     }
 
     @Override
-    public Set<CostCommand> getOutstandingCosts() {
+    public List<CostCommand> getOutstandingCosts() {
 
-        Set<CostCommand> listOfDates = new HashSet<>();
+        List<CostCommand> listOfDates = new ArrayList<>();
 
         getCosts()
                 .stream()
                 .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(TODAY_DATE)))
                 .forEach(cost -> listOfDates.add(cost));
 
-        System.out.println("Od " + TODAY_DATE.getDayOfMonth() + TODAY_DATE.getMonthValue() + "do" + ONE_MONTH_LATER.getDayOfMonth() + " " + ONE_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
 
     @Override
-    public Set<CostCommand> getCostsNextMonth() {
+    public List<CostCommand> getCostsNextMonth() {
 
-        Set<CostCommand> listOfDates = new HashSet<>();
+        List<CostCommand> listOfDates = new ArrayList<>();
 
         getCosts()
                 .stream()
@@ -67,15 +66,14 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
                 .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(ONE_MONTH_LATER.plusDays(1))))
                 .forEach(cost -> listOfDates.add(cost));
 
-        System.out.println("Od " + TODAY_DATE.getDayOfMonth() + TODAY_DATE.getMonthValue() + "do" + ONE_MONTH_LATER.getDayOfMonth() + " " + ONE_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
 
     @Override
-    public Set<CostCommand> getCostsAnotherMonth() {
+    public List<CostCommand> getCostsAnotherMonth() {
 
-        Set<CostCommand> listOfDates = new HashSet<>();
+        List<CostCommand> listOfDates = new ArrayList<>();
 
         getCosts()
                 .stream()
@@ -83,22 +81,20 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
                 .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(TWO_MONTH_LATER.plusDays(1))))
                 .forEach(cost -> listOfDates.add(cost));
 
-        System.out.println("Od " + ONE_MONTH_LATER.getDayOfMonth() + ONE_MONTH_LATER.getMonthValue() + "do" + TWO_MONTH_LATER.getDayOfMonth() + " " + TWO_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
 
     @Override
-    public Set<CostCommand> furtherCosts() {
+    public List<CostCommand> getFurtherCosts() {
 
-        Set<CostCommand> listOfDates = new HashSet<>();
+        List<CostCommand> listOfDates = new ArrayList<>();
 
         getCosts()
                 .stream()
                 .filter(costCommand -> costCommand.getScheduledtime().after(Date.valueOf(TWO_MONTH_LATER)))
                 .forEach(cost -> listOfDates.add(cost));
 
-        System.out.println("Od " + ONE_MONTH_LATER.getDayOfMonth() + ONE_MONTH_LATER.getMonthValue() + "do" + TWO_MONTH_LATER.getDayOfMonth() + " " + TWO_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
