@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.budgetServices;
 
 import com.radello.constructioncompanyorganizer.domain.Budget;
 

@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.incomesServices;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;

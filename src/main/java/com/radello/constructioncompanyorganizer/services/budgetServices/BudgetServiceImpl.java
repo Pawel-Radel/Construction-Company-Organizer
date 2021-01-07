@@ -1,7 +1,8 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.budgetServices;
 
 import com.radello.constructioncompanyorganizer.domain.Budget;
 import com.radello.constructioncompanyorganizer.repositories.BudgetRepository;
+import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

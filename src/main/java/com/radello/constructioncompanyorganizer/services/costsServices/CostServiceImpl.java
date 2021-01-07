@@ -1,10 +1,12 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.costsServices;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.converter.CostCommandToCost;
 import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
 import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
+import com.radello.constructioncompanyorganizer.services.costsServices.CostService;
+import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

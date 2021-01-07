@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.costsServices;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.converter.CostCommandToCost;
@@ -6,6 +6,8 @@ import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
 
 import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
+import com.radello.constructioncompanyorganizer.services.costsServices.CostServiceImpl;
+import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,7 +41,7 @@ class CostServiceImplTest {
 
 
     CostServiceImpl costService;
-    @Spy
+    @Mock
     CostRepository costRepository;
     @Mock
     CostToCostCommand costToCostCommand;

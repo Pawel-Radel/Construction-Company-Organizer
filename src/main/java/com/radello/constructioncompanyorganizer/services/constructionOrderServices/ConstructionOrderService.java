@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.constructionOrderServices;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;

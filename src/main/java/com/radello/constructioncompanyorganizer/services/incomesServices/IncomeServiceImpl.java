@@ -1,10 +1,11 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.incomesServices;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.converter.IncomeCommandToIncome;
 import com.radello.constructioncompanyorganizer.converter.IncomeToIncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
 import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
+import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;

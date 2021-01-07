@@ -1,7 +1,7 @@
 package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
-import com.radello.constructioncompanyorganizer.services.CostService;
+import com.radello.constructioncompanyorganizer.services.costsServices.CostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

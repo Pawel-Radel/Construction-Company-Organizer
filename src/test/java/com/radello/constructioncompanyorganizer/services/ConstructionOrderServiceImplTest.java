@@ -7,6 +7,7 @@ import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 import com.radello.constructioncompanyorganizer.domain.Income;
 import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import com.radello.constructioncompanyorganizer.repositories.ConstructionOrderRepository;
+import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

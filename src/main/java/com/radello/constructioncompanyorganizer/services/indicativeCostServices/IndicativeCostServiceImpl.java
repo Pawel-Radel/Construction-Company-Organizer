@@ -1,10 +1,11 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.indicativeCostServices;
 
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.converter.IndicativeCostCommandToIndicativeCost;
 import com.radello.constructioncompanyorganizer.converter.IndicativeCostToIndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import com.radello.constructioncompanyorganizer.repositories.IndicativeCostRepository;
+import com.radello.constructioncompanyorganizer.services.indicativeCostServices.IndicativeCostService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;

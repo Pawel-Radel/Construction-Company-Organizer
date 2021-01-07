@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.indicativeCostServices;
 
 
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;

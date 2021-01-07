@@ -1,10 +1,11 @@
-package com.radello.constructioncompanyorganizer.services;
+package com.radello.constructioncompanyorganizer.services.constructionOrderServices;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.converter.ConstructionOrderCommandtoConstructionOrder;
 import com.radello.constructioncompanyorganizer.converter.ConstructionOrdertoConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 import com.radello.constructioncompanyorganizer.repositories.ConstructionOrderRepository;
+import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
