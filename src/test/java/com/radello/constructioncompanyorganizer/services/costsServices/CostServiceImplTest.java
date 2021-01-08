@@ -3,21 +3,21 @@ package com.radello.constructioncompanyorganizer.services.costsServices;
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.converter.CostCommandToCost;
 import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
-
 import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
-import com.radello.constructioncompanyorganizer.services.costsServices.CostServiceImpl;
-import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -48,13 +48,13 @@ class CostServiceImplTest {
     @Mock
     CostCommandToCost costCommandToCost;
     @Mock
-    CostsDependsOnTimeServiceImpl costsDependsonTimeService;
+    CostsDependsOnTimeServiceImpl costsDependsOnTimeService;
 
     @BeforeEach
     void setUp() {
 
         costService = new CostServiceImpl(costRepository,
-                costToCostCommand, costCommandToCost, costsDependsonTimeService);
+                costToCostCommand, costCommandToCost, costsDependsOnTimeService);
 
         cost = new Cost();
         cost.setID(ID_VALUE);
@@ -74,14 +74,14 @@ class CostServiceImplTest {
     @Test
     void getCosts() {
 
-        when(costRepository.findAll()).thenReturn(costs);
+        when(costRepository.findAll(Sort.by("ID"))).thenReturn(costs);
 
         Set <Cost> costs1 = costService.getCosts();
 
         assertNotNull(costs1);
         assertEquals(2, costService.getCosts().size());
 
-        verify(costRepository, times(2)).findAll();
+        verify(costRepository, times(2)).findAll(Sort.by("ID"));
         verify(costRepository, never()).save(any());
     }
 
