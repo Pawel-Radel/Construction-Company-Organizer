@@ -2,16 +2,14 @@ package com.radello.constructioncompanyorganizer.services.costsServices;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
-import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.repositories.CostRepository;
-import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.OneToMany;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -63,7 +61,7 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
         getCosts()
                 .stream()
                 .filter(costCommand -> costCommand.getScheduledtime().after(Date.valueOf(TODAY_DATE.minusDays(1))))
-                .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(ONE_MONTH_LATER.plusDays(1))))
+                .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(ONE_MONTH_LATER)))
                 .forEach(cost -> listOfDates.add(cost));
 
 

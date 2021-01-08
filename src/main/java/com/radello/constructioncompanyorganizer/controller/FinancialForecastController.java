@@ -51,6 +51,7 @@ public class FinancialForecastController {
         model.addAttribute("sumOfNextCosts", costSumService.getSumOfNextCosts());
         model.addAttribute("sumOfAnotherCosts", costSumService.getSumOfAnotherCosts());
         model.addAttribute("sumOfFurtherCosts", costSumService.getSumOfFurtherCosts());
+        model.addAttribute("Integer", new Helper());
 
         return "FinancialForecast";
     }

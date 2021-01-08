@@ -24,12 +24,13 @@
                     <td th:text="${cost.amount}">1000</td>
                     <td th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${cost.scheduledtime}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/cost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${cost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfCosts}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfCosts}">1000 zł</div>
         </div>
     </div>
 
@@ -51,12 +52,18 @@
                     <td th:text="${income.amount}">1000</td>
                     <td th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${income.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href =  "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/income/' + ${income.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${income.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links">
+                        <form th:action="@{/logout}" th:object="${Integer}">
+                            <input type="text" th:value="${Integer}"/>
+                            <a href="#" th:href="@{/logout}">dni</a>
+                        </form>
+                    </td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfIncomes}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfIncomes}">1000 zł</div>
         </div>
     </div>
     <div class="clear"></div>
@@ -78,17 +85,18 @@
                     <td th:text="${outsCost.amount}">1000</td>
                     <td th:text="${outsCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${outsCost.scheduledtime}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/cost/' + ${outsCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${outsCost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfOutsCosts}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfOutsCosts}">1000 zł</div>
         </div>
     </div>
     <div class="half">
         <div class="formInfo">
-            <div class="head"><h3>Przychody  zaległe </h3></div>
+            <div class="head"><h3>Przychody zaległe </h3></div>
             <table>
                 <tr>
                     <th>ID</th>
@@ -104,12 +112,13 @@
                     <td th:text="${outsIncome.amount}">1000</td>
                     <td th:text="${outsIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${outsIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/income/' + ${outsIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${outsIncome.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfOutsIncomes}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfOutsIncomes}">1000 zł</div>
         </div>
     </div>
     <div class="clear"></div>
@@ -131,12 +140,13 @@
                     <td th:text="${nextCost.amount}">1000</td>
                     <td th:text="${nextCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${nextCost.scheduledtime}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/cost/' + ${nextCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${nextCost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfNextCosts}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfNextCosts}">1000 zł</div>
         </div>
     </div>
     <div class="half">
@@ -157,12 +167,13 @@
                     <td th:text="${nextIncome.amount}">1000</td>
                     <td th:text="${nextIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${nextIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/income/' + ${nextIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${nextIncome.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfNextIncomes}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfNextIncomes}">1000 zł</div>
         </div>
     </div>
     <div class="clear"></div>
@@ -184,12 +195,13 @@
                     <td th:text="${anotherCost.amount}">1000</td>
                     <td th:text="${anotherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${anotherCost.scheduledtime}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/cost/' + ${anotherCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${anotherCost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfAnotherCosts}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfAnotherCosts}">1000 zł</div>
         </div>
     </div>
     <div class="half">
@@ -210,12 +222,13 @@
                     <td th:text="${anotherIncome.amount}">1000</td>
                     <td th:text="${anotherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${anotherIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href = "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/income/' + ${anotherIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${anotherIncome.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfAnotherIncomes}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfAnotherIncomes}">1000 zł</div>
         </div>
     </div>
     <div class="clear"></div>
@@ -237,12 +250,13 @@
                     <td th:text="${furtherCost.amount}">1000</td>
                     <td th:text="${furtherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${furtherCost.scheduledtime}">01-01-2020</td>
-                    <td><a href =  "#"> Usuń </a></td>
-                    <td><a href = "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href = "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/cost/' + ${furtherCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${furtherCost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfFurtherCosts}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfFurtherCosts}">1000 zł</div>
         </div>
     </div>
     <div class="half">
@@ -263,13 +277,14 @@
                     <td th:text="${furtherIncome.amount}">1000</td>
                     <td th:text="${furtherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                     <td th:text="${furtherIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href =  "#"> Usuń </a></td>
-                    <td><a href =  "#"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href =  "#">dni</a></td>
+                    <td><a href="#" th:href="@{'/income/' + ${furtherIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td><a href="#" th:href="@{'/budget/' + ${furtherIncome.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links"><input type="text"><a href="#">dni</a></td>
                 </tr>
 
             </table>
-            <div class="informationDiv">Suma zł</div><div class="informationDiv" th:text="${sumOfFurtherIncomes}">1000 zł</div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${sumOfFurtherIncomes}">1000 zł</div>
         </div>
     </div>
     <div class="clear"></div>

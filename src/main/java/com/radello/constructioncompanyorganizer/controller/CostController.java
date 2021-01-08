@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -44,6 +45,15 @@ public class CostController {
 
         costService.saveCostCommand(command);
         
+        return "redirect:/financialForecast";
+    }
+
+    @GetMapping("cost/{id}/delete")
+    public String deleteById(@PathVariable String id){
+
+        log.debug("Deleting id: " + id);
+
+        costService.deleteById(Long.valueOf(id));
         return "redirect:/financialForecast";
     }
 

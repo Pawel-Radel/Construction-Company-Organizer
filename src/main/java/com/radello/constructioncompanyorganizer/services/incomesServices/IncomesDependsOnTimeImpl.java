@@ -47,7 +47,6 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
                 .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TODAY_DATE)))
                 .forEach(listOfDates::add);
 
-        System.out.println("Od " + TODAY_DATE.getDayOfMonth() + TODAY_DATE.getMonthValue() + "do" + ONE_MONTH_LATER.getDayOfMonth() + " " + ONE_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
@@ -60,10 +59,9 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
         getIncomes()
                 .stream()
                 .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TODAY_DATE.minusDays(1))))
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(ONE_MONTH_LATER.plusDays(1))))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(ONE_MONTH_LATER)))
                 .forEach(listOfDates::add);
 
-        System.out.println("Od " + TODAY_DATE.getDayOfMonth() + TODAY_DATE.getMonthValue() + "do" + ONE_MONTH_LATER.getDayOfMonth() + " " + ONE_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
@@ -79,7 +77,6 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
                 .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TWO_MONTH_LATER.plusDays(1))))
                 .forEach(listOfDates::add);
 
-        System.out.println("Od " + String.format("%02d" , ONE_MONTH_LATER.getDayOfMonth()) + ONE_MONTH_LATER.getMonthValue() + "do" + TWO_MONTH_LATER.getDayOfMonth() + " " + TWO_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }
@@ -93,8 +90,6 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
                 .stream()
                 .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TWO_MONTH_LATER)))
                 .forEach(listOfDates::add);
-
-        System.out.println("Od " + ONE_MONTH_LATER.getDayOfMonth() + ONE_MONTH_LATER.getMonthValue() + "do" + TWO_MONTH_LATER.getDayOfMonth() + " " + TWO_MONTH_LATER.getMonthValue());
 
         return listOfDates;
     }

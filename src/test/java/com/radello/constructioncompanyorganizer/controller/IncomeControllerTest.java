@@ -12,6 +12,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -36,15 +39,19 @@ class IncomeControllerTest {
     @Mock
     BindingResult bindingResult;
 
+    MockMvc mockMvc;
+
     @BeforeEach
     void setUp() {
+
         incomeController = new IncomeController(incomeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(incomeController).build();
     }
 
     @Test
     void shownewIncomeTemplate() throws Exception {
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(incomeController).build();
+
 
         mockMvc.perform(get("/newIncome/"))
                 .andExpect(status().isOk())
@@ -74,6 +81,15 @@ class IncomeControllerTest {
         assertEquals("redirect:/financialForecast", viewName);
         verify(incomeService, times(1)).saveIncomeCommand(any());
         verify(incomeService, never()).findCommandByID(any());
+    }
 
+
+    @Test
+    void deleteById() throws Exception{
+        mockMvc.perform(get("/income/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/financialForecast"));
+
+       verify(incomeService, times(1)).deleteById(anyLong());
     }
 }
