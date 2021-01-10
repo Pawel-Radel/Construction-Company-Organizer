@@ -17,6 +17,5 @@ public interface CostService {
 
     void deleteById(Long l);
 
-
-
+    void realizeAndPostponeToNewDate(String id, Long value);
 }

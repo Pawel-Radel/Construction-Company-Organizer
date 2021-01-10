@@ -6,7 +6,6 @@ import com.radello.constructioncompanyorganizer.repositories.CostRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +45,7 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
 
         getCosts()
                 .stream()
-                .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(TODAY_DATE)))
+                .filter(costCommand -> costCommand.getScheduledtime().isBefore(TODAY_DATE))
                 .forEach(cost -> listOfDates.add(cost));
 
 
@@ -60,8 +59,8 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
 
         getCosts()
                 .stream()
-                .filter(costCommand -> costCommand.getScheduledtime().after(Date.valueOf(TODAY_DATE.minusDays(1))))
-                .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(ONE_MONTH_LATER)))
+                .filter(costCommand -> costCommand.getScheduledtime().isAfter(TODAY_DATE.minusDays(1)))
+                .filter(costCommand -> costCommand.getScheduledtime().isBefore(ONE_MONTH_LATER))
                 .forEach(cost -> listOfDates.add(cost));
 
 
@@ -75,8 +74,8 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
 
         getCosts()
                 .stream()
-                .filter(costCommand -> costCommand.getScheduledtime().after(Date.valueOf(ONE_MONTH_LATER.minusDays(1))))
-                .filter(costCommand -> costCommand.getScheduledtime().before(Date.valueOf(TWO_MONTH_LATER.plusDays(1))))
+                .filter(costCommand -> costCommand.getScheduledtime().isAfter(ONE_MONTH_LATER.minusDays(1)))
+                .filter(costCommand -> costCommand.getScheduledtime().isBefore(TWO_MONTH_LATER.plusDays(1)))
                 .forEach(cost -> listOfDates.add(cost));
 
 
@@ -90,7 +89,7 @@ public class CostsDependsOnTimeServiceImpl implements CostsDependsOnTimeService 
 
         getCosts()
                 .stream()
-                .filter(costCommand -> costCommand.getScheduledtime().after(Date.valueOf(TWO_MONTH_LATER)))
+                .filter(costCommand -> costCommand.getScheduledtime().isAfter(TWO_MONTH_LATER))
                 .forEach(cost -> listOfDates.add(cost));
 
 

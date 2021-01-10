@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +28,8 @@ class CostServiceImplTest {
 
     private static final int AMOUNT_VALUE = 1000;
     private final Long ID_VALUE = 1L;
-    private final LocalDate TODAY_DATE = LocalDate.now();
-    private final Date DAY_AFTER = Date.valueOf(LocalDate.now().plusDays(1));
-    private final Date DAY_BEFORE = Date.valueOf(LocalDate.now().minusDays(1));
+    private final LocalDate DAY_AFTER = LocalDate.now().plusDays(1);
+    private final LocalDate DAY_BEFORE = LocalDate.now().minusDays(1);
     private List<Cost> costs;
     private Cost cost;
     private Cost cost1;
@@ -76,7 +74,7 @@ class CostServiceImplTest {
 
         when(costRepository.findAll(Sort.by("ID"))).thenReturn(costs);
 
-        Set <Cost> costs1 = costService.getCosts();
+        Set<Cost> costs1 = costService.getCosts();
 
         assertNotNull(costs1);
         assertEquals(2, costService.getCosts().size());
@@ -147,7 +145,7 @@ class CostServiceImplTest {
         costService.deleteById(ID_VALUE);
 
         verify(costRepository, times(1)).deleteById(anyLong());
-        verify(costRepository,never()).save(any());
+        verify(costRepository, never()).save(any());
 
     }
 

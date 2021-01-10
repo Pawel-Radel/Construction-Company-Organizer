@@ -6,7 +6,6 @@ import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
         List<IncomeCommand> incomeSet = new ArrayList<>();
         incomeRepository.findAll(Sort.by(Sort.Direction.ASC, "ID"))
                 .stream()
-                .map(cost -> incomeToIncomeCommand.convert(cost))
+                .map(income -> incomeToIncomeCommand.convert(income))
                 .iterator().forEachRemaining(incomeSet::add);
         return incomeSet;
     }
@@ -42,9 +41,11 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
 
         List<IncomeCommand> listOfDates = new ArrayList<>();
 
+        getIncomes().forEach(incomeCommand -> System.out.println(incomeCommand.getScheduledTimeToGet()));
+
         getIncomes()
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TODAY_DATE)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(TODAY_DATE))
                 .forEach(listOfDates::add);
 
 
@@ -58,8 +59,8 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
 
         getIncomes()
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TODAY_DATE.minusDays(1))))
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(ONE_MONTH_LATER)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(TODAY_DATE.minusDays(1)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(ONE_MONTH_LATER))
                 .forEach(listOfDates::add);
 
 
@@ -73,8 +74,8 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
 
         getIncomes()
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(ONE_MONTH_LATER.minusDays(1))))
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TWO_MONTH_LATER.plusDays(1))))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(ONE_MONTH_LATER.minusDays(1)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(TWO_MONTH_LATER.plusDays(1)))
                 .forEach(listOfDates::add);
 
 
@@ -88,7 +89,7 @@ public class IncomesDependsOnTimeImpl implements IncomesDependsOnTime {
 
         getIncomes()
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TWO_MONTH_LATER)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(TWO_MONTH_LATER))
                 .forEach(listOfDates::add);
 
         return listOfDates;

@@ -1,5 +1,6 @@
 package com.radello.constructioncompanyorganizer.controller;
 
+import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostSumService;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomesDependsOnTime;
@@ -16,17 +17,21 @@ public class FinancialForecastController {
     IncomesDependsOnTime incomesDependsOnTime;
     IncomeSumService incomeSumService;
     CostSumService costSumService;
+    BudgetService budgetService;
 
     public FinancialForecastController(CostsDependsOnTimeService costsDependsOnTimeService,
                                        IncomesDependsOnTime incomesDependsOnTime,
                                        IncomeSumService incomeSumService,
-                                       CostSumService costSumService) {
+                                       CostSumService costSumService,
+                                       BudgetService budgetService) {
 
         this.costsDependsOnTimeService = costsDependsOnTimeService;
         this.incomesDependsOnTime = incomesDependsOnTime;
         this.incomeSumService = incomeSumService;
         this.costSumService = costSumService;
+        this.budgetService = budgetService;
     }
+
 
     @GetMapping("/financialForecast")
     public String showFinancialForecast(Model model) {
@@ -51,8 +56,10 @@ public class FinancialForecastController {
         model.addAttribute("sumOfNextCosts", costSumService.getSumOfNextCosts());
         model.addAttribute("sumOfAnotherCosts", costSumService.getSumOfAnotherCosts());
         model.addAttribute("sumOfFurtherCosts", costSumService.getSumOfFurtherCosts());
-        model.addAttribute("Integer", new Helper());
+        model.addAttribute("Budget", budgetService.find());
 
         return "FinancialForecast";
     }
+
 }
+

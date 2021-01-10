@@ -1,6 +1,5 @@
 package com.radello.constructioncompanyorganizer.controller;
 
-import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Cost;
 import com.radello.constructioncompanyorganizer.domain.Income;
 import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
@@ -8,8 +7,8 @@ import com.radello.constructioncompanyorganizer.services.costsServices.CostServi
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -34,12 +33,11 @@ public class BudgetController {
         Cost cost = costService.findByID(Long.valueOf(id));
 
         budgetService.decreaseBudget(cost.getAmount());
-
         return "redirect:/cost/" + id + "/delete";
     }
 
     @GetMapping("budget/{id}/increase")
-    public String IncreaseBudget(@PathVariable String id) {
+    public String increaseBudget(@PathVariable String id) {
 
         Income income = incomeService.findByID(Long.valueOf(id));
 
@@ -48,12 +46,22 @@ public class BudgetController {
         return "redirect:/income/" + id + "/delete";
     }
 
-    @GetMapping("logout")
-    public String IncreaseBudget2(@ModelAttribute("Integer") String string) {
+    @PostMapping("postpone/{id}/income")
+    public String increaseBudget2(@RequestParam(value = "test", required = false) Long value,
+                                  @PathVariable String id) {
+        budgetService.increaseBudget(incomeService.findCommandByID(Long.valueOf(id)).getAmount());
+        incomeService.realizeAndPostponeToNewDate(id, value);
 
-        System.out.println("efffffffffff");
-        System.out.println(string);
-
-        return "index";
+        return "redirect:/financialForecast";
     }
+
+    @PostMapping("postpone/{id}/cost")
+    public String decreaseBudget2(@RequestParam(value = "test2", required = false) Long value,
+                                  @PathVariable String id) {
+        budgetService.decreaseBudget(costService.findCommandByID(Long.valueOf(id)).getAmount());
+        costService.realizeAndPostponeToNewDate(id, value);
+
+        return "redirect:/financialForecast";
+    }
+
 }

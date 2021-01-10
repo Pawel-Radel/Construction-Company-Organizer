@@ -12,9 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -51,8 +48,6 @@ class IncomeControllerTest {
     @Test
     void shownewIncomeTemplate() throws Exception {
 
-
-
         mockMvc.perform(get("/newIncome/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("newIncome"));
@@ -76,7 +71,7 @@ class IncomeControllerTest {
         command.setID(1L);
         when(incomeService.saveIncomeCommand(any())).thenReturn(command);
 
-        String viewName = incomeController.saveOrUpdate(command, bindingResult);
+        String viewName = incomeController.saveOrUpdate(command, new String("01/01/2020"), bindingResult);
 
         assertEquals("redirect:/financialForecast", viewName);
         verify(incomeService, times(1)).saveIncomeCommand(any());

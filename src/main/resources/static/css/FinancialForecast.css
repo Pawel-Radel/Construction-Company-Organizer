@@ -12,6 +12,16 @@
     font-size: 16px;
     border: 2px solid #d9d9de;
 }
+.Budget {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+    background-color: #eba134;
+    padding: 0.5%;
+    border-radius: 20%;
+    border: 2px solid red;
+}
+
 .informationDiv {
     width: 10%;
     background-color: #1c87c9;
@@ -21,7 +31,7 @@
     border: 1px solid #d9d9de;
 }
 
-.wrapper{
+.wrapper {
     border: 1px solid red;
 }
 
@@ -44,10 +54,6 @@ p {
     opacity: 80%;
 }
 
-input {
-    width: 20px;
-}
-
 .forecast {
     width: 40vw;
     height: 13vh;
@@ -67,8 +73,18 @@ h1 {
     clear: both;
 }
 
+form {
+    margin: 0;
+    bottom: 0;
+}
+
 input {
-    margin-right: 10px;
+    padding: 0;
+    width: 60%;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: auto;
 }
 
 table {
@@ -92,42 +108,63 @@ h3 {
 }
 
 th {
-    padding: 3px;
+    padding: 8px;
     font-weight: normal;
     text-align: center;
     background-color: #1c87c9;
-    height: 4vh;
     text-align: center;
+    height: 100%;
 }
 
 td {
     padding: 5px;
+    padding: 0;
 }
 
 tr {
+    margin: 0;
     padding: 3px;
+    padding: 0;
     text-align: center;
     background-color: #f5f5f5;
+    box-sizing: border-box;
 }
 
 button {
-    width: 20%;
     float: right;
-    height: 30px;
-    line-height: 20px;
-    padding: 4px;
-    border-radius: 3px;
     background-color: #1c87c9;
-    margin-top: 3vh;
-    border: 1px solid #006400;
 }
 
-button:hover {
-    background: #2371a0;
+.btn-link {
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+    color: #0000EE;
+    padding: 0;
+    text-decoration: underline;
+    font-family: inherit;
+    font-size: inherit;
+    float: left;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: auto;
+    margin-bottom: 5%;
+}
+
+#tab1, #tab2, #tab3, #tab4, #tab5, #tab6, #tab7, #tab8, #tab9, #tab10{
+    background-color: #ff5805;
+    padding: 3px;
+    border-radius: 5%;
+}
+
+.links {
+    margin: 0;
+    padding: 0;
 }
 
 td {
-    height: 4vh;
+
     background: #f5f5f5;
     text-align: center;
 }

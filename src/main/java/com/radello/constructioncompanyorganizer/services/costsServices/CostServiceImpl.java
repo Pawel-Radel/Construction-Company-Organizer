@@ -1,6 +1,7 @@
 package com.radello.constructioncompanyorganizer.services.costsServices;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
+import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.converter.CostCommandToCost;
 import com.radello.constructioncompanyorganizer.converter.CostToCostCommand;
 import com.radello.constructioncompanyorganizer.domain.Cost;
@@ -69,8 +70,22 @@ public class CostServiceImpl implements CostService {
         costRepository.deleteById(l);
     }
 
+    @Override
+    @Transactional
+    public void realizeAndPostponeToNewDate(String id, Long value) {
+
+        CostCommand costCommand = findCommandByID(Long.valueOf(id));
+        CostCommand costCommand1 = new CostCommand();
+        costCommand1.setAmount(costCommand.getAmount());
+        costCommand1.setForWhat(costCommand.getForWhat());
+        costCommand1.setScheduledtime(costCommand.getScheduledtime().plusDays(value));
+        saveCostCommand(costCommand1);
+        deleteById(costCommand.getID());
 
     }
+
+
+}
 
 
 

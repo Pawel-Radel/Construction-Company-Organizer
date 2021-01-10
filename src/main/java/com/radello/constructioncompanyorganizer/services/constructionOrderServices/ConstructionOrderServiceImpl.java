@@ -5,9 +5,9 @@ import com.radello.constructioncompanyorganizer.converter.ConstructionOrderComma
 import com.radello.constructioncompanyorganizer.converter.ConstructionOrdertoConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 import com.radello.constructioncompanyorganizer.repositories.ConstructionOrderRepository;
-import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -22,8 +22,8 @@ public class ConstructionOrderServiceImpl implements ConstructionOrderService {
     private final ConstructionOrderCommandtoConstructionOrder commandToConstructionOrder;
 
     public ConstructionOrderServiceImpl(ConstructionOrderRepository constOrdRepository,
-            ConstructionOrdertoConstructionOrderCommand consOrdToConsOrdCommand,
-            ConstructionOrderCommandtoConstructionOrder commandToConstructionOrder) {
+                                        ConstructionOrdertoConstructionOrderCommand consOrdToConsOrdCommand,
+                                        ConstructionOrderCommandtoConstructionOrder commandToConstructionOrder) {
 
         this.constructionOrderRepository = constOrdRepository;
         this.consOrdToConsOrdCommand = consOrdToConsOrdCommand;

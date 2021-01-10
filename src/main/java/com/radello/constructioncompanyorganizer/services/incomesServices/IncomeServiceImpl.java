@@ -5,9 +5,9 @@ import com.radello.constructioncompanyorganizer.converter.IncomeCommandToIncome;
 import com.radello.constructioncompanyorganizer.converter.IncomeToIncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
 import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
-import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -44,7 +44,6 @@ public class IncomeServiceImpl implements IncomeService {
 
         return incomeOptional.orElse(null);
 
-
     }
 
     @Override
@@ -69,6 +68,19 @@ public class IncomeServiceImpl implements IncomeService {
     public void deleteById(Long l) {
 
         incomeRepository.deleteById(l);
+    }
+
+    @Override
+    @Transactional
+    public void realizeAndPostponeToNewDate(String id, Long value) {
+
+        IncomeCommand incomeCommand = findCommandByID(Long.valueOf(id));
+        IncomeCommand incomeCommand1 = new IncomeCommand();
+        incomeCommand1.setAmount(incomeCommand.getAmount());
+        incomeCommand1.setForWhat(incomeCommand.getForWhat());
+        incomeCommand1.setScheduledTimeToGet(incomeCommand.getScheduledTimeToGet().plusDays(value));
+        saveIncomeCommand(incomeCommand1);
+        deleteById(incomeCommand.getID());
     }
 
 }

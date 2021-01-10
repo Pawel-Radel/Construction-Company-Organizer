@@ -2,9 +2,10 @@ package com.radello.constructioncompanyorganizer.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.LocalDate;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IncomeTest {
 
@@ -27,7 +28,7 @@ class IncomeTest {
     @Test
     void getScheduledTimeToGet() {
 
-        Date scheduledTimeToGetTest = new Date (2011-11-11);
+        LocalDate scheduledTimeToGetTest = LocalDate.now();
 
         income.setScheduledTimeToGet(scheduledTimeToGetTest);
         assertEquals(scheduledTimeToGetTest, income.getScheduledTimeToGet());

@@ -30,11 +30,11 @@ public class ConstructionOrderCommand {
 
     @Min(value = 2021 - 1 - 1)
     @Max(value = 2100 - 1 - 1)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Min(value = 2021 - 1 - 1)
     @Max(value = 2100 - 1 - 1)
-    private Date scheduledEndDate;
+    private LocalDate scheduledEndDate;
 
     private IncomeCommand incomeCommand;
     private Set<IndicativeCostCommand> indicateCosts = new HashSet<>();

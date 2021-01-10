@@ -15,7 +15,7 @@ class CostToCostCommandTest {
     private final Long ID_VALUE = 1L;
     private final int AMOUNT_VALUE = 123;
     private final String FOR_WHAT_VALUE = "Flat";
-    private final Date LOCALE_DATE_VALUE = new Date (2021-11-11);
+    private final LocalDate LOCALE_DATE_VALUE = LocalDate.now();
 
     CostToCostCommand costToCostCommand;
 

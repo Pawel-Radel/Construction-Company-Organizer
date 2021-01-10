@@ -29,7 +29,8 @@ class CostTest {
     @Test
     void getScheduledtime() {
 
-        Date scheduledTimeTest = new Date (2020-11-11);
+        LocalDate scheduledTimeTest = LocalDate.now();
+
 
         cost.setScheduledtime(scheduledTimeTest);
 

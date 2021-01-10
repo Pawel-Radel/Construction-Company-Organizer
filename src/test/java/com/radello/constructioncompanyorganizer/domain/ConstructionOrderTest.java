@@ -53,7 +53,7 @@ class ConstructionOrderTest {
     @Test
     void getStartDate() {
 
-        Date dateTest = new Date (2020-11-11);
+        LocalDate dateTest = LocalDate.now();
         consOrd.setStartDate(dateTest);
 
         assertEquals(dateTest, consOrd.getStartDate());
@@ -63,7 +63,7 @@ class ConstructionOrderTest {
 
     @Test
     void getScheduledEndDate() {
-        Date dateTest = new Date(2020-11-11);
+        LocalDate dateTest = LocalDate.now();
         consOrd.setScheduledEndDate(dateTest);
         assertEquals(dateTest, consOrd.getScheduledEndDate());
 

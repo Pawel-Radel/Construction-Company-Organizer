@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/FinancialForecast.css}" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/financialForecast.js"></script>
 </head>
 <body>
 <div class="main-body">
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Rozchody wszystkie</h3></div>
+            <button id="tab1">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -20,13 +23,18 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="cost : ${costs}">
-                    <td th:text="${cost.ID}">1</td>
-                    <td th:text="${cost.amount}">1000</td>
-                    <td th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${cost.scheduledtime}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/cost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${cost.ID} + '/decrease'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td1" th:text="${cost.ID}">1</td>
+                    <td class="td1" th:text="${cost.amount}">1000</td>
+                    <td class="td1" th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td1" th:text="${cost.scheduledtime}">01-01-2020</td>
+                    <td class="td1"><a href="#" th:href="@{'/cost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td1"><a href="#" th:href="@{'/budget/' + ${cost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links td1">
+                        <form th:action="@{'postpone/' + ${cost.ID} + '/cost'}" method="post">
+                            <input type="text" th:name="test2"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -37,6 +45,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Przychody wszystkie</h3></div>
+            <button id="tab2">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -48,16 +57,16 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="income : ${incomes}">
-                    <td th:text="${income.ID}">1</td>
-                    <td th:text="${income.amount}">1000</td>
-                    <td th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${income.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/income/' + ${income.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${income.ID} + '/increase'}"> Zrealizuj</a></td>
-                    <td class="links">
-                        <form th:action="@{/logout}" th:object="${Integer}">
-                            <input type="text" th:value="${Integer}"/>
-                            <a href="#" th:href="@{/logout}">dni</a>
+                    <td class="td2" th:text="${income.ID}">1</td>
+                    <td class="td2" th:text="${income.amount}">1000</td>
+                    <td class="td2" th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td2" th:text="${income.scheduledTimeToGet}">01-01-2020</td>
+                    <td class="td2"><a href="#" th:href="@{'/income/' + ${income.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td2"><a href="#" th:href="@{'/budget/' + ${income.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links td2">
+                        <form th:action="@{'postpone/' + ${income.ID} + '/income'}" method="post">
+                            <input type="text" th:name="test"/>
+                            <button type="submit" class="btn-link"> dni</button>
                         </form>
                     </td>
                 </tr>
@@ -70,6 +79,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Rozchody zaległe</h3></div>
+            <button id="tab3">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -78,16 +88,22 @@
                     <th>Data zaistnienia</th>
                     <th> Usuń</th>
                     <th> Zrealizuj</th>
-                    <th> Zrealizuj i odnów za</th>
+                    <th class="links"> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="outsCost : ${outsCosts}">
-                    <td th:text="${outsCost.ID}">1</td>
-                    <td th:text="${outsCost.amount}">1000</td>
-                    <td th:text="${outsCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${outsCost.scheduledtime}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/cost/' + ${outsCost.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${outsCost.ID} + '/decrease'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td3" th:text="${outsCost.ID}">1</td>
+                    <td class="td3" th:text="${outsCost.amount}">1000</td>
+                    <td class="td3" th:text="${outsCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td3" th:text="${outsCost.scheduledtime}">01-01-2020</td>
+                    <td class="td3"><a href="#" th:href="@{'/cost/' + ${outsCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td3"><a href="#" th:href="@{'/budget/' + ${outsCost.ID} + '/decrease'}"> Zrealizuj</a>
+                    </td>
+                    <td class="links td3">
+                        <form th:action="@{'postpone/' + ${outsCost.ID} + '/cost'}" method="post">
+                            <input type="text" th:name="test2"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -97,6 +113,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Przychody zaległe </h3></div>
+            <button id="tab4">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -108,13 +125,19 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="outsIncome : ${outsIncomes}">
-                    <td th:text="${outsIncome.ID}">1</td>
-                    <td th:text="${outsIncome.amount}">1000</td>
-                    <td th:text="${outsIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${outsIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/income/' + ${outsIncome.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${outsIncome.ID} + '/increase'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td4" th:text="${outsIncome.ID}">1</td>
+                    <td class="td4" th:text="${outsIncome.amount}">1000</td>
+                    <td class="td4" th:text="${outsIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td4" th:text="${outsIncome.scheduledTimeToGet}">01-01-2020</td>
+                    <td class="td4"><a href="#" th:href="@{'/income/' + ${outsIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td4"><a href="#" th:href="@{'/budget/' + ${outsIncome.ID} + '/increase'}"> Zrealizuj</a>
+                    </td>
+                    <td class="links td4">
+                        <form th:action="@{'postpone/' + ${outsIncome.ID} + '/income'}" method="post">
+                            <input type="text" th:name="test"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -125,6 +148,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Rozchody na najbliższy miesiąć</h3></div>
+            <button id="tab5">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -136,13 +160,20 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="nextCost : ${nextCosts}">
-                    <td th:text="${nextCost.ID}">1</td>
-                    <td th:text="${nextCost.amount}">1000</td>
-                    <td th:text="${nextCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${nextCost.scheduledtime}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/cost/' + ${nextCost.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${nextCost.ID} + '/decrease'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td5" th:text="${nextCost.ID}">1</td>
+                    <td class="td5" th:text="${nextCost.amount}">1000</td>
+                    <td class="td5" th:text="${nextCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td5" th:text="${nextCost.scheduledtime}">01-01-2020</td>
+                    <td class="td5">
+                        <a href="#" th:href="@{'/cost/' + ${nextCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td5"><a href="#" th:href="@{'/budget/' + ${nextCost.ID} + '/decrease'}"> Zrealizuj</a>
+                    </td>
+                    <td class="links td5">
+                        <form th:action="@{'postpone/' + ${nextCost.ID} + '/cost'}" method="post">
+                            <input type="text" th:name="test2"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -152,6 +183,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Przychody na najbliższy miesiąc</h3></div>
+            <button id="tab6">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -163,13 +195,19 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="nextIncome : ${nextIncomes}">
-                    <td th:text="${nextIncome.ID}">1</td>
-                    <td th:text="${nextIncome.amount}">1000</td>
-                    <td th:text="${nextIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${nextIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/income/' + ${nextIncome.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${nextIncome.ID} + '/increase'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td6" th:text="${nextIncome.ID}">1</td>
+                    <td class="td6" th:text="${nextIncome.amount}">1000</td>
+                    <td class="td6" th:text="${nextIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td6" th:text="${nextIncome.scheduledTimeToGet}">01-01-2020</td>
+                    <td class="td6"><a href="#" th:href="@{'/income/' + ${nextIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td6"><a href="#" th:href="@{'/budget/' + ${nextIncome.ID} + '/increase'}"> Zrealizuj</a>
+                    </td>
+                    <td class="links td6">
+                        <form th:action="@{'postpone/' + ${nextIncome.ID} + '/income'}" method="post">
+                            <input type="text" th:name="test"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -180,6 +218,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Rozchody na kolejny miesiąc</h3></div>
+            <button id="tab7">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -191,13 +230,19 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="anotherCost : ${anotherCosts}">
-                    <td th:text="${anotherCost.ID}">1</td>
-                    <td th:text="${anotherCost.amount}">1000</td>
-                    <td th:text="${anotherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${anotherCost.scheduledtime}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/cost/' + ${anotherCost.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${anotherCost.ID} + '/decrease'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td7" th:text="${anotherCost.ID}">1</td>
+                    <td class="td7" th:text="${anotherCost.amount}">1000</td>
+                    <td class="td7" th:text="${anotherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td7" th:text="${anotherCost.scheduledtime}">01-01-2020</td>
+                    <td class="td7"><a href="#" th:href="@{'/cost/' + ${anotherCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td7"><a href="#" th:href="@{'/budget/' + ${anotherCost.ID} + '/decrease'}"> Zrealizuj</a>
+                    </td>
+                    <td class="links td7">
+                        <form th:action="@{'postpone/' + ${anotherCost.ID} + '/cost'}" method="post">
+                            <input type="text" th:name="test2"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -207,6 +252,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Przychody na kolejny miesiąć</h3></div>
+            <button id="tab8">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -218,13 +264,20 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="anotherIncome : ${anotherIncomes}">
-                    <td th:text="${anotherIncome.ID}">1</td>
-                    <td th:text="${anotherIncome.amount}">1000</td>
-                    <td th:text="${anotherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${anotherIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/income/' + ${anotherIncome.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${anotherIncome.ID} + '/increase'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td8" th:text="${anotherIncome.ID}">1</td>
+                    <td class="td8" th:text="${anotherIncome.amount}">1000</td>
+                    <td class="td8" th:text="${anotherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td8" th:text="${anotherIncome.scheduledTimeToGet}">01-01-2020</td>
+                    <td class="td8"><a href="#" th:href="@{'/income/' + ${anotherIncome.ID} + '/delete'}"> Usuń </a>
+                    </td>
+                    <td class="td8"><a href="#" th:href="@{'/budget/' + ${anotherIncome.ID} + '/increase'}">
+                        Zrealizuj</a></td>
+                    <td class="links td8">
+                        <form th:action="@{'postpone/' + ${anotherIncome.ID} + '/income'}" method="post">
+                            <input type="text" th:name="test"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -235,6 +288,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Rozchody dalsze</h3></div>
+            <button id="tab9">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -246,13 +300,18 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="furtherCost : ${furtherCosts}">
-                    <td th:text="${furtherCost.ID}">1</td>
-                    <td th:text="${furtherCost.amount}">1000</td>
-                    <td th:text="${furtherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${furtherCost.scheduledtime}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/cost/' + ${furtherCost.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${furtherCost.ID} + '/decrease'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td9"th:text="${furtherCost.ID}">1</td>
+                    <td class="td9"th:text="${furtherCost.amount}">1000</td>
+                    <td class="td9"th:text="${furtherCost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td9"th:text="${furtherCost.scheduledtime}">01-01-2020</td>
+                    <td class="td9"><a href="#" th:href="@{'/cost/' + ${furtherCost.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td9"><a href="#" th:href="@{'/budget/' + ${furtherCost.ID} + '/decrease'}"> Zrealizuj</a></td>
+                    <td class="links td9">
+                        <form th:action="@{'postpone/' + ${furtherCost.ID} + '/cost'}" method="post">
+                            <input type="text" th:name="test2"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
             <div class="informationDiv">Suma zł</div>
@@ -262,6 +321,7 @@
     <div class="half">
         <div class="formInfo">
             <div class="head"><h3>Przychody dalsze</h3></div>
+            <button id="tab10">Ukryj / Pokaż</button>
             <table>
                 <tr>
                     <th>ID</th>
@@ -273,13 +333,18 @@
                     <th> Zrealizuj i odnów za</th>
                 </tr>
                 <tr th:each="furtherIncome : ${furtherIncomes}">
-                    <td th:text="${furtherIncome.ID}">1</td>
-                    <td th:text="${furtherIncome.amount}">1000</td>
-                    <td th:text="${furtherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                    <td th:text="${furtherIncome.scheduledTimeToGet}">01-01-2020</td>
-                    <td><a href="#" th:href="@{'/income/' + ${furtherIncome.ID} + '/delete'}"> Usuń </a></td>
-                    <td><a href="#" th:href="@{'/budget/' + ${furtherIncome.ID} + '/increase'}"> Zrealizuj</a></td>
-                    <td class="links"><input type="text"><a href="#">dni</a></td>
+                    <td class="td10"th:text="${furtherIncome.ID}">1</td>
+                    <td class="td10"th:text="${furtherIncome.amount}">1000</td>
+                    <td class="td10"th:text="${furtherIncome.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                    <td class="td10"th:text="${furtherIncome.scheduledTimeToGet}">01-01-2020</td>
+                    <td class="td10"><a href="#" th:href="@{'/income/' + ${furtherIncome.ID} + '/delete'}"> Usuń </a></td>
+                    <td class="td10"><a href="#" th:href="@{'/budget/' + ${furtherIncome.ID} + '/increase'}"> Zrealizuj</a></td>
+                    <td class="links td10">
+                        <form th:action="@{'postpone/' + ${furtherIncome.ID} + '/income'}" method="post">
+                            <input type="text" th:name="test"/>
+                            <button type="submit" class="btn-link"> dni</button>
+                        </form>
+                    </td>
                 </tr>
 
             </table>
@@ -288,10 +353,10 @@
         </div>
     </div>
     <div class="clear"></div>
-    <div class="forecast"><h1>Prognoza Finansowa</h1><br>
-        <p>Prognozowane jest że za 30 dni twój budżet zwiększy się o 10000zł.<br>
-            Po zrealizowaniu wszystkich przychodów i kosztów twój budżet zwiększy się o 20000 zł.</p>
+    <div class="Budget" th:text="'Aktualnie budżet wynosi ' + ${Budget.getAmount} + ' zł.'"> Aktualnie budget wynosi
+        20000 zł.
     </div>
+
 </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 // class representing cost to accounting
@@ -15,14 +16,14 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cost extends MoneyTransfer{
+public class Cost extends MoneyTransfer {
 
 
     private String forWhat;
 
-    @Temporal(TemporalType.DATE)
+
     @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private Date scheduledtime;
+    private LocalDate scheduledtime;
 
 
 }

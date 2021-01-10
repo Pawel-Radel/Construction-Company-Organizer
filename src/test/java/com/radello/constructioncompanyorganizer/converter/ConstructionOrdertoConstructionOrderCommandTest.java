@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,9 +20,9 @@ class ConstructionOrdertoConstructionOrderCommandTest {
     private final String FOR_WHAT_VALUE_1 = "flat";
     private final String FOR_WHAT_VALUE_3 = "flat2";
     private final String FOR_WHAT_VALUE_2 = "flat1";
-    private final Date LOCAL_DATE_VALUE = new Date (2020-11-11);
-    private final Date LOCAL_DATE_VALUE2 = new Date(2020-12-11);
-    private final Date LOCAL_DATE_VALUE3 = new Date(2020-10-11);
+    private final LocalDate LOCAL_DATE_VALUE = LocalDate.now();
+    private final LocalDate LOCAL_DATE_VALUE2 = LocalDate.now().plusDays(2);
+    private final LocalDate LOCAL_DATE_VALUE3 = LocalDate.now().minusDays(3);
     private final int AMOUNT_VALUE = 123;
     private final String TITLE_VALUE = "Title";
     private final String ADDRES_VALUE = "Addres Value";
@@ -57,7 +57,6 @@ class ConstructionOrdertoConstructionOrderCommandTest {
 
         Income income = new Income();
         income.setID(ID_VALUE_1);
-        income.setScheduledTimeToGet(LOCAL_DATE_VALUE);
         income.setForWhat(FOR_WHAT_VALUE_3);
         income.setAmount(AMOUNT_VALUE);
 
@@ -85,7 +84,6 @@ class ConstructionOrdertoConstructionOrderCommandTest {
         assertEquals(ADDRES_VALUE, constructionOrderCommand.getAddres());
         assertEquals(ID_VALUE_1, constructionOrderCommand.getIncomeCommand().getID());
         assertEquals(FOR_WHAT_VALUE_3, constructionOrderCommand.getIncomeCommand().getForWhat());
-        assertEquals(LOCAL_DATE_VALUE, constructionOrderCommand.getIncomeCommand().getScheduledTimeToGet());
         assertEquals(AMOUNT_VALUE, constructionOrderCommand.getIncomeCommand().getAmount());
         assertEquals(2, constructionOrderCommand.getIndicateCosts().size());
     }

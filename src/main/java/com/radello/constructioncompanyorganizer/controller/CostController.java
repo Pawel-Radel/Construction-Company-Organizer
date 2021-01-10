@@ -6,12 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Controller
@@ -35,7 +34,13 @@ public class CostController {
 
     @PostMapping("cost")
     public String saveOrUpdate(@Valid @ModelAttribute("cost") CostCommand command,
+                               @RequestParam("date2") String localDate,
                                BindingResult bindingResult) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        LocalDate lDate = LocalDate.parse(localDate, formatter);
+        command.setScheduledtime(lDate);
 
         if (bindingResult.hasErrors()) {
 
@@ -44,12 +49,12 @@ public class CostController {
         }
 
         costService.saveCostCommand(command);
-        
+
         return "redirect:/financialForecast";
     }
 
     @GetMapping("cost/{id}/delete")
-    public String deleteById(@PathVariable String id){
+    public String deleteById(@PathVariable String id) {
 
         log.debug("Deleting id: " + id);
 

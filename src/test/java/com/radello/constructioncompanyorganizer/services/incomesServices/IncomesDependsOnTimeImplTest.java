@@ -11,7 +11,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Sort;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ class IncomesDependsOnTimeImplTest {
     @Mock
     IncomeToIncomeCommand incomeToIncomeCommand;
 
-
+    IncomeCommand command;
     List<Income> incomes;
     @Mock
     Income income1;
@@ -45,14 +44,11 @@ class IncomesDependsOnTimeImplTest {
 
     @BeforeEach
     void setUp() {
-        incomesDependsOnTimeImpl = new IncomesDependsOnTimeImpl(incomeRepository,incomeToIncomeCommand);
-        //income1 = new Income();
-        //income2 = new Income();
+        incomesDependsOnTimeImpl = new IncomesDependsOnTimeImpl(incomeRepository, incomeToIncomeCommand);
         incomes = new ArrayList<>();
-        income1.setScheduledTimeToGet(Date.valueOf(LocalDate.now().minusDays(1)));
-        income2.setScheduledTimeToGet(Date.valueOf(LocalDate.now()));
         incomes.add(income1);
         incomes.add(income2);
+        command = new IncomeCommand();
     }
 
     @Test
@@ -61,7 +57,7 @@ class IncomesDependsOnTimeImplTest {
         when(incomeToIncomeCommand.convert(any())).thenReturn(new IncomeCommand());
         when(incomeRepository.findAll(Sort.by("ID"))).thenReturn(incomes);
 
-        List <IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
+        List<IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
 
         assertNotNull(income);
 
@@ -69,105 +65,101 @@ class IncomesDependsOnTimeImplTest {
 
         verify(incomeRepository, times(1)).findAll(Sort.by("ID"));
         verify(incomeRepository, never()).save(any());
-        verify(incomeToIncomeCommand,times(2)).convert(any());
+        verify(incomeToIncomeCommand, times(2)).convert(any());
     }
 
     @Test
     void getOutstandingIncomes() {
 
-        IncomeCommand command = new IncomeCommand();
-        command.setScheduledTimeToGet(Date.valueOf(LocalDate.now().minusDays(1)));
+        command.setScheduledTimeToGet(LocalDate.now().minusDays(1));
 
         when(incomeToIncomeCommand.convert(any())).thenReturn(command);
         when(incomeRepository.findAll(Sort.by("ID"))).thenReturn(incomes);
 
-        List <IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
-        List <IncomeCommand> incomeAfterFilter = new ArrayList<>();
+        List<IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
+        List<IncomeCommand> incomeAfterFilter = new ArrayList<>();
 
         income
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TODAY_DATE)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(TODAY_DATE))
                 .forEach(incomeAfterFilter::add);
 
         assertNotNull(incomeAfterFilter);
         assertEquals(2, incomeAfterFilter.size());
         verify(incomeRepository, times(1)).findAll(Sort.by("ID"));
         verify(incomeRepository, never()).save(any());
-        verify(incomeToIncomeCommand,times(2)).convert(any());
+        verify(incomeToIncomeCommand, times(2)).convert(any());
     }
 
     @Test
     void getIncomesNextMonth() {
 
-        IncomeCommand command = new IncomeCommand();
-        command.setScheduledTimeToGet(Date.valueOf(LocalDate.now().plusDays(1)));
+        command.setScheduledTimeToGet(LocalDate.now().plusDays(1));
 
         when(incomeToIncomeCommand.convert(any())).thenReturn(command);
         when(incomeRepository.findAll(Sort.by("ID"))).thenReturn(incomes);
 
-        List <IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
-        List <IncomeCommand> incomeAfterFilter = new ArrayList<>();
+        List<IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
+        List<IncomeCommand> incomeAfterFilter = new ArrayList<>();
 
         income
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TODAY_DATE.minusDays(1))))
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(ONE_MONTH_LATER.plusDays(1))))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(TODAY_DATE.minusDays(1)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(ONE_MONTH_LATER.plusDays(1)))
                 .forEach(incomeAfterFilter::add);
 
         assertNotNull(incomeAfterFilter);
         assertEquals(2, incomeAfterFilter.size());
         verify(incomeRepository, times(1)).findAll(Sort.by("ID"));
         verify(incomeRepository, never()).save(any());
-        verify(incomeToIncomeCommand,times(2)).convert(any());
+        verify(incomeToIncomeCommand, times(2)).convert(any());
     }
 
     @Test
     void getIncomesAnotherMonth() {
 
-        IncomeCommand command = new IncomeCommand();
-        command.setScheduledTimeToGet(Date.valueOf(ONE_MONTH_LATER));
+        command.setScheduledTimeToGet(ONE_MONTH_LATER);
 
         when(incomeToIncomeCommand.convert(any())).thenReturn(command);
         when(incomeRepository.findAll(Sort.by("ID"))).thenReturn(incomes);
 
-        List <IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
-        List <IncomeCommand> incomeAfterFilter = new ArrayList<>();
+        List<IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
+        List<IncomeCommand> incomeAfterFilter = new ArrayList<>();
 
         income
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(ONE_MONTH_LATER.minusDays(1))))
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().before(Date.valueOf(TWO_MONTH_LATER.plusDays(1))))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(ONE_MONTH_LATER.minusDays(1)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isBefore(TWO_MONTH_LATER.plusDays(1)))
                 .forEach(incomeAfterFilter::add);
 
         assertNotNull(incomeAfterFilter);
         assertEquals(2, incomeAfterFilter.size());
         verify(incomeRepository, times(1)).findAll(Sort.by("ID"));
         verify(incomeRepository, never()).save(any());
-        verify(incomeToIncomeCommand,times(2)).convert(any());
+        verify(incomeToIncomeCommand, times(2)).convert(any());
     }
 
     @Test
     void getFurtherIncomes() {
 
-        IncomeCommand command = new IncomeCommand();
-        command.setScheduledTimeToGet(Date.valueOf(TWO_MONTH_LATER.plusDays(1)));
+        command.setScheduledTimeToGet(TWO_MONTH_LATER.plusDays(1));
 
         when(incomeToIncomeCommand.convert(any())).thenReturn(command);
         when(incomeRepository.findAll(Sort.by("ID"))).thenReturn(incomes);
 
-        List <IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
-        List <IncomeCommand> incomeAfterFilter = new ArrayList<>();
+        List<IncomeCommand> income = incomesDependsOnTimeImpl.getIncomes();
+        List<IncomeCommand> incomeAfterFilter = new ArrayList<>();
 
         income
                 .stream()
-                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().after(Date.valueOf(TWO_MONTH_LATER)))
+                .filter(incomeCommand -> incomeCommand.getScheduledTimeToGet().isAfter(TWO_MONTH_LATER))
                 .forEach(incomeAfterFilter::add);
 
         assertNotNull(incomeAfterFilter);
         assertEquals(2, incomeAfterFilter.size());
         verify(incomeRepository, times(1)).findAll(Sort.by("ID"));
         verify(incomeRepository, never()).save(any());
-        verify(incomeToIncomeCommand,times(2)).convert(any());
+        verify(incomeToIncomeCommand, times(2)).convert(any());
 
     }
 }

@@ -1,6 +1,7 @@
 package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.CostCommand;
+import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostSumService;
 import com.radello.constructioncompanyorganizer.services.costsServices.CostsDependsOnTimeService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeSumService;
@@ -41,6 +42,8 @@ class FinancialForecastControllerTest {
     @Mock
     IncomeSumService incomeSumService;
     @Mock
+    BudgetService budgetService;
+    @Mock
     CostSumService costSumService;
     @Mock
     Model model;
@@ -48,7 +51,7 @@ class FinancialForecastControllerTest {
     @BeforeEach
     void setUp() {
         financialForecastController = new FinancialForecastController(costsDependsOnTimeService,
-                incomesDependsOnTime, incomeSumService, costSumService);
+                incomesDependsOnTime, incomeSumService, costSumService, budgetService);
     }
 
     @Test
@@ -62,7 +65,7 @@ class FinancialForecastControllerTest {
     }
 
     @Test
-    void Test(){
+    void Test() {
 
         List<CostCommand> comandset = new ArrayList<>();
         comandset.add(new CostCommand());

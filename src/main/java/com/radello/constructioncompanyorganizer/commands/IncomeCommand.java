@@ -3,7 +3,8 @@ package com.radello.constructioncompanyorganizer.commands;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -15,7 +16,8 @@ public class IncomeCommand {
 
     private String forWhat;
 
-    private Date scheduledTimeToGet;
+    @DateTimeFormat(pattern = "yyyy/mm/dd")
+    private LocalDate scheduledTimeToGet;
 
 
 }

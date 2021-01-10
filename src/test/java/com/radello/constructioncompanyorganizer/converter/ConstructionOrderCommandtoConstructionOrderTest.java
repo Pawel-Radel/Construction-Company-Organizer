@@ -4,12 +4,10 @@ import com.radello.constructioncompanyorganizer.commands.ConstructionOrderComman
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
-import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,9 +18,9 @@ class ConstructionOrderCommandtoConstructionOrderTest {
     private final String FOR_WHAT_VALUE_1 = "flat";
     private final String FOR_WHAT_VALUE_3 = "flat2";
     private final String FOR_WHAT_VALUE_2 = "flat1";
-    private final Date LOCAL_DATE_VALUE = new Date(2020-11-11);
-    private final Date LOCAL_DATE_VALUE2 = new Date(2020-12-11);
-    private final Date LOCAL_DATE_VALUE3 = new Date(2020-10-11);
+    private final LocalDate LOCAL_DATE_VALUE = LocalDate.now();
+    private final LocalDate LOCAL_DATE_VALUE2 = LocalDate.now().plusDays(2L);
+    private final LocalDate LOCAL_DATE_VALUE3 = LocalDate.now().minusDays(2L);
     private final int AMOUNT_VALUE = 123;
     private final String TITLE_VALUE = "Title";
     private final String ADDRES_VALUE = "Addres Value";
