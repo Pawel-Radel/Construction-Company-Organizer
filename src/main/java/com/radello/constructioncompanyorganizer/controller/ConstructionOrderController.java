@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class controller {
+public class ConstructionOrderController {
 
     ConstructionOrderService constructionOrderService;
     IncomeService incomeService;
 
 
-    public controller(ConstructionOrderService constructionOrderService, IncomeService incomeService) {
+    public ConstructionOrderController(ConstructionOrderService constructionOrderService, IncomeService incomeService) {
         this.constructionOrderService = constructionOrderService;
         this.incomeService = incomeService;
     }
