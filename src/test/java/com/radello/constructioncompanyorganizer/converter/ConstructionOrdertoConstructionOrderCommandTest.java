@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -60,7 +59,6 @@ class ConstructionOrdertoConstructionOrderCommandTest {
         income.setForWhat(FOR_WHAT_VALUE_3);
         income.setAmount(AMOUNT_VALUE);
 
-        constructionOrder1.setIncome(income);
 
         IndicativeCost indicativeCost1 = new IndicativeCost();
         indicativeCost1.setID(ID_VALUE_1);
@@ -70,8 +68,8 @@ class ConstructionOrdertoConstructionOrderCommandTest {
         indicativeCost2.setID(ID_VALUE_2);
         indicativeCost2.setForWhat(FOR_WHAT_VALUE_2);
 
-        constructionOrder1.getIndicateCosts().add(indicativeCost1);
-        constructionOrder1.getIndicateCosts().add(indicativeCost2);
+        constructionOrder1.getIndicativeCosts().add(indicativeCost1);
+        constructionOrder1.getIndicativeCosts().add(indicativeCost2);
 
         ConstructionOrderCommand constructionOrderCommand = constructionOrdertoConstructionOrderCommand
                 .convert(constructionOrder1);
@@ -82,9 +80,6 @@ class ConstructionOrdertoConstructionOrderCommandTest {
         assertEquals(LOCAL_DATE_VALUE3, constructionOrderCommand.getStartDate());
         assertEquals(LOCAL_DATE_VALUE2, constructionOrderCommand.getScheduledEndDate());
         assertEquals(ADDRES_VALUE, constructionOrderCommand.getAddres());
-        assertEquals(ID_VALUE_1, constructionOrderCommand.getIncomeCommand().getID());
-        assertEquals(FOR_WHAT_VALUE_3, constructionOrderCommand.getIncomeCommand().getForWhat());
-        assertEquals(AMOUNT_VALUE, constructionOrderCommand.getIncomeCommand().getAmount());
-        assertEquals(2, constructionOrderCommand.getIndicateCosts().size());
+        assertEquals(2, constructionOrderCommand.getIndicativeCostCommands().size());
     }
 }

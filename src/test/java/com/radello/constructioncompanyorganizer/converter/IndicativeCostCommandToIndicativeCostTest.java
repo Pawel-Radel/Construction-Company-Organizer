@@ -1,6 +1,5 @@
 package com.radello.constructioncompanyorganizer.converter;
 
-import com.radello.constructioncompanyorganizer.commands.CostCommand;
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import org.junit.jupiter.api.BeforeEach;

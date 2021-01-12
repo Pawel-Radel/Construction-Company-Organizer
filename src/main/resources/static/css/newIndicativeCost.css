@@ -1,0 +1,186 @@
+html, body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    color: #666;
+    background: #39CCCC;
+}
+
+.aroundTable {
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.head {
+    width: 60%;
+    opacity: 50%;
+    text-align: center;
+    height: 4vh;
+    line-height: 4vh;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10%;
+    opacity: 80%;
+    font-size: 20px;
+}
+
+.nextStep{
+    border-radius: 5%;
+    width: 40%;
+    padding: 10px;
+    border: none;
+    background: #d90b0b;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    margin: 0em;
+    margin-top: 20px;
+    font: 400 13.3333px Arial;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.nextStep:hover{
+    background-color: #fa0505;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-weight: 400;
+    color: #1c87c9;
+}
+
+p {
+    margin: 0 0 5px;
+}
+
+h3 {
+    color: black;
+    opacity: 80%;
+}
+
+.main-block {
+    min-height: 100vh;
+    background: #39CCCC;
+}
+
+.formInfo {
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    padding: 2%;
+    width: 70%;
+}
+
+.informationDiv {
+    width: 10%;
+    background-color: #1c87c9;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #d9d9de;
+    color: white;
+    float: left;
+}
+
+th {
+    padding: 8px;
+    font-weight: normal;
+    text-align: center;
+    background-color: #1c87c9;
+    text-align: center;
+    height: 100%;
+    color: white;
+}
+a{
+    margin-top: 30px;
+    padding-bottom: 30px;
+}
+
+td {
+    padding: 5px;
+    color: black;
+}
+.nextStep{
+    float: right;
+}
+
+tr {
+    margin: 0;
+    padding: 3px;
+    text-align: center;
+    background-color: #f5f5f5;
+    box-sizing: border-box;
+
+}
+.part1{
+    width: 25%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+form {
+    margin-top: 7%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+    padding: 25px;
+    box-shadow: 0 2px 5px #f5f5f5;
+    background: #f5f5f5;
+    padding-bottom: 100px;
+}
+
+input, textarea {
+    width: calc(100% - 18px);
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #1c87c9;
+    outline: none;
+}
+
+input::placeholder {
+    color: #666;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #1c87c9;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+}
+
+table {
+    border: 2px solid #008B8B;
+    width: 100%;
+}
+
+button:hover {
+    background: #2371a0;
+}
+
+@media (min-width: 568px) {
+    .main-block {
+        flex-direction: row;
+    }
+}

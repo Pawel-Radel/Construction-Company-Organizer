@@ -1,14 +1,10 @@
 package com.radello.constructioncompanyorganizer.commands;
 
-import com.radello.constructioncompanyorganizer.domain.Income;
-import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,23 +16,34 @@ public class ConstructionOrderCommand {
 
     private Long ID;
 
-    @NotBlank(message = "Title is mandatory")
-    @Size(min = 3, max = 255)
+    //@NotBlank(message = "Title is mandatory")
+    //@Size(min = 3, max = 255)
     private String title;
 
-    @NotBlank(message = "Addres is mandatory")
-    @Size(min = 3, max = 255)
+    //@NotBlank(message = "Addres is mandatory")
+    //@Size(min = 3, max = 255)
     private String addres;
 
-    @Min(value = 2021 - 1 - 1)
-    @Max(value = 2100 - 1 - 1)
+    //@Min(value = 2021 - 1 - 1)
+    //@Max(value = 2100 - 1 - 1)
     private LocalDate startDate;
 
-    @Min(value = 2021 - 1 - 1)
-    @Max(value = 2100 - 1 - 1)
+    //@Min(value = 2021 - 1 - 1)
+    //@Max(value = 2100 - 1 - 1)
     private LocalDate scheduledEndDate;
 
-    private IncomeCommand incomeCommand;
-    private Set<IndicativeCostCommand> indicateCosts = new HashSet<>();
+    private Set <IncomeCommand> incomeCommands = new HashSet<>();
+    private Set<IndicativeCostCommand> indicativeCostCommands = new HashSet<>();
 
+    public ConstructionOrderCommand addIncomes (IncomeCommand incomeCommand){
+        incomeCommand.setConstructionOrderCommand(this);
+        this.getIncomeCommands().add(incomeCommand);
+        return this;
+    }
+
+    public ConstructionOrderCommand addIndicativeCost(IndicativeCostCommand indcCost) {
+        indcCost.setConstructionOrderCommand(this);
+        this.getIndicativeCostCommands().add(indcCost);
+        return this;
+    }
 }

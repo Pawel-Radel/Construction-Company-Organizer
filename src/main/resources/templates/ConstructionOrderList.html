@@ -7,25 +7,25 @@
 <body>
 
 <div class="responstable">
-    <div class="head"><h1>Przychody</h1></div>
+    <div class="head"><h1>Lista zleceń budowlanych</h1></div>
     <table>
 
-        <tr>
-            <th>Tytuł</th>
-            <th>Adres</th>
-            <th>Data rozpoczęcia</th>
-            <th>Data zakończenia</th>
+        <tr >
+            <th >Tytuł</th>
+            <th >Adres</th>
+            <th >Data rozpoczęcia</th>
+            <th >Data zakończenia</th>
             <th>Szacowany zysk</th>
             <th class="links">Szczegóły / Edycja</th>
             <th class="links">Rozliczenie</th>
             <th class="links">Usuń</th>
         </tr>
 
-        <tr>
-            <td>Renowacja Elewacji Mokotów</td>
-            <td>Mokotów, ul. Czerniakowska 33/55</td>
-            <td>01-01-2020</td>
-            <td>03-03-2020r</td>
+        <tr th:each="ConsOrd : ${ConsOrd}">
+            <td th:text="$ConsOrd.title">Renowacja Elewacji Mokotów</td>
+            <td th:text="$ConsOrd.addres">Mokotów, ul. Czerniakowska 33/55</td>
+            <td th:text="$ConsOrd.startDate">01-01-2020</td>
+            <td th:text="$ConsOrd.scheduledEndDate">03-03-2020r</td>
             <td>15 000 zł</td>
             <td class="links"><a href "#"> Szczegóły / Edycja</a></td>
             <td><a href "#"> Rozlicz </a></td>

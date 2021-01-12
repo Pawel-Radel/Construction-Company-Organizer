@@ -5,12 +5,10 @@ import com.radello.constructioncompanyorganizer.converter.IndicativeCostCommandT
 import com.radello.constructioncompanyorganizer.converter.IndicativeCostToIndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import com.radello.constructioncompanyorganizer.repositories.IndicativeCostRepository;
-import com.radello.constructioncompanyorganizer.services.indicativeCostServices.IndicativeCostService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 
 @Service
 public class IndicativeCostServiceImpl implements IndicativeCostService {
@@ -68,4 +66,26 @@ public class IndicativeCostServiceImpl implements IndicativeCostService {
 
         indicativeCostRepository.deleteById(l);
     }
+
+    @Override
+    public List<IndicativeCostCommand> sortSet( Set<IndicativeCostCommand> set) {
+
+        List list = new ArrayList<>(set);
+
+        Comparator<IndicativeCostCommand> comparator = Comparator.comparingInt(left -> left.getID().intValue());
+        list.sort(comparator);
+
+        return list;
+    }
+
+    public int sumValues (List <IndicativeCostCommand> list){
+
+            return list
+                .stream()
+                .map(indicativeCostCommand -> indicativeCostCommand.getAmount())
+                .reduce(0,Integer::sum);
+
+    }
+
+
 }

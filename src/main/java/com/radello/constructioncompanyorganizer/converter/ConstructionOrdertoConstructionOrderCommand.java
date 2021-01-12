@@ -33,12 +33,15 @@ public class ConstructionOrdertoConstructionOrderCommand implements Converter<Co
             constructionOrderCommand.setScheduledEndDate(constructionOrder.getScheduledEndDate());
             constructionOrderCommand.setStartDate(constructionOrder.getStartDate());
             constructionOrderCommand.setTitle(constructionOrder.getTitle());
-            constructionOrderCommand.setIncomeCommand(incomeToIncomeCommand.convert(constructionOrder.getIncome()));
 
-           if (constructionOrder.getIndicateCosts() != null && constructionOrder.getIndicateCosts().size() > 0) {
-                constructionOrder.getIndicateCosts()
-                        .forEach(indicativeCost -> constructionOrderCommand.getIndicateCosts()
-                                .add(indicativeCostToIndicativeCostCommand.convert(indicativeCost)));
+            if (constructionOrder.getIncomes() !=null && constructionOrder.getIncomes().size() > 0) {
+                constructionOrder.getIncomes()
+                        .forEach(income -> constructionOrderCommand.addIncomes(incomeToIncomeCommand.convert(income)));
+            }
+
+           if (constructionOrder.getIndicativeCosts() != null && constructionOrder.getIndicativeCosts().size() > 0) {
+                constructionOrder.getIndicativeCosts()
+                        .forEach(indicativeCost -> constructionOrderCommand.addIndicativeCost(indicativeCostToIndicativeCostCommand.convert(indicativeCost)));
             }
             return constructionOrderCommand;
         }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link th:href="@{/css/newIndicativeCost.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
+</head>
+<body>
+
+<div class="main-block">
+<div class "part1">
+    <form th:object="${cost}" th:action="@{'/newCostToConsOrder/' + ${ConsOrd.ID} + '/create/'}" method="post">
+
+        <h1>Dodaj nowy Rozchód</h1>
+        <div class="info">
+            <input type="hidden" th:field="*{ID}">
+            <label>Kwota</label>
+            <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
+            <label>Za co</label>
+            <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
+
+        <button type="submit" href="/">Dodaj Rozchód</button>
+        <a class = "nextStep" th:href="@{'/newIncomeToConsOrder/' + ${ConsOrd.ID} }" >Dalej</a>
+        </div>
+    </form>
+    </div>
+
+       <div class="formInfo">
+           <div class="head"><h3>Lista przewidywanych kosztów</h3></div>
+                <div class="aroundTable">
+                   <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Kwota</th>
+                        <th>Za co</th>
+                        <th>Usuń</th>
+                        <th> Edytuj</th>
+                    </tr>
+                    <tr th:each="cost : ${ConsOrd2}">
+                        <td class="td7" th:text="${cost.ID}">1</td>
+                        <td class="td7" th:text="${cost.amount}">1000</td>
+                        <td class="td7" th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                        <td class="td7"><a href="#" th:href="@{'/cost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
+                        <td class="td7"><a href="#" th:href="@{'/budget/' + ${cost.ID} + '/decrease'}"> Edytuj</a>
+                        </td>
+
+                </table><div>
+                 <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${SumAmount}">1000 zł</div>
+            </div>
+
+    </div>
+    </div>
+
+</div>
+
+</body>
+</html>

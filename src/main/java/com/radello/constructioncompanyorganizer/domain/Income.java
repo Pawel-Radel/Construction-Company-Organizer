@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
@@ -22,7 +23,7 @@ public class Income extends MoneyTransfer {
     @DateTimeFormat(pattern = "yyyy/mm/dd")
     private LocalDate scheduledTimeToGet;
 
-    @OneToOne
+    @ManyToOne
     private ConstructionOrder constructionOrder;
 
 }

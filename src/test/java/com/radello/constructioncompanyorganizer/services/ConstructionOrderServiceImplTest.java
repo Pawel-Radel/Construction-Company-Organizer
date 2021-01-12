@@ -53,7 +53,6 @@ class ConstructionOrderServiceImplTest {
 
         Income income = new Income();
         income.setID(ID_VALUE);
-        constructionOrder.setIncome(income);
 
         IndicativeCost indicativeCost1 = new IndicativeCost();
         indicativeCost1.setID(ID_VALUE);
@@ -61,8 +60,8 @@ class ConstructionOrderServiceImplTest {
         Long ID_VALUE2 = 2L;
         indicativeCost2.setID(ID_VALUE2);
 
-        constructionOrder.getIndicateCosts().add(indicativeCost1);
-        constructionOrder.getIndicateCosts().add(indicativeCost2);
+        constructionOrder.getIndicativeCosts().add(indicativeCost1);
+        constructionOrder.getIndicativeCosts().add(indicativeCost2);
 
         constructionOrderOptional = Optional.of(constructionOrder);
     }

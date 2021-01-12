@@ -59,8 +59,6 @@ class ConstructionOrderCommandtoConstructionOrderTest {
         incomeCommand.setForWhat(FOR_WHAT_VALUE_3);
         incomeCommand.setAmount(AMOUNT_VALUE);
 
-        constructionOrderCommand.setIncomeCommand(incomeCommand);
-
         IndicativeCostCommand indicativeCost1 = new IndicativeCostCommand();
         indicativeCost1.setID(ID_VALUE_1);
         indicativeCost1.setForWhat(FOR_WHAT_VALUE_1);
@@ -69,8 +67,8 @@ class ConstructionOrderCommandtoConstructionOrderTest {
         indicativeCost2.setID(ID_VALUE_2);
         indicativeCost2.setForWhat(FOR_WHAT_VALUE_2);
 
-        constructionOrderCommand.getIndicateCosts().add(indicativeCost1);
-        constructionOrderCommand.getIndicateCosts().add(indicativeCost2);
+        constructionOrderCommand.getIndicativeCostCommands().add(indicativeCost1);
+        constructionOrderCommand.getIndicativeCostCommands().add(indicativeCost2);
 
         ConstructionOrder constructionOrder = constructionOrderCommandtoConstructionOrder
                 .convert(constructionOrderCommand);
@@ -81,10 +79,6 @@ class ConstructionOrderCommandtoConstructionOrderTest {
         assertEquals(LOCAL_DATE_VALUE3, constructionOrder.getStartDate());
         assertEquals(LOCAL_DATE_VALUE2, constructionOrder.getScheduledEndDate());
         assertEquals(ADDRES_VALUE, constructionOrder.getAddres());
-        assertEquals(ID_VALUE_1, constructionOrder.getIncome().getID());
-        assertEquals(FOR_WHAT_VALUE_3, constructionOrder.getIncome().getForWhat());
-        assertEquals(LOCAL_DATE_VALUE, constructionOrder.getIncome().getScheduledTimeToGet());
-        assertEquals(AMOUNT_VALUE, constructionOrder.getIncome().getAmount());
-        assertEquals(2, constructionOrder.getIndicateCosts().size());
+        assertEquals(2, constructionOrder.getIndicativeCosts().size());
     }
 }

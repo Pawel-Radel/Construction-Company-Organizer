@@ -19,5 +19,7 @@ public class IncomeCommand {
     @DateTimeFormat(pattern = "yyyy/mm/dd")
     private LocalDate scheduledTimeToGet;
 
+    ConstructionOrderCommand constructionOrderCommand;
+
 
 }

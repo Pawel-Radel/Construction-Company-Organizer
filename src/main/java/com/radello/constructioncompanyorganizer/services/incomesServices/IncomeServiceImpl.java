@@ -1,6 +1,7 @@
 package com.radello.constructioncompanyorganizer.services.incomesServices;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.converter.IncomeCommandToIncome;
 import com.radello.constructioncompanyorganizer.converter.IncomeToIncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
@@ -8,9 +9,7 @@ import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class IncomeServiceImpl implements IncomeService {
@@ -81,6 +80,25 @@ public class IncomeServiceImpl implements IncomeService {
         incomeCommand1.setScheduledTimeToGet(incomeCommand.getScheduledTimeToGet().plusDays(value));
         saveIncomeCommand(incomeCommand1);
         deleteById(incomeCommand.getID());
+    }
+    @Override
+    public List<IncomeCommand> sortSet(Set<IncomeCommand> set) {
+
+        List list = new ArrayList<>(set);
+
+        Comparator<IncomeCommand> comparator = Comparator.comparingInt(left -> left.getID().intValue());
+        list.sort(comparator);
+
+        return list;
+    }
+
+    public int sumValues (List <IncomeCommand> list){
+
+        return list
+                .stream()
+                .map(incomeCommand -> incomeCommand.getAmount())
+                .reduce(0,Integer::sum);
+
     }
 
 }

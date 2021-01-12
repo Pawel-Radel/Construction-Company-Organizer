@@ -22,23 +22,22 @@ public class ConstructionOrder {
     private LocalDate startDate;
     private LocalDate scheduledEndDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Income income;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "constructionOrder")
+    private Set<Income> incomes = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Construction_Order_ID")
-    private Set<IndicativeCost> indicateCosts = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "constructionOrder")
+    private Set<IndicativeCost> indicativeCosts = new HashSet<>();
 
-    public void setIncome(Income income) {
-        if (income != null) {
-            this.income = income;
-            income.setConstructionOrder(this);
-        }
+    public ConstructionOrder addIncome(Income income) {
+
+        income.setConstructionOrder(this);
+        this.incomes.add(income);
+        return this;
     }
 
     public ConstructionOrder addIndicativeCost(IndicativeCost indcCost) {
         indcCost.setConstructionOrder(this);
-        this.indicateCosts.add(indcCost);
+        this.indicativeCosts.add(indcCost);
         return this;
     }
 

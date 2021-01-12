@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/newIncome.css}" rel="stylesheet"/>
+</head>
+
+<body>
+    <form action="/createCostOrder" th:object="${ConsOrder}" method="post">
+            <h1>Dodaj zlecenie budowlane</h1>
+            <div class="info">
+                <input class="fname" type="hidden" name="name" placeholder="Full name" th:field="*{ID}">
+
+                <label>Tytuł</label>
+                <input type="text" placeholder="e.g. 1000" th:field="*{title}">
+
+                <label>Adres</label>
+                <input type="text" name="name" placeholder="e. g. Rozliczenie z urzędem skarbowym" th:field="*{addres}">
+
+                <div>
+                    <div class="element1">
+                        <label>Termin rozpoczęcia</label>
+                        <input type="date" name="name" placeholder="" th:field="*{startDate}">
+                    </div>
+                    <div class="element2">
+                        <label>Termin zakończenia</label>
+                        <input type="date" name="name" placeholder="" th:field="*{scheduledEndDate}">
+                    </div>
+                </div>
+                <div class="elementClear"></div>
+
+
+
+        <button type="submit" href="/">Dalej</button>
+    </form>
+</div>
+
+</body>
+
+</html>
