@@ -1,7 +1,6 @@
 package com.radello.constructioncompanyorganizer.services.incomesServices;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
-import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.converter.IncomeCommandToIncome;
 import com.radello.constructioncompanyorganizer.converter.IncomeToIncomeCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
@@ -42,15 +41,12 @@ public class IncomeServiceImpl implements IncomeService {
         Optional<Income> incomeOptional = incomeRepository.findById(l);
 
         return incomeOptional.orElse(null);
-
     }
-
     @Override
     @Transactional
     public IncomeCommand findCommandByID(Long l) {
 
         return incomeToIncomeCommand.convert(findByID(l));
-
     }
 
     @Override
@@ -61,6 +57,11 @@ public class IncomeServiceImpl implements IncomeService {
         Income incomeSaved = incomeRepository.save(income);
 
         return incomeToIncomeCommand.convert(incomeSaved);
+    }
+    @Override
+    public Income saveIncome(Income income) {
+
+        return incomeRepository.save(income);
     }
 
     @Override
@@ -81,6 +82,7 @@ public class IncomeServiceImpl implements IncomeService {
         saveIncomeCommand(incomeCommand1);
         deleteById(incomeCommand.getID());
     }
+
     @Override
     public List<IncomeCommand> sortSet(Set<IncomeCommand> set) {
 
@@ -92,12 +94,12 @@ public class IncomeServiceImpl implements IncomeService {
         return list;
     }
 
-    public int sumValues (List <IncomeCommand> list){
+    public int sumValues(List<IncomeCommand> list) {
 
         return list
                 .stream()
-                .map(incomeCommand -> incomeCommand.getAmount())
-                .reduce(0,Integer::sum);
+                .map(IncomeCommand::getAmount)
+                .reduce(0, Integer::sum);
 
     }
 

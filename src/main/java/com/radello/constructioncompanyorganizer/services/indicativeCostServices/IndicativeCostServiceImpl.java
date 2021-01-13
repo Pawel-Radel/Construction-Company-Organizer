@@ -37,9 +37,7 @@ public class IndicativeCostServiceImpl implements IndicativeCostService {
     public IndicativeCost findByID(Long l) {
         Optional<IndicativeCost> indCostOptional = indicativeCostRepository.findById(l);
 
-
         return indCostOptional.orElse(null);
-
     }
 
     @Override
@@ -57,8 +55,13 @@ public class IndicativeCostServiceImpl implements IndicativeCostService {
 
         IndicativeCost indicativeCostSaved = indicativeCostRepository.save(indicativeCost);
 
-
         return indicativeCostToIndicativeCostCommand.convert(indicativeCostSaved);
+    }
+
+    @Override
+    public IndicativeCost saveCost(IndicativeCost indicativeCost) {
+
+        return indicativeCostRepository.save(indicativeCost);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class IndicativeCostServiceImpl implements IndicativeCostService {
     }
 
     @Override
-    public List<IndicativeCostCommand> sortSet( Set<IndicativeCostCommand> set) {
+    public List<IndicativeCostCommand> sortSet(Set<IndicativeCostCommand> set) {
 
         List list = new ArrayList<>(set);
 
@@ -78,12 +81,12 @@ public class IndicativeCostServiceImpl implements IndicativeCostService {
         return list;
     }
 
-    public int sumValues (List <IndicativeCostCommand> list){
+    public int sumValues(List<IndicativeCostCommand> list) {
 
-            return list
+        return list
                 .stream()
                 .map(indicativeCostCommand -> indicativeCostCommand.getAmount())
-                .reduce(0,Integer::sum);
+                .reduce(0, Integer::sum);
 
     }
 

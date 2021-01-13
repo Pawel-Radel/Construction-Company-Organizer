@@ -5,12 +5,11 @@ import com.radello.constructioncompanyorganizer.converter.ConstructionOrderComma
 import com.radello.constructioncompanyorganizer.converter.ConstructionOrdertoConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 import com.radello.constructioncompanyorganizer.repositories.ConstructionOrderRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -31,10 +30,16 @@ public class ConstructionOrderServiceImpl implements ConstructionOrderService {
     }
 
     @Override
-    public Set<ConstructionOrder> getConstructionOrders() {
-        Set<ConstructionOrder> constructionOrderSetSet = new HashSet<>();
-        constructionOrderRepository.findAll().iterator().forEachRemaining(constructionOrderSetSet::add);
-        return constructionOrderSetSet;
+    public List<ConstructionOrderCommand> getConstructionOrders() {
+
+        List<ConstructionOrderCommand> constructionOrderSet = new ArrayList<>();
+        constructionOrderRepository
+                .findAll(Sort.by(Sort.Direction.ASC, "ID"))
+                .stream()
+                .map(consOrdToConsOrdCommand::convert)
+                .forEach(constructionOrderSet::add);
+
+        return constructionOrderSet;
     }
 
     @Override
@@ -59,7 +64,6 @@ public class ConstructionOrderServiceImpl implements ConstructionOrderService {
 
         ConstructionOrder constructionOrderSaved = constructionOrderRepository.save(constructionOrder);
 
-
         return consOrdToConsOrdCommand.convert(constructionOrderSaved);
     }
 
@@ -67,5 +71,14 @@ public class ConstructionOrderServiceImpl implements ConstructionOrderService {
     public void deleteById(Long l) {
 
         constructionOrderRepository.deleteById(l);
+    }
+
+    @Override
+    public Integer sumIncomes(ConstructionOrderCommand command) {
+
+        return command.getIncomeCommands()
+                .stream()
+                .map(incomeCommand -> incomeCommand.getAmount())
+                .reduce(0, Integer::sum);
     }
 }

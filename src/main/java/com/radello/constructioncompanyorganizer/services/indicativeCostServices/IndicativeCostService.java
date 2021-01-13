@@ -23,4 +23,6 @@ public interface IndicativeCostService {
 
     int sumValues (List <IndicativeCostCommand> list);
 
+    IndicativeCost saveCost(IndicativeCost indicativeCost);
+
 }

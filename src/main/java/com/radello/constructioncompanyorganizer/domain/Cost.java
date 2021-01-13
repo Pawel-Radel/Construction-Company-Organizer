@@ -22,7 +22,7 @@ public class Cost extends MoneyTransfer {
     private String forWhat;
 
 
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private LocalDate scheduledtime;
 
 

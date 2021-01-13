@@ -29,9 +29,11 @@
             <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
 
         <button type="submit" href="/">Dodaj Rozchód</button>
-        <a class = "nextStep" th:href="@{'/newIncomeToConsOrder/' + ${ConsOrd.ID} }" >Dalej</a>
+
+       <a class = "nextStep" th:href="@{'/newIncomeToConsOrder/' + ${ConsOrd.ID} }" >Dalej</a>
+        </form>
         </div>
-    </form>
+
     </div>
 
        <div class="formInfo">
@@ -49,8 +51,8 @@
                         <td class="td7" th:text="${cost.ID}">1</td>
                         <td class="td7" th:text="${cost.amount}">1000</td>
                         <td class="td7" th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                        <td class="td7"><a href="#" th:href="@{'/cost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
-                        <td class="td7"><a href="#" th:href="@{'/budget/' + ${cost.ID} + '/decrease'}"> Edytuj</a>
+                        <td class="td7"><a href="#" th:href="@{'/indicativeCost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
+                        <td class="td7"><a href="#" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/indicativeCost/' + ${cost.ID} + '/edit/'}"> Edytuj</a>
                         </td>
 
                 </table><div>

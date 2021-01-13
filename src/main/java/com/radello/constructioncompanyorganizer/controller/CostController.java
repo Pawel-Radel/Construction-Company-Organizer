@@ -9,8 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Controller
@@ -37,10 +35,8 @@ public class CostController {
                                @RequestParam("date2") String localDate,
                                BindingResult bindingResult) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-        LocalDate lDate = LocalDate.parse(localDate, formatter);
-        command.setScheduledtime(lDate);
+        command.setDatesByString(localDate);
 
         if (bindingResult.hasErrors()) {
 

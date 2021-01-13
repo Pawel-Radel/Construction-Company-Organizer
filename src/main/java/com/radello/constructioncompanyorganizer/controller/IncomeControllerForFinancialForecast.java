@@ -1,25 +1,26 @@
 package com.radello.constructioncompanyorganizer.controller;
 
+import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
+import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
+import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import java.util.List;
 
 @Slf4j
 @Controller
-public class IncomeController {
+public class IncomeControllerForFinancialForecast {
 
     IncomeService incomeService;
 
-    public IncomeController(IncomeService incomeService) {
+    public IncomeControllerForFinancialForecast(IncomeService incomeService) {
         this.incomeService = incomeService;
     }
 
@@ -36,10 +37,7 @@ public class IncomeController {
                                @RequestParam("date") String localDate,
                                BindingResult bindingResult) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-        LocalDate lDate = LocalDate.parse(localDate, formatter);
-        command.setScheduledTimeToGet(lDate);
+        command.setDatesByString(localDate);
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors()
@@ -60,4 +58,7 @@ public class IncomeController {
         incomeService.deleteById(Long.valueOf(id));
         return "redirect:/financialForecast";
     }
+
+
+
 }

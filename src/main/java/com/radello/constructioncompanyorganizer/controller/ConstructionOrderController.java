@@ -2,15 +2,12 @@ package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
-import com.radello.constructioncompanyorganizer.services.indicativeCostServices.IndicativeCostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,11 +16,15 @@ public class ConstructionOrderController {
 
     ConstructionOrderService constructionOrderService;
     IncomeService incomeService;
+    BudgetService budgetService;
 
+    public ConstructionOrderController(ConstructionOrderService constructionOrderService,
+                                       IncomeService incomeService,
+                                       BudgetService budgetService) {
 
-    public ConstructionOrderController(ConstructionOrderService constructionOrderService, IncomeService incomeService) {
         this.constructionOrderService = constructionOrderService;
         this.incomeService = incomeService;
+        this.budgetService = budgetService;
     }
 
     @GetMapping("/listConstructionOrder")
@@ -44,9 +45,12 @@ public class ConstructionOrderController {
     }
 
     @PostMapping("/createCostOrder")
-    public String createConsOrder(@ModelAttribute("ConsOrder") ConstructionOrderCommand command) {
-        ConstructionOrderCommand command1 = constructionOrderService.saveConstructionOrderCommand(command);
+    public String createConsOrder(@ModelAttribute("ConsOrder") ConstructionOrderCommand command,
+                                  @RequestParam(value = "date1") String date1,
+                                  @RequestParam(value = "date2") String date2) {
 
+        command.setDatesByStrings(date1, date2);
+        ConstructionOrderCommand command1 = constructionOrderService.saveConstructionOrderCommand(command);
         Long ID = command1.getID();
 
         return "redirect:/newCostToConsOrder/" + ID;
@@ -54,34 +58,27 @@ public class ConstructionOrderController {
 
 
 
-    @GetMapping("/newIncomeToConsOrder/{id}")
-    public String addingIncomestoConstructionOrder (@PathVariable String id, Model model){
+    @GetMapping("constructionOrder/{id}/delete")
+    public String deleteIncomefromConstructionOrderById(@PathVariable String id) {
 
-        ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id));
-        List list = incomeService.sortSet(command1.getIncomeCommands());
-        incomeService.sortSet(command1.getIncomeCommands());
+        constructionOrderService.deleteById(Long.valueOf(id));
 
-        model.addAttribute("income", new IncomeCommand());
-        model.addAttribute("ConsOrd", command1);
-        model.addAttribute("ConsOrd2", list);
-        model.addAttribute("SumAmount", incomeService.sumValues(list));
-
-        return "newIncomesToConsOrder";
-
+        return "redirect:/listConstructionOrder";
     }
 
-    @PostMapping("/newIncomeToConsOrder/{id}/create/")
-    public String addingCostToConstructionOrder(@ModelAttribute("income") IncomeCommand incomeCommand,
-                                                @PathVariable String id, Model model) {
+    @GetMapping("constructionOrder/{id}/settlementAndDelete")
+    public String settlementAndDeleteIncomefromConstructionOrderById(@PathVariable String id) {
 
-        ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
-        command.addIncomes(incomeCommand);
+        budgetService
+                .increaseBudget(constructionOrderService
+                        .sumIncomes(constructionOrderService.findCommandByID(Long.valueOf(id))));
 
-        constructionOrderService.saveConstructionOrderCommand(command);
+        constructionOrderService.deleteById(Long.valueOf(id));
 
-        return "redirect:/newIncomeToConsOrder/" + id;
+        return "redirect:/listConstructionOrder";
     }
 
-    }
+
+}
 
 

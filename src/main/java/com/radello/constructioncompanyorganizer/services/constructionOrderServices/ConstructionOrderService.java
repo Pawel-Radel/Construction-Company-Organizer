@@ -3,11 +3,12 @@ package com.radello.constructioncompanyorganizer.services.constructionOrderServi
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.domain.ConstructionOrder;
 
+import java.util.List;
 import java.util.Set;
 
 public interface ConstructionOrderService {
 
-    Set<ConstructionOrder> getConstructionOrders();
+    List<ConstructionOrderCommand> getConstructionOrders();
 
     ConstructionOrder findByID (Long l);
 
@@ -16,4 +17,6 @@ public interface ConstructionOrderService {
     ConstructionOrderCommand saveConstructionOrderCommand (ConstructionOrderCommand command);
 
     void deleteById (Long l);
+
+    Integer sumIncomes(ConstructionOrderCommand command);
 }

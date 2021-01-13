@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,6 @@ import java.util.Set;
 @Getter
 @Setter
 public class ConstructionOrderCommand {
-
 
     private Long ID;
 
@@ -32,10 +32,21 @@ public class ConstructionOrderCommand {
     //@Max(value = 2100 - 1 - 1)
     private LocalDate scheduledEndDate;
 
-    private Set <IncomeCommand> incomeCommands = new HashSet<>();
+    private Set<IncomeCommand> incomeCommands = new HashSet<>();
     private Set<IndicativeCostCommand> indicativeCostCommands = new HashSet<>();
 
-    public ConstructionOrderCommand addIncomes (IncomeCommand incomeCommand){
+    public ConstructionOrderCommand setDatesByStrings(String string1, String string2) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        LocalDate startDate = LocalDate.parse(string1, formatter);
+        LocalDate endDate = LocalDate.parse(string2, formatter);
+        this.setStartDate(startDate);
+        this.setScheduledEndDate(endDate);
+
+        return this;
+    }
+
+    public ConstructionOrderCommand addIncomes(IncomeCommand incomeCommand) {
         incomeCommand.setConstructionOrderCommand(this);
         this.getIncomeCommands().add(incomeCommand);
         return this;
@@ -45,5 +56,19 @@ public class ConstructionOrderCommand {
         indcCost.setConstructionOrderCommand(this);
         this.getIndicativeCostCommands().add(indcCost);
         return this;
+    }
+
+    public int profitEstimation() {
+        Integer sumOfCosts = this.getIndicativeCostCommands()
+                .stream()
+                .map(indicativeCostCommand -> indicativeCostCommand.getAmount())
+                .reduce(0, Integer::sum);
+
+        Integer sumOfIncomes = this.getIncomeCommands()
+                .stream()
+                .map(incomeCommand -> incomeCommand.getAmount())
+                .reduce(0, Integer::sum);
+
+        return sumOfIncomes - sumOfCosts;
     }
 }

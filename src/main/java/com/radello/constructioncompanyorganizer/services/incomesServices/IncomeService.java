@@ -1,7 +1,6 @@
 package com.radello.constructioncompanyorganizer.services.incomesServices;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
-import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
 import com.radello.constructioncompanyorganizer.domain.Income;
 
 import java.util.List;
@@ -25,5 +24,7 @@ public interface IncomeService {
     List<IncomeCommand> sortSet(Set<IncomeCommand> set);
 
     int sumValues (List <IncomeCommand> list);
+
+    Income saveIncome(Income income);
 
 }

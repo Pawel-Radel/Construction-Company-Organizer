@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -16,10 +17,17 @@ public class IncomeCommand {
 
     private String forWhat;
 
-    @DateTimeFormat(pattern = "yyyy/mm/dd")
+    @DateTimeFormat(pattern = "mm/dd/yyyy")
     private LocalDate scheduledTimeToGet;
 
     ConstructionOrderCommand constructionOrderCommand;
+
+    public void setDatesByString(String string1) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        LocalDate date = LocalDate.parse(string1, formatter);
+        this.setScheduledTimeToGet(date);
+    }
 
 
 }

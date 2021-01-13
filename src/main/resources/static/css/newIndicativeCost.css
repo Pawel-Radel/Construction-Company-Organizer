@@ -179,6 +179,10 @@ button:hover {
     background: #2371a0;
 }
 
+a {
+    margin-top: 0;
+}
+
 @media (min-width: 568px) {
     .main-block {
         flex-direction: row;

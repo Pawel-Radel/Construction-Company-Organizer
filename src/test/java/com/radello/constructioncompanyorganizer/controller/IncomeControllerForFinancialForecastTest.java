@@ -20,9 +20,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 @ExtendWith(MockitoExtension.class)
-class IncomeControllerTest {
+class IncomeControllerForFinancialForecastTest {
 
-    IncomeController incomeController;
+    IncomeControllerForFinancialForecast incomeControllerforFinancialForecast;
 
     @Mock
     IncomeService incomeService;
@@ -41,8 +41,8 @@ class IncomeControllerTest {
     @BeforeEach
     void setUp() {
 
-        incomeController = new IncomeController(incomeService);
-        mockMvc = MockMvcBuilders.standaloneSetup(incomeController).build();
+        incomeControllerforFinancialForecast = new IncomeControllerForFinancialForecast(incomeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(incomeControllerforFinancialForecast).build();
     }
 
     @Test
@@ -53,7 +53,7 @@ class IncomeControllerTest {
                 .andExpect(view().name("newIncome"));
 
         ArgumentCaptor<IncomeCommand> argumentCaptor = ArgumentCaptor.forClass(IncomeCommand.class);
-        String viewName = incomeController.shownewIncomeTemplate(model);
+        String viewName = incomeControllerforFinancialForecast.shownewIncomeTemplate(model);
         assertEquals("newIncome", viewName);
 
         verify(model, times(1)).addAttribute(eq("income"), argumentCaptor.capture());
@@ -71,7 +71,7 @@ class IncomeControllerTest {
         command.setID(1L);
         when(incomeService.saveIncomeCommand(any())).thenReturn(command);
 
-        String viewName = incomeController.saveOrUpdate(command, new String("01/01/2020"), bindingResult);
+        String viewName = incomeControllerforFinancialForecast.saveOrUpdate(command, new String("01/01/2020"), bindingResult);
 
         assertEquals("redirect:/financialForecast", viewName);
         verify(incomeService, times(1)).saveIncomeCommand(any());

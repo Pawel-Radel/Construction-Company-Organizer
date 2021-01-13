@@ -2,6 +2,7 @@ package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
+import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
 import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.indicativeCostServices.IndicativeCostService;
 import org.springframework.stereotype.Controller;
@@ -51,4 +52,46 @@ public class IndicativeCostController {
 
         return "redirect:/newCostToConsOrder/" + id;
     }
+
+    @GetMapping("/indicativeCost/{id}/delete")
+    public String deleteIndicativeCostById(@PathVariable String id) {
+
+        Long ID = indicativeCostService.findByID(Long.valueOf(id)).getConstructionOrder().getID();
+
+        String string = String.valueOf(ID);
+        indicativeCostService.deleteById(Long.valueOf(id));
+
+        return "redirect:/newCostToConsOrder/" + string;
+    }
+
+    @GetMapping("/constructionOrder/{id1}/indicativeCost/{id2}/edit")
+    public String editIndicativeCostById(@PathVariable String id1,
+                                         @PathVariable String id2,
+                                         Model model) {
+
+        ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id1));
+        List list = indicativeCostService.sortSet(command1.getIndicativeCostCommands());
+
+        model.addAttribute("cost", indicativeCostService.findCommandByID(Long.valueOf(id2)));
+        model.addAttribute("ConsOrd", command1);
+        model.addAttribute("ConsOrd2", list);
+        model.addAttribute("SumAmount", indicativeCostService.sumValues(list));
+
+        return "editIndicativeCost";
+    }
+
+    @PostMapping("/indicativecost/{id}/edit")
+    public String editIndicativeCost(@PathVariable String id,
+                                     @ModelAttribute("cost") IndicativeCostCommand indCostCommand) {
+
+        IndicativeCost cost = indicativeCostService.findByID(indCostCommand.getID());
+        cost.setAmount(indCostCommand.getAmount());
+        cost.setForWhat(indCostCommand.getForWhat());
+        indicativeCostService.saveCost(cost);
+
+        return "redirect:/newCostToConsOrder/" + id;
+    }
 }
+
+
+
