@@ -1,7 +1,8 @@
-package com.radello.constructioncompanyorganizer.controller;
+package com.radello.constructioncompanyorganizer.controller.IncomeControllers;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.domain.DateFormatter;
 import com.radello.constructioncompanyorganizer.domain.Income;
 import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class IncomeControllerToConstructionOrderForm {
+public class IncomeControllerToConstructionOrderFormCreate {
 
     IncomeService incomeService;
     ConstructionOrderService constructionOrderService;
 
-    public IncomeControllerToConstructionOrderForm(IncomeService incomeService,
-                                                   ConstructionOrderService constructionOrderService) {
+    public IncomeControllerToConstructionOrderFormCreate(IncomeService incomeService,
+                                                         ConstructionOrderService constructionOrderService) {
 
         this.incomeService = incomeService;
         this.constructionOrderService = constructionOrderService;
@@ -36,7 +37,7 @@ public class IncomeControllerToConstructionOrderForm {
         model.addAttribute("ConsOrd2", list);
         model.addAttribute("SumAmount", incomeService.sumValues(list));
 
-        return "newIncomesToConsOrder";
+        return "IncomeTemplates/newIncomesToConsOrder";
 
     }
 
@@ -73,28 +74,22 @@ public class IncomeControllerToConstructionOrderForm {
         ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id1));
         List list = incomeService.sortSet(command1.getIncomeCommands());
         IncomeCommand incomeCommand = incomeService.findCommandByID(Long.valueOf(id2));
+        String date = DateFormatter.formatDateToProperlyString(incomeCommand.getScheduledTimeToGet());
 
-        String day = String.format("%02d", incomeCommand.getScheduledTimeToGet().getDayOfMonth());
-        String month = String.format("%02d", incomeCommand.getScheduledTimeToGet().getMonthValue());
-        int year = incomeCommand.getScheduledTimeToGet().getYear();
-
-        String date = new StringBuilder().append(month).append("/").append(day).append("/").append(year).toString();
-
-        model.addAttribute("income", incomeService.findCommandByID(Long.valueOf(id2)));
+        model.addAttribute("income", incomeCommand);
         model.addAttribute("ConsOrd", command1);
         model.addAttribute("ConsOrd2", list);
         model.addAttribute("SumAmount", incomeService.sumValues(list));
         model.addAttribute("date", date);
 
-        return "editIncomesToConsOrder";
+        return "IncomeTemplates/editIncomesToConsOrder";
     }
 
     @PostMapping("/income/{id}/edit")
     public String editIndicativeCost(@PathVariable String id,
                                      @ModelAttribute("cost") IncomeCommand incomeCommand,
-                                     @ModelAttribute ("date") String date) {
+                                     @RequestParam (value = "date2") String date) {
 
-        System.out.println(date);
         incomeCommand.setDatesByString(date);
         Income income = incomeService.findByID(incomeCommand.getID());
         income.setAmount(incomeCommand.getAmount());

@@ -1,6 +1,7 @@
 package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.controller.IncomeControllers.IncomeControllerForFinancialForecast;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -50,11 +51,11 @@ class IncomeControllerForFinancialForecastTest {
 
         mockMvc.perform(get("/newIncome/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("newIncome"));
+                .andExpect(view().name("IncomeTemplates/newIncome"));
 
         ArgumentCaptor<IncomeCommand> argumentCaptor = ArgumentCaptor.forClass(IncomeCommand.class);
         String viewName = incomeControllerforFinancialForecast.shownewIncomeTemplate(model);
-        assertEquals("newIncome", viewName);
+        assertEquals("IncomeTemplates/newIncome", viewName);
 
         verify(model, times(1)).addAttribute(eq("income"), argumentCaptor.capture());
         IncomeCommand setInController = argumentCaptor.getValue();

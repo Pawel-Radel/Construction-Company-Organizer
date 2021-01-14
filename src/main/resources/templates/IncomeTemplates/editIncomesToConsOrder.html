@@ -17,23 +17,23 @@
 <body>
 
 <div class>
-"part1">
-<form th:object="${income}" th:action="@{'/newIncomeToConsOrder/' + ${ConsOrd.ID} + '/create/'}" method="post">
 
-    <h1>Dodaj nowy Przychód</h1>
-    <div class="info">
-        <input type="hidden" th:field="*{ID}">
-        <label>Kwota</label>
-        <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
-        <label>Za co</label>
-        <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
-        <label> Data zaistnienia </label>
-        <input type="text" id="datepicker" th:name="date">
+    <form th:object="${income}" th:action="@{'/income/' + ${ConsOrd.ID} + '/edit/'}" method="post">
 
-        <button type="submit" href="/">Dodaj Rozchód</button>
-        <a class="nextStep" th:href="@{/listConstructionOrder}">Zakończ</a>
-    </div>
-</form>
+        <h1>Dodaj nowy Przychód</h1>
+        <div class="info">
+            <input type="hidden" th:field="*{ID}">
+            <label>Kwota</label>
+            <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
+            <label>Za co</label>
+            <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
+            <label> Data zaistnienia </label>
+            <input type="text" id="datepicker" th:value="${date}"  th:name ="date2" >
+
+            <button type="submit" href="/">Edytuj</button>
+            <a class="nextStep" th:href="@{/listConstructionOrder}">Zakończ</a>
+        </div>
+    </form>
 </div>
 
 <div class="formInfo">

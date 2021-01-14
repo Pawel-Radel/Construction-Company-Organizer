@@ -1,15 +1,13 @@
 package com.radello.constructioncompanyorganizer.controller;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
-import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
+import com.radello.constructioncompanyorganizer.domain.DateFormatter;
 import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 public class ConstructionOrderController {
@@ -32,8 +30,7 @@ public class ConstructionOrderController {
 
         model.addAttribute("ConsOrder", constructionOrderService.getConstructionOrders());
 
-
-        return "ConstructionOrderList";
+        return "ConstructionOrderTemplates/ConstructionOrderList";
     }
 
     @GetMapping("/newConstructionOrder")
@@ -41,7 +38,7 @@ public class ConstructionOrderController {
 
         model.addAttribute("ConsOrder", new ConstructionOrderCommand());
 
-        return "newConsOrderP1";
+        return "ConstructionOrderTemplates/newConsOrderP1";
     }
 
     @PostMapping("/createCostOrder")
@@ -55,8 +52,6 @@ public class ConstructionOrderController {
 
         return "redirect:/newCostToConsOrder/" + ID;
     }
-
-
 
     @GetMapping("constructionOrder/{id}/delete")
     public String deleteIncomefromConstructionOrderById(@PathVariable String id) {
@@ -78,7 +73,32 @@ public class ConstructionOrderController {
         return "redirect:/listConstructionOrder";
     }
 
+    @GetMapping("constructionOrder/{id}/edit")
+    public String editConstructionOrder(@PathVariable String id, Model model) {
 
-}
+        ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
+        model.addAttribute("ConsOrder", command);
+        model.addAttribute("startDate", DateFormatter.formatDateToProperlyString(command.getStartDate()));
+        model.addAttribute("endDate", DateFormatter.formatDateToProperlyString(command.getScheduledEndDate()));
+
+        return "ConstructionOrderTemplates/ConstructionOrderform";
+    }
+
+    @PostMapping("constructionOrder/{id}/ConfrimEdit")
+    public String confrimEditConstructionORder(@ModelAttribute("ConsOrder") ConstructionOrderCommand command,
+                                  @RequestParam(value = "date1") String date1,
+                                  @RequestParam(value = "date2") String date2) {
+
+        command.setDatesByStrings(date1, date2);
+        constructionOrderService.saveConstructionOrderCommand(command);
+
+        return "redirect:/listConstructionOrder";
+    }
+
+
+    }
+
+
+
 
 

@@ -16,59 +16,56 @@
 </head>
 <body>
 
-<div class>
+<div class="main-block">
+    <div class
+    "part1">
+    <form th:object="${cost}" th:action="@{'/consOrderEdit/newCostToConsOrder/' + ${ConsOrd.ID} + '/create/'}" method="post">
 
-    <form th:object="${income}" th:action="@{'/income/' + ${ConsOrd.ID} + '/edit/'}" method="post">
-
-        <h1>Dodaj nowy Przychód</h1>
+        <h1>Dodaj nowy Rozchód</h1>
         <div class="info">
             <input type="hidden" th:field="*{ID}">
             <label>Kwota</label>
             <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
             <label>Za co</label>
             <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
-            <label> Data zaistnienia </label>
-            <input type="text" id="datepicker" th:value="${date}" >
 
-            <button type="submit" href="/">Edytuj</button>
-            <a class="nextStep" th:href="@{/listConstructionOrder}">Zakończ</a>
-        </div>
+            <button type="submit" href="/">Dodaj Rozchód</button>
+
+            <a class="nextStep" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/edit' }">Powrót do Zlecenia</a>
     </form>
 </div>
 
+</div>
+
 <div class="formInfo">
-    <div class="head"><h3>Lista przewidywanych przychodów</h3></div>
+    <div class="head"><h3>Lista przewidywanych kosztów</h3></div>
     <div class="aroundTable">
         <table>
             <tr>
                 <th>ID</th>
                 <th>Kwota</th>
                 <th>Za co</th>
-                <th>Data zaistnienia</th>
                 <th>Usuń</th>
                 <th> Edytuj</th>
             </tr>
-            <tr th:each="income : ${ConsOrd2}">
-                <td class="td7" th:text="${income.ID}">1</td>
-                <td class="td7" th:text="${income.amount}">1000</td>
-                <td class="td7" th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
-                <td class="td7" th:text="${income.scheduledTimeToGet}">Mokotów, ul. Czerniakowska 33/55</td>
-                <td class="td7"><a href="#" th:href="@{'/incomefromConsOrd/' + ${income.ID} + '/delete'}"> Usuń </a>
-                </td>
+            <tr th:each="cost : ${ConsOrd2}">
+                <td class="td7" th:text="${cost.ID}">1</td>
+                <td class="td7" th:text="${cost.amount}">1000</td>
+                <td class="td7" th:text="${cost.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                <td class="td7"><a href="#" th:href="@{'/consOrderEdit/indicativeCost/' + ${cost.ID} + '/delete'}"> Usuń </a></td>
                 <td class="td7"><a href="#"
-                                   th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/income/' + ${income.ID} + '/edit/'}">
+                                   th:href="@{'/consOrderEdit/constructionOrder/' + ${ConsOrd.ID} + '/indicativeCost/' + ${cost.ID} + '/edit/'}">
                     Edytuj</a>
                 </td>
-
         </table>
         <div>
             <div class="informationDiv">Suma zł</div>
             <div class="informationDiv" th:text="${SumAmount}">1000 zł</div>
         </div>
-
     </div>
 </div>
 
+</div>
 
 </body>
 </html>

@@ -1,10 +1,6 @@
-package com.radello.constructioncompanyorganizer.controller;
+package com.radello.constructioncompanyorganizer.controller.IncomeControllers;
 
-import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
-import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
-import com.radello.constructioncompanyorganizer.domain.IndicativeCost;
-import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.List;
 
 @Slf4j
 @Controller
@@ -29,7 +24,7 @@ public class IncomeControllerForFinancialForecast {
 
         model.addAttribute("income", new IncomeCommand());
 
-        return "newIncome";
+        return "IncomeTemplates/newIncome";
     }
 
     @PostMapping("income")

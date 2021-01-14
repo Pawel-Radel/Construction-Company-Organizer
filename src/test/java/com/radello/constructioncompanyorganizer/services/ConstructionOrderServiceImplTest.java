@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Sort;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -136,7 +137,7 @@ class ConstructionOrderServiceImplTest {
 
         constructionOrderService.getConstructionOrders();
 
-        verify(constructionOrderRepository, times(1)).findAll();
+        verify(constructionOrderRepository, times(1)).findAll(Sort.by("ID"));
         verify(constructionOrderRepository, never()).save(any());
     }
 }

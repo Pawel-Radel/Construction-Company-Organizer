@@ -35,7 +35,7 @@ public class ConstructionOrderCommand {
     private Set<IncomeCommand> incomeCommands = new HashSet<>();
     private Set<IndicativeCostCommand> indicativeCostCommands = new HashSet<>();
 
-    public ConstructionOrderCommand setDatesByStrings(String string1, String string2) {
+    public void setDatesByStrings(String string1, String string2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
         LocalDate startDate = LocalDate.parse(string1, formatter);
@@ -43,7 +43,6 @@ public class ConstructionOrderCommand {
         this.setStartDate(startDate);
         this.setScheduledEndDate(endDate);
 
-        return this;
     }
 
     public ConstructionOrderCommand addIncomes(IncomeCommand incomeCommand) {

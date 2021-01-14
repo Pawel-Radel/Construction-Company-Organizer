@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link th:href="@{/css/newIndicativeCost.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+</head>
+<body>
+
+<div class>
+
+    <form th:object="${income}" th:action="@{'/constructionOrderEdit/newIncomeToConsOrder/' + ${ConsOrd.ID} + '/create/'}" method="post">
+
+        <h1>Dodaj nowy Przychód</h1>
+        <div class="info">
+            <input type="hidden" th:field="*{ID}">
+            <label>Kwota</label>
+            <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
+            <label>Za co</label>
+            <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
+            <label> Data zaistnienia </label>
+            <input type="text" id="datepicker" th:name="date">
+
+            <button type="submit" href="/">Dodaj Rozchód</button>
+            <a class="nextStep" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/edit'}" >Powrót do zlecenia</a>
+        </div>
+    </form>
+</div>
+
+<div class="formInfo">
+    <div class="head"><h3>Lista przewidywanych przychodów</h3></div>
+    <div class="aroundTable">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Kwota</th>
+                <th>Za co</th>
+                <th>Data zaistnienia</th>
+                <th>Usuń</th>
+                <th> Edytuj</th>
+            </tr>
+            <tr th:each="income : ${ConsOrd2}">
+                <td class="td7" th:text="${income.ID}">1</td>
+                <td class="td7" th:text="${income.amount}">1000</td>
+                <td class="td7" th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
+                <td class="td7" th:text="${income.scheduledTimeToGet}">Mokotów, ul. Czerniakowska 33/55</td>
+                <td class="td7"><a href="#" th:href="@{'/constructionOrderEdit/incomefromConsOrd/' + ${income.ID} + '/delete'}"> Usuń </a>
+                </td>
+                <td class="td7"><a href="#"
+                                   th:href="@{'/constructionOrderEdit/constructionOrder/' + ${ConsOrd.ID} + '/income/' + ${income.ID} + '/edit/'}">
+                    Edytuj</a>
+                </td>
+
+        </table>
+        <div>
+            <div class="informationDiv">Suma zł</div>
+            <div class="informationDiv" th:text="${SumAmount}">1000 zł</div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

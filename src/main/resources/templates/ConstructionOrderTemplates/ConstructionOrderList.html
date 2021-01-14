@@ -29,13 +29,13 @@
             <td th:text="${consOrd.startDate}">01-01-2020</td>
             <td th:text="${consOrd.scheduledEndDate}">03-03-2020r</td>
             <td th:text="${consOrd.profitEstimation()}">15 000 zł</td>
-            <td class="links"><a href "#"> Szczegóły / Edycja</a></td>
-            <td><a href "#" th:href="@{'/constructionOrder/' + ${consOrd.ID} + '/settlementAndDelete'}"> Rozlicz </a></td>
-            <td><a href "#" th:href="@{'/constructionOrder/' + ${consOrd.ID} + '/delete'}"> Usuń</a></td>
+            <td class="links"><a th:href="@{'/constructionOrder/' + ${consOrd.ID} + '/edit'}"> Szczegóły / Edycja</a></td>
+            <td><a  th:href="@{'/constructionOrder/' + ${consOrd.ID} + '/settlementAndDelete'}"> Rozlicz </a></td>
+            <td><a  th:href="@{'/constructionOrder/' + ${consOrd.ID} + '/delete'}"> Usuń</a></td>
         </tr>
 
     </table>
-    <button> Dodaj nowe zlecenie budowlane </button>
+    <a style="font-size: 13px" class="button" th:href="@{newConstructionOrder}" >Dodaj nowe zlecenie budowlane </a>
 </div>
 </body>
 </html>

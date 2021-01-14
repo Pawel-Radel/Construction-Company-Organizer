@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.controller;
+package com.radello.constructioncompanyorganizer.controller.IndicativeCostsControllers;
 
 import com.radello.constructioncompanyorganizer.commands.ConstructionOrderCommand;
 import com.radello.constructioncompanyorganizer.commands.IndicativeCostCommand;
@@ -15,19 +15,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class IndicativeCostController {
+public class IndicativeCostControllerConstOrderEdit {
 
     ConstructionOrderService constructionOrderService;
     IndicativeCostService indicativeCostService;
 
-    public IndicativeCostController(ConstructionOrderService constructionOrderService,
+    public IndicativeCostControllerConstOrderEdit(ConstructionOrderService constructionOrderService,
                                     IndicativeCostService indicativeCostService) {
 
         this.constructionOrderService = constructionOrderService;
         this.indicativeCostService = indicativeCostService;
     }
 
-    @GetMapping("/newCostToConsOrder/{id}")
+    @GetMapping("/consOrderEdit/newCostToConsOrder/{id}")
     public String addCostsToConsOrd(@PathVariable String id, Model model) {
 
         ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id));
@@ -38,10 +38,10 @@ public class IndicativeCostController {
         model.addAttribute("ConsOrd2", list);
         model.addAttribute("SumAmount", indicativeCostService.sumValues(list));
 
-        return "newIndicativeCost";
+        return "IndicativeCostsTemplates/NewIndicativeFormWithLinkToConsOrder";
     }
 
-    @PostMapping("/newCostToConsOrder/{id}/create/")
+    @PostMapping("/consOrderEdit/newCostToConsOrder/{id}/create/")
     public String addingCostToConstructionOrder(@ModelAttribute("cost") IndicativeCostCommand indCostCommand,
                                                 @PathVariable String id, Model model) {
 
@@ -50,10 +50,10 @@ public class IndicativeCostController {
 
         constructionOrderService.saveConstructionOrderCommand(command);
 
-        return "redirect:/newCostToConsOrder/" + id;
+        return "redirect:/consOrderEdit/newCostToConsOrder/" + id;
     }
 
-    @GetMapping("/indicativeCost/{id}/delete")
+    @GetMapping("/consOrderEdit/indicativeCost/{id}/delete")
     public String deleteIndicativeCostById(@PathVariable String id) {
 
         Long ID = indicativeCostService.findByID(Long.valueOf(id)).getConstructionOrder().getID();
@@ -61,10 +61,10 @@ public class IndicativeCostController {
         String string = String.valueOf(ID);
         indicativeCostService.deleteById(Long.valueOf(id));
 
-        return "redirect:/newCostToConsOrder/" + string;
+        return "redirect:/consOrderEdit/newCostToConsOrder/" + string;
     }
 
-    @GetMapping("/constructionOrder/{id1}/indicativeCost/{id2}/edit")
+    @GetMapping("/consOrderEdit/constructionOrder/{id1}/indicativeCost/{id2}/edit")
     public String editIndicativeCostById(@PathVariable String id1,
                                          @PathVariable String id2,
                                          Model model) {
@@ -77,10 +77,10 @@ public class IndicativeCostController {
         model.addAttribute("ConsOrd2", list);
         model.addAttribute("SumAmount", indicativeCostService.sumValues(list));
 
-        return "editIndicativeCost";
+        return "IndicativeCostsTemplates/editIndicativeCostWithLinkToConsOrderForm";
     }
 
-    @PostMapping("/indicativecost/{id}/edit")
+    @PostMapping("/consOrderEdit/indicativecost/{id}/edit")
     public String editIndicativeCost(@PathVariable String id,
                                      @ModelAttribute("cost") IndicativeCostCommand indCostCommand) {
 
@@ -89,9 +89,6 @@ public class IndicativeCostController {
         cost.setForWhat(indCostCommand.getForWhat());
         indicativeCostService.saveCost(cost);
 
-        return "redirect:/newCostToConsOrder/" + id;
+        return "redirect:/consOrderEdit/newCostToConsOrder/" + id;
     }
 }
-
-
-
