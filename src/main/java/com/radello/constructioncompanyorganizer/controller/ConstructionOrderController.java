@@ -29,7 +29,7 @@ public class ConstructionOrderController {
     public String showConsOrdList(Model model) {
 
         model.addAttribute("ConsOrder", constructionOrderService.getConstructionOrders());
-
+        model.addAttribute("Budget", budgetService.find());
         return "ConstructionOrderTemplates/ConstructionOrderList";
     }
 

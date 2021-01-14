@@ -18,7 +18,7 @@
             <th >Data zakończenia</th>
             <th>Szacowany zysk</th>
             <th class="links">Szczegóły / Edycja</th>
-            <th class="links">Rozliczenie</th>
+            <th class="links">Rozlicz <b>przychód</b> i usuń</th>
             <th class="links">Usuń</th>
         </tr>
 
@@ -36,6 +36,10 @@
 
     </table>
     <a style="font-size: 13px" class="button" th:href="@{newConstructionOrder}" >Dodaj nowe zlecenie budowlane </a>
+    <a style="font-size: 13px" class="button2" th:href="@{/}" >Powrót do głównego menu</a>
+    <div class="Budget" th:text="'Aktualnie budżet wynosi ' + ${Budget.getAmount} + ' zł.'"> Aktualnie budget wynosi
+        20000 zł.
+    </div>
 </div>
 </body>
 </html>

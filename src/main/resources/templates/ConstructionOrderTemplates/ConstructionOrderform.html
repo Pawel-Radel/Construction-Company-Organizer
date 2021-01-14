@@ -16,61 +16,64 @@
 
 <body>
 <div class="main-block">
-    <form th:action="@{'/constructionOrder/' + ${ConsOrder.ID} + '/ConfrimEdit'}" th:object="${ConsOrder}"  method="post">
-            <h1>Dodaj zlecenie budowlane</h1>
-            <div class="info">
-                <input class="fname" type="hidden" name="name" placeholder="Full name" th:field="*{ID}"
-                       th:value="${ConsOrder.ID}">
+    <form th:action="@{'/constructionOrder/' + ${ConsOrder.ID} + '/ConfrimEdit'}" th:object="${ConsOrder}"
+          method="post">
+        <h1>Dodaj zlecenie budowlane</h1>
+        <div class="info">
+            <input class="fname" type="hidden" name="name" placeholder="Full name" th:field="*{ID}"
+                   th:value="${ConsOrder.ID}">
 
-                <label>Tytuł</label>
-                <input type="text" placeholder="e.g. 1000" th:field="*{title}" th:value="${ConsOrder.title}" th:name="title">>
+            <label>Tytuł</label>
+            <input type="text" placeholder="e.g. 1000" th:field="*{title}" th:value="${ConsOrder.title}"
+                   th:name="title">
 
-                <label>Adres</label>
-                <input type="text" name="name" placeholder="e. g. Rozliczenie z urzędem skarbowym" th:field="*{addres}"
-                       th:value="${ConsOrder.addres}" th:name="adres">>
+            <label>Adres</label>
+            <input type="text" name="name" placeholder="e. g. Rozliczenie z urzędem skarbowym" th:field="*{addres}"
+                   th:value="${ConsOrder.addres}" th:name="adres">
 
-                <div>
-                    <div class="element1">
-                        <label>Termin rozpoczęcia</label>
-                        <input type="text" class="datepicker" th:value="${startDate}" th:name="date1"></div>
-                    <div class="element2">
-                        <label>Termin zakończenia</label>
-                        <input type="text" class="datepicker" th:value="${endDate}" th:name="date2"></div>
-                </div>
-                <div class="elementClear"></div>
+            <div>
+                <div class="element1">
+                    <label>Termin rozpoczęcia</label>
+                    <input type="text" class="datepicker" th:value="${startDate}" th:name="date1"></div>
+                <div class="element2">
+                    <label>Termin zakończenia</label>
+                    <input type="text" class="datepicker" th:value="${endDate}" th:name="date2"></div>
+            </div>
+            <div class="elementClear"></div>
 
-                <label>Lista kosztów </label>
-                <div class="elementClear"></div>
-                <div class="IncomeBody">
-                    <ul th:each="IndCost : ${ConsOrder.indicativeCostCommands}">
-                        <li th:text="'Kwota ' + ${IndCost.amount}  + ' zł. Za: ' + ${IndCost.forWhat}" +>1000 zł,
-                            Andrzej Brzozowski, 2021-11-11
-                        </li>
-                    </ul>
-                </div>
-                <div class="IncomeHead">
-                    <a th:href="@{'/consOrderEdit/newCostToConsOrder/' + ${ConsOrder.ID}}">Konfiguruj</a>
+            <label>Lista kosztów </label>
+            <div class="elementClear"></div>
+            <div class="IncomeBody">
+                <ul th:each="IndCost : ${ConsOrder.indicativeCostCommands}">
+                    <li th:text="'Kwota ' + ${IndCost.amount}  + ' zł. Za: ' + ${IndCost.forWhat}" +>1000 zł,
+                        Andrzej Brzozowski, 2021-11-11
+                    </li>
+                </ul>
+            </div>
+            <div class="IncomeHead">
+                <a class="configuration" th:href="@{'/consOrderEdit/newCostToConsOrder/' + ${ConsOrder.ID}}">Konfiguruj</a>
 
-                </div>
-                <label>Przychód</label>
-                <div class="IncomeBody">
-                    <ul th:each="income : ${ConsOrder.incomeCommands}">
-                        <li th:text="'Kwota ' + ${income.amount}  + ' zł. Za: ' + ${income.forWhat} + 'planowana data: ' + ${income.scheduledTimeToGet}">
-                            20 000 zł, Kamil Albertski, rozliczenie faktury za naprawę, 2021-09-09
-                        </li>
-                    </ul>
-                </div>
-                <div class="IncomeHead">
-                    <a th:href="@{'/constructionOrderEdit/newIncomeToConsOrder/' + ${ConsOrder.ID}}">Konfiguruj</a>
-                </div>
+            </div>
+            <label>Przychód</label>
+            <div class="IncomeBody">
+                <ul th:each="income : ${ConsOrder.incomeCommands}">
+                    <li th:text="'Kwota ' + ${income.amount}  + ' zł. Za: ' + ${income.forWhat} + ', data: ' + ${income.scheduledTimeToGet}">
+                        20 000 zł, Kamil Albertski, rozliczenie faktury za naprawę, 2021-09-09
+                    </li>
+                </ul>
+            </div>
+            <div class="IncomeHead">
+                <a class="configuration" th:href="@{'/constructionOrderEdit/newIncomeToConsOrder/' + ${ConsOrder.ID}}">Konfiguruj</a>
+            </div>
 
 
-        <button type="submit" href="/">Edytuj
-        </button>
+            <button type="submit" href="/">Edytuj
+            </button>
     </form>
 
 </div>
 </div>
+<a style="font-size: 13px" class="button" th:href="@{/}">Powrót do głównego menu</a>
 </body>
 
 </html>

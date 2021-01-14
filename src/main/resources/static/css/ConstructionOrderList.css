@@ -1,9 +1,10 @@
 
-.html, body{
-    background:#39CCCC;
+.html, body {
+    background: #39CCCC;
     box-sizing: border-box;
 }
-.responstable{
+
+.responstable {
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
@@ -13,6 +14,7 @@
     left: 0;
     right: 0;
 }
+
 .button {
     margin-top: 18px;
     font-size: 30px;
@@ -31,12 +33,13 @@
     border-radius: 3%;
 }
 
-.button:hover{
+.button:hover {
     background: #2371a0;
 }
+
 th {
 
-    border: 2px solid rgba(29,150,178,1);
+    border: 2px solid rgba(29, 150, 178, 1);
     font-weight: normal;
     text-align: center;
     background-color: #1c87c9;
@@ -46,7 +49,6 @@ th {
 h1 {
     opacity: 60%;
 }
-
 
 
 .head {
@@ -78,6 +80,7 @@ button {
     margin-top: 3vh;
     border: 1px solid #006400;
 }
+
 button:hover {
     background: #2371a0;
 }
@@ -88,11 +91,45 @@ table {
     border: 2px solid #008B8B;
 }
 
-.links{
+.links {
     width: 6%;
 }
+.button2 {
+    position: fixed;
+    bottom: 5%;
+    left: 2%;
+    margin-top: 18px;
+    font-size: 30px;
+    float: right;
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    padding: 14px;
+    background: #12db33;
+    border-radius: 3%;
+}
 
-td{
+.button2:hover{
+    background: #54f00c;
+}
+
+.Budget {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+    background-color: #eba134;
+    padding: 0.5%;
+    border-radius: 20%;
+    border: 2px solid red;
+}
+
+td {
     height: 4vh;
     background: #f5f5f5;
     text-align: center;

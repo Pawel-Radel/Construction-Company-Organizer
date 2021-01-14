@@ -9,6 +9,61 @@ html, body {
     background: #39CCCC;
 
 }
+
+.button {
+    position: fixed;
+    bottom: 5%;
+    left: 2%;
+    margin-top: 18px;
+    font-size: 30px;
+    float: right;
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+    padding: 14px;
+    background: #12db33;
+    border-radius: 3%;
+}
+
+.configuration{
+    float: right;
+    padding: 7px;
+    border: none;
+    background: #1c87c9;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    border-radius: 7%;
+    margin-top: 4px;
+}
+.configuration:hover{
+    cursor: pointer;
+}
+
+.button:hover{
+    background: #54f00c;
+}
 h1 {
     margin: 0 0 20px;
     font-weight: 400;
