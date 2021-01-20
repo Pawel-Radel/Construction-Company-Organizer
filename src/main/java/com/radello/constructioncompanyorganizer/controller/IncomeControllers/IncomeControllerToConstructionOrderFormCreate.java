@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//Controller that handles inquiries revenue incomes during creating a construction order
 @Controller
 public class IncomeControllerToConstructionOrderFormCreate {
 
@@ -42,9 +43,9 @@ public class IncomeControllerToConstructionOrderFormCreate {
     }
 
     @PostMapping("/newIncomeToConsOrder/{id}/create/")
-    public String addingCostToConstructionOrder(@ModelAttribute("income") IncomeCommand incomeCommand,
-                                                @PathVariable String id,
-                                                @RequestParam("date") String date, Model model) {
+    public String addingIncomeToConstructionOrder(@ModelAttribute("income") IncomeCommand incomeCommand,
+                                                  @PathVariable String id,
+                                                  @RequestParam("date") String date) {
 
         incomeCommand.setDatesByString(date);
         IncomeCommand savedIncomeCommand = incomeService.saveIncomeCommand(incomeCommand);

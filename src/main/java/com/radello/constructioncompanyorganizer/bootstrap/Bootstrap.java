@@ -11,9 +11,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import java.time.LocalDate;
-import java.sql.Date;
 
+import java.time.LocalDate;
+
+
+
+// Class to load data before Application Start
 @Slf4j
 @Component
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {

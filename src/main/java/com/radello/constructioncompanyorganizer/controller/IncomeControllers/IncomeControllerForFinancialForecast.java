@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 
+
+//Controller that handles inquiries revenue incomes without creating a construction order
 @Slf4j
 @Controller
 public class IncomeControllerForFinancialForecast {
@@ -16,6 +19,7 @@ public class IncomeControllerForFinancialForecast {
     IncomeService incomeService;
 
     public IncomeControllerForFinancialForecast(IncomeService incomeService) {
+
         this.incomeService = incomeService;
     }
 
@@ -40,7 +44,7 @@ public class IncomeControllerForFinancialForecast {
             return "index";
         }
 
-        IncomeCommand savedCommand = incomeService.saveIncomeCommand(command);
+        incomeService.saveIncomeCommand(command);
 
         return "redirect:/financialForecast";
     }
@@ -48,12 +52,8 @@ public class IncomeControllerForFinancialForecast {
     @GetMapping("income/{id}/delete")
     public String deleteById(@PathVariable String id) {
 
-        log.debug("Deleting id: " + id);
-
         incomeService.deleteById(Long.valueOf(id));
         return "redirect:/financialForecast";
     }
-
-
 
 }

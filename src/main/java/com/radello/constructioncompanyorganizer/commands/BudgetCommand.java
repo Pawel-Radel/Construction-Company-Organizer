@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
+//Class represents Budget of customer
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,6 +13,6 @@ public class BudgetCommand {
 
 
     private Long ID;
-    // Represent amount of money in budget
+
     private int amount;
 }

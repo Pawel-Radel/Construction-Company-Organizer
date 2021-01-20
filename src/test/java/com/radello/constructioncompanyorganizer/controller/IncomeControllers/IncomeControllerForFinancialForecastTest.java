@@ -1,4 +1,4 @@
-package com.radello.constructioncompanyorganizer.controller;
+package com.radello.constructioncompanyorganizer.controller.IncomeControllers;
 
 import com.radello.constructioncompanyorganizer.commands.IncomeCommand;
 import com.radello.constructioncompanyorganizer.controller.IncomeControllers.IncomeControllerForFinancialForecast;

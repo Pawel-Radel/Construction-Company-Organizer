@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -38,11 +39,8 @@ public class ConstructionOrderCommand {
     public void setDatesByStrings(String string1, String string2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-        LocalDate startDate = LocalDate.parse(string1, formatter);
-        LocalDate endDate = LocalDate.parse(string2, formatter);
-        this.setStartDate(startDate);
-        this.setScheduledEndDate(endDate);
-
+        this.setStartDate(LocalDate.parse(string1, formatter));
+        this.setScheduledEndDate(LocalDate.parse(string2, formatter));
     }
 
     public ConstructionOrderCommand addIncomes(IncomeCommand incomeCommand) {
@@ -51,21 +49,20 @@ public class ConstructionOrderCommand {
         return this;
     }
 
-    public ConstructionOrderCommand addIndicativeCost(IndicativeCostCommand indcCost) {
+    public void addIndicativeCost(IndicativeCostCommand indcCost) {
         indcCost.setConstructionOrderCommand(this);
         this.getIndicativeCostCommands().add(indcCost);
-        return this;
     }
 
     public int profitEstimation() {
         Integer sumOfCosts = this.getIndicativeCostCommands()
                 .stream()
-                .map(indicativeCostCommand -> indicativeCostCommand.getAmount())
+                .map(IndicativeCostCommand::getAmount)
                 .reduce(0, Integer::sum);
 
         Integer sumOfIncomes = this.getIncomeCommands()
                 .stream()
-                .map(incomeCommand -> incomeCommand.getAmount())
+                .map(IncomeCommand::getAmount)
                 .reduce(0, Integer::sum);
 
         return sumOfIncomes - sumOfCosts;
