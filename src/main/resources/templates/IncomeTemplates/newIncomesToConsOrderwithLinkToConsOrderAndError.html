@@ -18,7 +18,7 @@
 
 <div class>
 
-    <form th:object="${income}" th:action="@{'/constructionOrderEdit/income/' + ${ConsOrd.ID} + '/edit/'}" method="post">
+    <form th:object="${income}" th:action="@{'/constructionOrderEdit/newIncomeToConsOrder/' + ${ConsOrd.ID} + '/create/'}" method="post">
 
         <h1>Dodaj nowy Przychód</h1>
         <div class="info">
@@ -32,15 +32,20 @@
             </span>
             <label>Za co</label>
             <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
-            <span th:if="${#fields.hasErrors('forWhat')}">
+            <span th:if="${#fields.hasErrors('amount')}">
                 <ul>
                     <li style="color: red">Pole nie może być puste</li>
                 </ul>
             </span>
             <label> Data zaistnienia </label>
-            <input type="text" id="datepicker" th:value="${date}"  th:name ="date2" >
+            <input type="text" id="datepicker" th:name="date" th:value="${date}">
+            <ul>
+                <li style="color: red"> Daty muszą być w formacie "mm/dd/yyyy"!</li>
+                <li style="color: red"> Pola nie mogą być puste</li>
 
-            <button type="submit" href="/">Edytuj</button>
+            </ul>
+
+            <button type="submit" href="/">Dodaj Rozchód</button>
             <a class="nextStep" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/edit'}" >Powrót do zlecenia</a>
         </div>
     </form>
@@ -66,7 +71,7 @@
                 <td class="td7"><a href="#" th:href="@{'/constructionOrderEdit/incomefromConsOrd/' + ${income.ID} + '/delete'}"> Usuń </a>
                 </td>
                 <td class="td7"><a href="#"
-                                   th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/income/' + ${income.ID} + '/edit/'}">
+                                   th:href="@{'/constructionOrderEdit/constructionOrder/' + ${ConsOrd.ID} + '/income/' + ${income.ID} + '/edit/'}">
                     Edytuj</a>
                 </td>
 
@@ -78,7 +83,7 @@
 
     </div>
 </div>
-<a style="font-size: 13px" class="button" th:href="@{/}" >Powrót do głównego menu</a>
 
+<a style="font-size: 13px" class="button" th:href="@{/}" >Powrót do głównego menu</a>
 </body>
 </html>

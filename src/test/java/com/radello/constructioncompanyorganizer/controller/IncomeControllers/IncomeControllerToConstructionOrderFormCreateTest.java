@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,6 +36,8 @@ class IncomeControllerToConstructionOrderFormCreateTest {
     ConstructionOrderService constructionOrderService;
     @Mock
     Model model;
+    @Mock
+    BindingResult result;
 
     MockMvc mockMvc;
 
@@ -72,8 +75,7 @@ class IncomeControllerToConstructionOrderFormCreateTest {
 
         when(constructionOrderService.findCommandByID(anyLong())).thenReturn(command);
         when(incomeService.saveIncomeCommand(any())).thenReturn(new IncomeCommand());
-
-        String viewName = incomeController.addingIncomeToConstructionOrder(new IncomeCommand(), String.valueOf(1), "05/05/2021");
+        String viewName = incomeController.addingIncomeToConstructionOrder(new IncomeCommand(),result,  String.valueOf(1), "05/05/2021", model);
         assertEquals("redirect:/newIncomeToConsOrder/1", viewName);
 
         verify(constructionOrderService, times(1)).findCommandByID(anyLong());

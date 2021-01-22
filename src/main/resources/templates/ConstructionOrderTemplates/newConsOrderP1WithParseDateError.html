@@ -27,14 +27,14 @@
         <input type="text" placeholder="e.g. 1000" th:field="*{title}">
         <span th:if="${#fields.hasErrors('title')}">
                     <ul>
-                        <li style="color: red">Pole nie może być puste</li>
+                        <li style="color: red" th:each="err : ${#fields.errors('title')}" th:text="${err}"/>
                     </ul>
             </span>
         <label>Adres</label>
         <input type="text" name="name" placeholder="e. g. Rozliczenie z urzędem skarbowym" th:field="*{addres}">
         <span th:if="${#fields.hasErrors('addres')}">
                     <ul>
-                        <li style="color: red">Pole nie może być puste</li>
+                        <li style="color: red" th:each="err : ${#fields.errors('addres')}" th:text="${err}"/>
                     </ul>
             </span>
         <div>
@@ -47,9 +47,11 @@
                 <input type="text" class="datepicker" th:name="date2" th:value="${endDate}">
             </div>
         </div>
+        <ul>
+            <li style="color: red"> Daty muszą być w formacie "mm/dd/yyyy"!</li>
+            <li style="color: red"> Pola nie mogą być puste</li>
+        </ul>
         <div class="elementClear"></div>
-
-
         <button type="submit" href="/">Dalej</button>
     </div>
 </form>

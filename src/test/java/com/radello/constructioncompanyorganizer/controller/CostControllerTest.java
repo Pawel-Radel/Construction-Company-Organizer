@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,6 +35,9 @@ class CostControllerTest {
     @Mock
     BindingResult bindingResult;
 
+    @Mock
+    Model model;
+
     @BeforeEach
     void setUp() {
         costController = new CostController(costService);
@@ -57,7 +61,7 @@ class CostControllerTest {
         command.setID(1L);
         when(costService.saveCostCommand(any())).thenReturn(command);
 
-        String viewName = costController.saveOrUpdate(command, new String("01/01/2020"), bindingResult);
+        String viewName = costController.saveOrUpdate(command, bindingResult, new String("01/01/2020"), model);
 
         assertEquals("redirect:/financialForecast", viewName);
         verify(costService, times(1)).saveCostCommand(any());

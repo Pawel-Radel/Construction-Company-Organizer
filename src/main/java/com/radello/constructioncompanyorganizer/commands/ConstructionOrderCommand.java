@@ -4,8 +4,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,26 +22,25 @@ public class ConstructionOrderCommand {
 
     private Long ID;
 
-    //@NotBlank(message = "Title is mandatory")
-    //@Size(min = 3, max = 255)
+    //@Size(min = 3, max = 255, message = "Title is mandatory")
+    @NotBlank(message = "pole nie może być puste")
     private String title;
 
-    //@NotBlank(message = "Addres is mandatory")
-    //@Size(min = 3, max = 255)
+    //@Size(min = 3, max = 255, message = "Addres is mandatory")
+    @NotBlank(message = "pole nie może być puste")
     private String addres;
 
-    //@Min(value = 2021 - 1 - 1)
-    //@Max(value = 2100 - 1 - 1)
+
     private LocalDate startDate;
 
-    //@Min(value = 2021 - 1 - 1)
-    //@Max(value = 2100 - 1 - 1)
+
     private LocalDate scheduledEndDate;
 
     private Set<IncomeCommand> incomeCommands = new HashSet<>();
     private Set<IndicativeCostCommand> indicativeCostCommands = new HashSet<>();
 
-    public void setDatesByStrings(String string1, String string2) {
+    public void setDatesByStrings(String string1, String string2) throws DateTimeParseException {
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
         this.setStartDate(LocalDate.parse(string1, formatter));

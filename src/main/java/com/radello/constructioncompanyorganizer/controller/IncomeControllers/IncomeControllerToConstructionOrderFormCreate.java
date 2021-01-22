@@ -8,8 +8,11 @@ import com.radello.constructioncompanyorganizer.services.constructionOrderServic
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 //Controller that handles inquiries revenue incomes during creating a construction order
@@ -43,13 +46,31 @@ public class IncomeControllerToConstructionOrderFormCreate {
     }
 
     @PostMapping("/newIncomeToConsOrder/{id}/create/")
-    public String addingIncomeToConstructionOrder(@ModelAttribute("income") IncomeCommand incomeCommand,
+    public String addingIncomeToConstructionOrder(@Valid @ModelAttribute("income") IncomeCommand incomeCommand,
+                                                  BindingResult result,
                                                   @PathVariable String id,
-                                                  @RequestParam("date") String date) {
+                                                  @RequestParam("date") String date,
+                                                  Model model) {
 
-        incomeCommand.setDatesByString(date);
-        IncomeCommand savedIncomeCommand = incomeService.saveIncomeCommand(incomeCommand);
         ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
+        List list = incomeService.sortSet(command.getIncomeCommands());
+
+        model.addAttribute("ConsOrd", command);
+        model.addAttribute("ConsOrd2", list);
+        model.addAttribute("SumAmount", incomeService.sumValues(list));
+        model.addAttribute("date", date);
+
+        if (result.hasErrors()){
+            return "IncomeTemplates/newIncomesToConsOrder";
+        }
+        try {
+            incomeCommand.setDatesByString(date);
+        }
+        catch (DateTimeParseException exception){
+            return "IncomeTemplates/newIncomesToConsOrderWitHDateError";
+        }
+
+        IncomeCommand savedIncomeCommand = incomeService.saveIncomeCommand(incomeCommand);
         command.addIncomes(savedIncomeCommand);
 
         constructionOrderService.saveConstructionOrderCommand(command);
@@ -87,11 +108,29 @@ public class IncomeControllerToConstructionOrderFormCreate {
     }
 
     @PostMapping("/income/{id}/edit")
-    public String editIndicativeCost(@PathVariable String id,
-                                     @ModelAttribute("cost") IncomeCommand incomeCommand,
-                                     @RequestParam (value = "date2") String date) {
+    public String editIncome(@PathVariable String id,
+                                     @Valid @ModelAttribute("income") IncomeCommand incomeCommand,
+                                     BindingResult result,
+                                     @RequestParam (value = "date2") String date,
+                                     Model model) {
 
-        incomeCommand.setDatesByString(date);
+        ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id));
+        List list = incomeService.sortSet(command1.getIncomeCommands());
+
+        model.addAttribute("ConsOrd", command1);
+        model.addAttribute("ConsOrd2", list);
+        model.addAttribute("SumAmount", incomeService.sumValues(list));
+        model.addAttribute("date", date);
+
+        if (result.hasErrors()){
+            return "IncomeTemplates/editIncomesToConsOrder";
+        }
+        try {
+            incomeCommand.setDatesByString(date);
+        }
+        catch (DateTimeParseException exception){
+            return "IncomeTemplates/editIncomesToConsOrderWithError";
+        }
         Income income = incomeService.findByID(incomeCommand.getID());
         income.setAmount(incomeCommand.getAmount());
         income.setForWhat(incomeCommand.getForWhat());

@@ -25,8 +25,18 @@
             <input type="hidden" th:field="*{ID}">
             <label>Kwota</label>
             <input type="text" th:field="*{amount}" placeholder="e.g. 1000">
+             <span th:if="${#fields.hasErrors('amount')}">
+                <ul>
+                    <li style="color: red">Wartość musi być podana liczbowo, minimalna wartość wynosi 1</li>
+                </ul>
+            </span>
             <label>Za co</label>
             <input type="text" th:field="*{forWhat}" placeholder="e. g. Rozliczenie z Urzędem Skarbowym">
+             <span th:if="${#fields.hasErrors('forWhat')}">
+                <ul>
+                    <li style="color: red" > Pole nie może być puste </li>
+                </ul>
+            </span>
 
         <button type="submit" href="/">Dodaj Rozchód</button>
 

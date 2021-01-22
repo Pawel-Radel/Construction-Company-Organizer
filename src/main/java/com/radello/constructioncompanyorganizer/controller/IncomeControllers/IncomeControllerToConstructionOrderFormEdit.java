@@ -8,8 +8,11 @@ import com.radello.constructioncompanyorganizer.services.constructionOrderServic
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 //Controller that handles inquiries revenue incomes during editing  a construction order
@@ -41,16 +44,34 @@ public class IncomeControllerToConstructionOrderFormEdit {
     }
 
     @PostMapping("/constructionOrderEdit/newIncomeToConsOrder/{id}/create/")
-    public String addingCostToConstructionOrder(@ModelAttribute("income") IncomeCommand incomeCommand,
+    public String addingCostToConstructionOrder(@Valid @ModelAttribute("income") IncomeCommand incomeCommand,
+                                                BindingResult result,
                                                 @PathVariable String id,
-                                                @RequestParam("date") String date) {
+                                                @RequestParam("date") String date,
+                                                Model model) {
 
-        incomeCommand.setDatesByString(date);
+        ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id));
+        List list = incomeService.sortSet(command1.getIncomeCommands());
+
+        model.addAttribute("ConsOrd", command1);
+        model.addAttribute("ConsOrd2", list);
+        model.addAttribute("SumAmount", incomeService.sumValues(list));
+        model.addAttribute("date", date);
+
+        if (result.hasErrors()){
+            return "IncomeTemplates/newIncomesToConsOrderwithLinkToConsOrder";
+        }
+        try {
+            incomeCommand.setDatesByString(date);
+        }
+        catch (DateTimeParseException exception){
+            return "IncomeTemplates/newIncomesToConsOrderwithLinkToConsOrderAndError";
+        }
+
         IncomeCommand savedIncomeCommand = incomeService.saveIncomeCommand(incomeCommand);
-        ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
-        command.addIncomes(savedIncomeCommand);
+        command1.addIncomes(savedIncomeCommand);
 
-        constructionOrderService.saveConstructionOrderCommand(command);
+        constructionOrderService.saveConstructionOrderCommand(command1);
 
         return "redirect:/constructionOrderEdit/newIncomeToConsOrder/" + id;
     }
@@ -86,10 +107,28 @@ public class IncomeControllerToConstructionOrderFormEdit {
 
     @PostMapping("/constructionOrderEdit/income/{id}/edit")
     public String editIndicativeCost(@PathVariable String id,
-                                     @ModelAttribute("cost") IncomeCommand incomeCommand,
-                                     @RequestParam(value = "date2") String date) {
+                                     @Valid @ModelAttribute("income") IncomeCommand incomeCommand,
+                                     BindingResult result,
+                                     @RequestParam(value = "date2") String date,
+                                     Model model) {
 
-        incomeCommand.setDatesByString(date);
+        ConstructionOrderCommand command1 = constructionOrderService.findCommandByID(Long.valueOf(id));
+        List list = incomeService.sortSet(command1.getIncomeCommands());
+
+        model.addAttribute("ConsOrd", command1);
+        model.addAttribute("ConsOrd2", list);
+        model.addAttribute("SumAmount", incomeService.sumValues(list));
+        model.addAttribute("date", date);
+
+        if (result.hasErrors()){
+            return "IncomeTemplates/editIncomesWithLinkToConsOrder";
+        }
+        try {
+            incomeCommand.setDatesByString(date);
+        }
+        catch (DateTimeParseException exception){
+            return "IncomeTemplates/editIncomesWithLinkToConsOrderAndErrors";
+        }
         Income income = incomeService.findByID(incomeCommand.getID());
         income.setAmount(incomeCommand.getAmount());
         income.setForWhat(incomeCommand.getForWhat());

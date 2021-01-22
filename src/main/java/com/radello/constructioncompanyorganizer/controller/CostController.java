@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
 
 @Slf4j
 @Controller
@@ -32,17 +33,24 @@ public class CostController {
 
     @PostMapping("cost")
     public String saveOrUpdate(@Valid @ModelAttribute("cost") CostCommand command,
+                               BindingResult bindingResult,
                                @RequestParam("date2") String localDate,
-                               BindingResult bindingResult) {
+                               Model model) {
 
-
-        command.setDatesByString(localDate);
+        model.addAttribute("date", localDate);
 
         if (bindingResult.hasErrors()) {
-
-            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-            return "index";
+            return "newCost";
         }
+        try {
+            command.setDatesByString(localDate);
+        }
+        catch (DateTimeParseException exception){
+            model.addAttribute("error", "Pole daty nie może być puste i musi mieć format \"mm/dd/yyyy\"");
+            return "newCost";
+        }
+
+        command.setDatesByString(localDate);
 
         costService.saveCostCommand(command);
 

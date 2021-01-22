@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
 
 
 //Controller that handles inquiries revenue incomes without creating a construction order
@@ -32,18 +33,21 @@ public class IncomeControllerForFinancialForecast {
     }
 
     @PostMapping("income")
-    public String saveOrUpdate(@Valid @ModelAttribute("income") IncomeCommand command,
+    public String saveOrUpdate(@Valid @ModelAttribute("income") IncomeCommand command, BindingResult bindingResult,
                                @RequestParam("date") String localDate,
-                               BindingResult bindingResult) {
+                               Model model) {
 
-        command.setDatesByString(localDate);
+        model.addAttribute("date", localDate);
 
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors()
-                    .forEach(objectError -> System.out.println((objectError.toString())));
-            return "index";
+            return "IncomeTemplates/newIncome";
         }
-
+        try {
+            command.setDatesByString(localDate);
+        } catch (DateTimeParseException exception) {
+            model.addAttribute("error", "Pole daty nie może być puste i musi mieć format \"mm/dd/yyyy\"");
+            return "IncomeTemplates/newIncome";
+        }
         incomeService.saveIncomeCommand(command);
 
         return "redirect:/financialForecast";

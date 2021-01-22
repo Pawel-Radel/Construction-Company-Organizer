@@ -24,11 +24,24 @@
             <input class="fname" type="hidden"  th:field="*{ID}">
             <label>Kwota</label>
             <input type="text" name="name" placeholder="e.g. 1000" th:field="*{amount}">
+            <span th:if="${#fields.hasErrors('amount')}">
+                <ul>
+                    <li style="color: red">Wartość musi być podana liczbowo, minimalna wartość wynosi 1</li>
+                </ul>
+            </span>
             <label>Za co</label>
-            <input type="text" th:field="*{forWhat}" placeholder="e.g. Wynagordzenie za zrealizowaną usługę">
+            <input type="text" th:field="*{forWhat}"  placeholder="e.g. Wynagordzenie za zrealizowaną usługę">
+            <span th:if="${#fields.hasErrors('forWhat')}">
+                <ul>
+                    <li style="color: red">Wartość musi być podana liczbowo, minimalna wartość wynosi 1</li>
+                </ul>
+            </span>
             <label>termin zapłaty</label>
-            <input type="text" id="datepicker" th:name="date">
+            <input type="text" id="datepicker" th:name="date" th:value="${date}">
             </div>
+
+            <p style="color: red" th:text="${error}"></p>
+
         <button type="submit" href="/">Dodaj Przychód</button>
     </form>
     <a style="font-size: 13px" class="button" th:href="@{/}" >Powrót do głównego menu</a>

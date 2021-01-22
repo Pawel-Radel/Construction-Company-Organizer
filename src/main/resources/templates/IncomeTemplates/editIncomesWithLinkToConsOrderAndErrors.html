@@ -39,7 +39,10 @@
             </span>
             <label> Data zaistnienia </label>
             <input type="text" id="datepicker" th:value="${date}"  th:name ="date2" >
-
+            <ul>
+                <li style="color: red"> Daty muszą być w formacie "mm/dd/yyyy"!</li>
+                <li style="color: red"> Pola nie mogą być puste</li>
+            </ul>
             <button type="submit" href="/">Edytuj</button>
             <a class="nextStep" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/edit'}" >Powrót do zlecenia</a>
         </div>

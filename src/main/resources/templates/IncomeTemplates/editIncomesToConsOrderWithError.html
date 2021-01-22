@@ -18,7 +18,7 @@
 
 <div class>
 
-    <form th:object="${income}" th:action="@{'/constructionOrderEdit/income/' + ${ConsOrd.ID} + '/edit/'}" method="post">
+    <form th:object="${income}" th:action="@{'/income/' + ${ConsOrd.ID} + '/edit/'}" method="post">
 
         <h1>Dodaj nowy Przychód</h1>
         <div class="info">
@@ -38,10 +38,14 @@
                 </ul>
             </span>
             <label> Data zaistnienia </label>
-            <input type="text" id="datepicker" th:value="${date}"  th:name ="date2" >
+            <input type="text" id="datepicker" th:value="${date}" th:name="date2">
+            <ul>
+                <li style="color: red"> Daty muszą być w formacie "mm/dd/yyyy"!</li>
+                <li style="color: red"> Pola nie mogą być puste</li>
 
+            </ul>
             <button type="submit" href="/">Edytuj</button>
-            <a class="nextStep" th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/edit'}" >Powrót do zlecenia</a>
+            <a class="nextStep" th:href="@{/listConstructionOrder}">Zakończ</a>
         </div>
     </form>
 </div>
@@ -63,7 +67,7 @@
                 <td class="td7" th:text="${income.amount}">1000</td>
                 <td class="td7" th:text="${income.forWhat}">Mokotów, ul. Czerniakowska 33/55</td>
                 <td class="td7" th:text="${income.scheduledTimeToGet}">Mokotów, ul. Czerniakowska 33/55</td>
-                <td class="td7"><a href="#" th:href="@{'/constructionOrderEdit/incomefromConsOrd/' + ${income.ID} + '/delete'}"> Usuń </a>
+                <td class="td7"><a href="#" th:href="@{'/incomefromConsOrd/' + ${income.ID} + '/delete'}"> Usuń </a>
                 </td>
                 <td class="td7"><a href="#"
                                    th:href="@{'/constructionOrder/' + ${ConsOrd.ID} + '/income/' + ${income.ID} + '/edit/'}">
@@ -78,7 +82,7 @@
 
     </div>
 </div>
-<a style="font-size: 13px" class="button" th:href="@{/}" >Powrót do głównego menu</a>
 
+<a style="font-size: 13px" class="button" th:href="@{/}">Powrót do głównego menu</a>
 </body>
 </html>

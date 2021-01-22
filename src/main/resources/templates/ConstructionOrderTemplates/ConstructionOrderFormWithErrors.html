@@ -73,8 +73,10 @@
             <div class="IncomeHead">
                 <a class="configuration" th:href="@{'/constructionOrderEdit/newIncomeToConsOrder/' + ${ConsOrder.ID}}">Konfiguruj</a>
             </div>
-
-
+            <ul>
+                <li style="color: red"> Daty muszą być w formacie "mm/dd/yyyy"!</li>
+                <li style="color: red"> Pola nie mogą być puste</li>
+            </ul>
             <button type="submit" href="/">Edytuj
             </button>
     </form>

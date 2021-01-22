@@ -7,11 +7,15 @@ import com.radello.constructioncompanyorganizer.services.constructionOrderServic
 import com.radello.constructioncompanyorganizer.services.indicativeCostServices.IndicativeCostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,15 +46,27 @@ public class IndicativeCostControllerConsOrderCreate {
     }
 
     @PostMapping("/newCostToConsOrder/{id}/create/")
-    public String addingCostToConstructionOrder(@ModelAttribute("cost") IndicativeCostCommand indCostCommand,
-                                                @PathVariable String id, Model model) {
+    public String addingCostToConstructionOrder(@Valid @ModelAttribute("cost") IndicativeCostCommand indCostCommand,
+                                                BindingResult result,
+                                                @PathVariable String id,
+                                                Model model) {
 
         ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
-        command.addIndicativeCost(indCostCommand);
+        List list = indicativeCostService.sortSet(command.getIndicativeCostCommands());
 
+        if (result.hasErrors()) {
+            model.addAttribute("cost", indCostCommand);
+            model.addAttribute("ConsOrd", command);
+            model.addAttribute("ConsOrd2", list);
+            model.addAttribute("SumAmount", indicativeCostService.sumValues(list));
+
+            return "IndicativeCostsTemplates/newIndicativeCost";
+        }
+        command.addIndicativeCost(indCostCommand);
         constructionOrderService.saveConstructionOrderCommand(command);
 
         return "redirect:/newCostToConsOrder/" + id;
+
     }
 
     @GetMapping("/indicativeCost/{id}/delete")
@@ -82,7 +98,21 @@ public class IndicativeCostControllerConsOrderCreate {
 
     @PostMapping("/indicativecost/{id}/edit")
     public String editIndicativeCost(@PathVariable String id,
-                                     @ModelAttribute("cost") IndicativeCostCommand indCostCommand) {
+                                     @Valid @ModelAttribute("cost") IndicativeCostCommand indCostCommand,
+                                     BindingResult result,
+                                     Model model) {
+
+        ConstructionOrderCommand command = constructionOrderService.findCommandByID(Long.valueOf(id));
+        List list = indicativeCostService.sortSet(command.getIndicativeCostCommands());
+
+        if (result.hasErrors()) {
+            model.addAttribute("cost", indCostCommand);
+            model.addAttribute("ConsOrd", command);
+            model.addAttribute("ConsOrd2", list);
+            model.addAttribute("SumAmount", indicativeCostService.sumValues(list));
+
+            return "IndicativeCostsTemplates/editIndicativeCost";
+        }
 
         IndicativeCost cost = indicativeCostService.findByID(indCostCommand.getID());
         cost.setAmount(indCostCommand.getAmount());

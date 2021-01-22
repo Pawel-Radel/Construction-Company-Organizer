@@ -5,10 +5,17 @@ import com.radello.constructioncompanyorganizer.domain.DateFormatter;
 import com.radello.constructioncompanyorganizer.services.budgetServices.BudgetService;
 import com.radello.constructioncompanyorganizer.services.constructionOrderServices.ConstructionOrderService;
 import com.radello.constructioncompanyorganizer.services.incomesServices.IncomeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.time.format.DateTimeParseException;
+
+@Slf4j
 @Controller
 public class ConstructionOrderController {
 
@@ -38,19 +45,34 @@ public class ConstructionOrderController {
 
         model.addAttribute("ConsOrder", new ConstructionOrderCommand());
 
+
         return "ConstructionOrderTemplates/newConsOrderP1";
     }
 
     @PostMapping("/createCostOrder")
-    public String createConsOrder(@ModelAttribute("ConsOrder") ConstructionOrderCommand command,
+    public String createConsOrder(@Valid @ModelAttribute("ConsOrder") ConstructionOrderCommand command, BindingResult result,
                                   @RequestParam(value = "date1") String date1,
-                                  @RequestParam(value = "date2") String date2) {
+                                  @RequestParam(value = "date2") String date2,
+                                  Model model) {
 
-        command.setDatesByStrings(date1, date2);
+       model.addAttribute("startDate", date1);
+       model.addAttribute("endDate", date2);
+
+
+        if (result.hasErrors()) {
+            return "ConstructionOrderTemplates/newConsOrderP1";
+        }
+        try {
+            command.setDatesByStrings(date1, date2);
+        } catch (DateTimeParseException exc) {
+            //return "redirect:/";
+            return "ConstructionOrderTemplates/newConsOrderP1WithParseDateError";
+        }
         ConstructionOrderCommand command1 = constructionOrderService.saveConstructionOrderCommand(command);
         Long ID = command1.getID();
 
         return "redirect:/newCostToConsOrder/" + ID;
+
     }
 
     @GetMapping("constructionOrder/{id}/delete")
@@ -85,18 +107,32 @@ public class ConstructionOrderController {
     }
 
     @PostMapping("constructionOrder/{id}/ConfrimEdit")
-    public String confrimEditConstructionORder(@ModelAttribute("ConsOrder") ConstructionOrderCommand command,
-                                  @RequestParam(value = "date1") String date1,
-                                  @RequestParam(value = "date2") String date2) {
+    public String confrimEditConstructionORder(@Valid @ModelAttribute("ConsOrder") ConstructionOrderCommand command,
+                                               BindingResult result,
+                                               @RequestParam(value = "date1") String date1,
+                                               @RequestParam(value = "date2") String date2,
+                                               Model model) {
 
-        command.setDatesByStrings(date1, date2);
+        model.addAttribute("startDate", date1);
+        model.addAttribute("endDate", date2);
+        if (result.hasErrors()){
+
+            return "ConstructionOrderTemplates/ConstructionOrderform";
+        }
+        try {
+            command.setDatesByStrings(date1, date2);
+        }
+        catch (DateTimeParseException exception) {
+            return "ConstructionOrderTemplates/ConstructionOrderFormWithErrors";
+        }
+
         constructionOrderService.saveConstructionOrderCommand(command);
 
         return "redirect:/listConstructionOrder";
     }
 
 
-    }
+}
 
 
 
