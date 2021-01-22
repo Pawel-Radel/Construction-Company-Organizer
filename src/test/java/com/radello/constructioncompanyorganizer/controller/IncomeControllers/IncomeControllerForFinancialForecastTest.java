@@ -72,7 +72,7 @@ class IncomeControllerForFinancialForecastTest {
         command.setID(1L);
         when(incomeService.saveIncomeCommand(any())).thenReturn(command);
 
-        String viewName = incomeControllerforFinancialForecast.saveOrUpdate(command, new String("01/01/2020"), bindingResult);
+        String viewName = incomeControllerforFinancialForecast.saveOrUpdate(command,bindingResult, new String("01/01/2020"),  model);
 
         assertEquals("redirect:/financialForecast", viewName);
         verify(incomeService, times(1)).saveIncomeCommand(any());
