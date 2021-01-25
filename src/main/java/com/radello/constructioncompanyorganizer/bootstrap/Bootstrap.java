@@ -8,6 +8,7 @@ import com.radello.constructioncompanyorganizer.repositories.CostRepository;
 import com.radello.constructioncompanyorganizer.repositories.IncomeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 // Class to load data before Application Start
 @Slf4j
 @Component
+@Profile(value = "default")
 public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final LocalDate TODAY_DATE = LocalDate.now();
